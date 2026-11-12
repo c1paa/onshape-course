@@ -1,0 +1,237 @@
+{
+ "t01": {
+  "v": 527.7875658030852,
+  "title": "Washer",
+  "topics": [
+   "sketch",
+   "extrude"
+  ],
+  "text": ""
+ },
+ "t02": {
+  "v": 6606.9026644707665,
+  "title": "Slotted plate",
+  "topics": [
+   "sketch",
+   "extrude",
+   "slot"
+  ],
+  "text": ""
+ },
+ "t03": {
+  "v": 3086.902664470767,
+  "title": "Gusset",
+  "topics": [
+   "sketch",
+   "constraints",
+   "extrude"
+  ],
+  "text": ""
+ },
+ "t04": {
+  "v": 1480.7233952816935,
+  "title": "Hex standoff",
+  "topics": [
+   "sketch",
+   "polygon",
+   "extrude"
+  ],
+  "text": ""
+ },
+ "t05": {
+  "v": 17821.902754903833,
+  "title": "Stepped block",
+  "topics": [
+   "extrude New/Add/Remove",
+   "blind depth"
+  ],
+  "text": ""
+ },
+ "t06": {
+  "v": 19500.0,
+  "title": "Tee bar",
+  "topics": [
+   "sketch on Front",
+   "extrude"
+  ],
+  "text": ""
+ },
+ "t07": {
+  "v": 46537.085212089645,
+  "title": "Rounded block",
+  "topics": [
+   "fillet",
+   "chamfer"
+  ],
+  "text": ""
+ },
+ "t08": {
+  "v": 5399.650121387074,
+  "title": "D-shaft",
+  "topics": [
+   "extrude",
+   "chamfer",
+   "remove"
+  ],
+  "text": "Order matters: make the round shaft, chamfer both ends, then cut the flat (1 deep)."
+ },
+ "t09": {
+  "v": 4916.902604182061,
+  "title": "Rounded L-bracket",
+  "topics": [
+   "sketch",
+   "extrude",
+   "fillet",
+   "holes"
+  ],
+  "text": ""
+ },
+ "t10": {
+  "v": 8036.129091982448,
+  "title": "Knob",
+  "topics": [
+   "extrude",
+   "fillet",
+   "chamfer",
+   "blind hole"
+  ],
+  "text": ""
+ },
+ "t11": {
+  "v": 14372.786390173309,
+  "title": "Bolt-circle flange",
+  "topics": [
+   "circular pattern",
+   "construction circle"
+  ],
+  "text": ""
+ },
+ "t12": {
+  "v": 16081.99138972998,
+  "title": "Grid plate",
+  "topics": [
+   "linear pattern (2 directions)",
+   "fillet"
+  ],
+  "text": ""
+ },
+ "t13": {
+  "v": 11619.575252183577,
+  "title": "Lightening plate",
+  "topics": [
+   "sketch pattern",
+   "fillet",
+   "remove"
+  ],
+  "text": ""
+ },
+ "t14": {
+  "v": 8739.527398724395,
+  "title": "Notched disk",
+  "topics": [
+   "circular pattern",
+   "remove"
+  ],
+  "text": ""
+ },
+ "t15": {
+  "v": 11520.0,
+  "title": "Heat sink",
+  "topics": [
+   "extrude Add",
+   "feature pattern"
+  ],
+  "text": ""
+ },
+ "t16": {
+  "v": 21423.894024056375,
+  "title": "Pillow block",
+  "topics": [
+   "mirror",
+   "extrude Add",
+   "sketch on side face"
+  ],
+  "text": ""
+ },
+ "t17": {
+  "v": 20347.610657883062,
+  "title": "Fork",
+  "topics": [
+   "mirror",
+   "extrude Add",
+   "hole across"
+  ],
+  "text": ""
+ },
+ "t18": {
+  "v": 13250.594559963956,
+  "title": "Split clamp",
+  "topics": [
+   "remove",
+   "sketch on side face",
+   "slot"
+  ],
+  "text": ""
+ },
+ "t19": {
+  "v": 42666.666669985105,
+  "title": "Boolean: intersect",
+  "topics": [
+   "Boolean intersect",
+   "two parts"
+  ],
+  "text": "Make two cylinders Ø40 × 40 as **separate parts** (New), one along Z and one along X, both centered on the origin. Then **Boolean → Intersect**. The result is one curved part."
+ },
+ "t20": {
+  "v": 4759.446936667315,
+  "title": "goBILDA-style bracket",
+  "topics": [
+   "sheet-like L",
+   "fillet",
+   "linear pattern",
+   "mirror"
+  ],
+  "text": ""
+ },
+ "t21": {
+  "v": 39117.92903568661,
+  "v7": 43907.75643915498,
+  "title": "Spoked wheel, N spokes",
+  "topics": [
+   "variables",
+   "feature pattern",
+   "extrude Add"
+  ],
+  "text": "Make **N** a Variable. Your model must rebuild without errors for any N. Submit with N = 5 and check the volume for N = 7 too."
+ },
+ "t22": {
+  "v": 12433.804637133258,
+  "title": "Hex-bore pulley",
+  "topics": [
+   "stacked extrudes",
+   "polygon",
+   "circular pattern",
+   "chamfer"
+  ],
+  "text": ""
+ },
+ "t23": {
+  "v": 10125.476140340515,
+  "title": "Servo mount plate",
+  "topics": [
+   "sketch",
+   "chamfer",
+   "pattern",
+   "mirror"
+  ],
+  "text": "The cutout fits a standard servo (40.5 × 20.2). Tab holes are 48 apart along the servo and 10 across."
+ },
+ "t24": {
+  "v": 70203.89402405638,
+  "title": "Shooter side plate",
+  "topics": [
+   "everything: fillet, patterns, mirror, remove"
+  ],
+  "text": "Origin = bottom-left corner. A combined task: plan the order of features before you start."
+ }
+}

@@ -15,6 +15,22 @@ class S:
     def path(s,pts,close=True):
         q=' '.join('%.1f,%.1f'%s.p(*t) for t in pts)
         s.e.append(f'<polygon points="{q}" fill="#eef3fb" stroke="#111" stroke-width="1.6"/>' if close else f'<polyline points="{q}" fill="none" stroke="#111" stroke-width="1.6"/>')
+    def pd(s,cmds,fill=True):
+        o=''
+        for c in cmds:
+            if c[0]=='M' or c[0]=='L':o+='%s%.1f,%.1f '%((c[0],)+s.p(c[1],c[2]))
+            elif c[0]=='A':
+                x,y=s.p(c[4],c[5]);o+='A%.1f,%.1f 0 %d %d %.1f,%.1f '%(c[1]*s.k,c[1]*s.k,c[2],c[3],x,y)
+            else:o+='Z '
+        s.e.append(f'<path d="{o}" fill="{"#eef3fb" if fill else "none"}" stroke="#111" stroke-width="1.6"/>')
+    def slot(s,cx,cy,L,W,fill=False):
+        r=W/2;a=L/2-r
+        s.pd([('M',cx-a,cy+r),('L',cx+a,cy+r),('A',r,0,1,cx+a,cy-r),('L',cx-a,cy-r),('A',r,0,1,cx-a,cy+r),('Z',)],fill)
+    def poly(s,pts,fill=True):
+        q=' '.join('%.1f,%.1f'%s.p(*t) for t in pts)
+        s.e.append(f'<polygon points="{q}" fill="{"#eef3fb" if fill else "none"}" stroke="#111" stroke-width="1.6"/>')
+    def rect(s,x,y,w,h,r=0):
+        a,b=s.p(x,y+h);s.e.append(f'<rect x="{a:.1f}" y="{b:.1f}" width="{w*s.k:.1f}" height="{h*s.k:.1f}" rx="{r*s.k:.1f}" fill="none" stroke="#111" stroke-width="1.6"/>')
     def rrect(s,x,y,w,h,r=0):
         a,b=s.p(x,y+h);s.e.append(f'<rect x="{a:.1f}" y="{b:.1f}" width="{w*s.k:.1f}" height="{h*s.k:.1f}" rx="{r*s.k:.1f}" fill="#eef3fb" stroke="#111" stroke-width="1.6"/>')
     def txt(s,x,y,t,sz=15,anc='middle',rot=0,px=False,bold=False):
@@ -54,7 +70,9 @@ class S:
         s.line(sx,sy,ex,ey,'#0a3d91',0.8);s.arrow(sx,sy,-c,-sn)
         h=1 if c>=0 else -1;s.line(ex,ey,ex+h*40/s.k,ey,'#0a3d91',0.8)
         s.txt(ex+h*4/s.k,ey+3/s.k,t,anc='start' if h>0 else 'end')
+    def note(s,t,y=None):
+        s.e.append(f'<text x="16" y="{y or 52}" font-size="14" font-family="Arial,Helvetica,sans-serif" fill="#444">{t}</text>')
     def svg(s,fn,title=''):
         hd=f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {s.w} {s.h}" width="{s.w}" height="{s.h}"><rect width="100%" height="100%" fill="white"/>'
-        if title:hd+=f'<text x="16" y="28" font-size="20" font-weight="bold" font-family="Arial,Helvetica,sans-serif" fill="#111">{title}</text><text x="{s.w-16}" y="{s.h-14}" font-size="13" text-anchor="end" font-family="Arial,Helvetica,sans-serif" fill="#666">All dimensions in mm</text>'
+        if title:hd+=f'<text x="16" y="28" font-size="20" font-weight="bold" font-family="Arial,Helvetica,sans-serif" fill="#111">{title}</text><text x="{s.w-16}" y="26" font-size="13" text-anchor="end" font-family="Arial,Helvetica,sans-serif" fill="#666">All dimensions in mm</text>'
         open(fn,'w').write(hd+''.join(s.e)+'</svg>')
