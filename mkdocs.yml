@@ -1,0 +1,23 @@
+site_name: FTC Club · Onshape
+theme:
+  name: material
+  palette:
+    primary: indigo
+  features:
+    - navigation.sections
+    - content.code.copy
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tasklist
+  - pymdownx.keys
+  - attr_list
+  - tables
+  - toc:
+      permalink: true
+nav:
+  - Home: index.md
+  - "Lesson 1: Sketch and part": lesson-1.md
+  - "Homework 1": homework-1.md
+  - "How to submit": submit.md
