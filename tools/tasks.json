@@ -255,5 +255,86 @@
    "circular + linear pattern in sketch"
   ],
   "text": "Rule: **one sketch, one Extrude**. Everything (outline and all holes) must be in a single fully defined sketch. Draw the top tangent line once and use the sketch **Mirror** about a construction centerline; use the sketch **Circular pattern** and **Linear pattern** tools for the holes."
+ },
+ "t27": {
+  "v": 12993.672617857173,
+  "title": "Tensioner plate",
+  "topics": [
+   "one sketch",
+   "arc slot",
+   "concentric",
+   "pattern"
+  ],
+  "text": "Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. The arc slot is centered on the pivot hole: a belt idler on it swings around the pivot."
+ },
+ "t28": {
+  "v": 13054.030443064283,
+  "title": "Triangle link",
+  "topics": [
+   "one sketch",
+   "tangent",
+   "circular pattern in sketch"
+  ],
+  "text": "Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. Three bosses joined by tangent lines."
+ },
+ "t29": {
+  "v": 21492.366196597246,
+  "title": "Hex pocket plate",
+  "topics": [
+   "one sketch",
+   "polygon",
+   "two staggered linear patterns"
+  ],
+  "text": "Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. Two patterns: one row of 7 and two rows of 6, shifted by half a step."
+ },
+ "t30": {
+  "v": 4306.293382584526,
+  "title": "Encoder disk",
+  "topics": [
+   "one sketch",
+   "two circular patterns",
+   "construction circles"
+  ],
+  "text": "Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. Two circular patterns with different counts."
+ },
+ "t31": {
+  "v": 14009.901344774093,
+  "title": "Five-window wheel",
+  "topics": [
+   "one sketch",
+   "sketch fillet",
+   "circular pattern in sketch"
+  ],
+  "text": "Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. Draw one window with its four R3 corners as sketch fillets, then pattern it."
+ },
+ "t32": {
+  "v": 16310.902664470766,
+  "title": "Truss rail",
+  "topics": [
+   "one sketch",
+   "two linear patterns",
+   "mirror in sketch"
+  ],
+  "text": "Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. Triangles pointing up and down: two linear patterns, shifted by half a step."
+ },
+ "t33": {
+  "v": 14840.424533126488,
+  "title": "Keyhole plate",
+  "topics": [
+   "one sketch",
+   "trim",
+   "2-direction pattern in sketch"
+  ],
+  "text": "Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. Each keyhole is a circle plus a slot: trim the lines inside so one closed outline is left."
+ },
+ "t34": {
+  "v": 11627.697672756038,
+  "title": "Triangle gusset with holes",
+  "topics": [
+   "one sketch",
+   "pattern + delete instances",
+   "fillet in sketch"
+  ],
+  "text": "Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. Pattern the holes in 2 directions, then remove the ones that fall outside the triangle."
  }
 }

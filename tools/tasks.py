@@ -377,6 +377,169 @@ def t26():
     s.note('Outline: R25 and R12 joined by two tangent lines. Symmetric about the centerline.',445)
     return m,s
 
+ONE='Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch.'
+def arcslot(cx,cy,R,a1,a2,w):
+    r=w/2;p=lambda rr,a:(cx+rr*math.cos(math.radians(a)),cy+rr*math.sin(math.radians(a)))
+    return [('M',)+p(R+r,a1),('A',R+r,0,0)+p(R+r,a2),('A',r,0,0)+p(R-r,a2),('A',R-r,0,1)+p(R-r,a1),('A',r,0,0)+p(R+r,a1),('Z',)]
+def cq_arcslot(cx,cy,R,a1,a2,w):
+    r=w/2;p=lambda rr,a:(cx+rr*math.cos(math.radians(a)),cy+rr*math.sin(math.radians(a)))
+    am=(a1+a2)/2
+    return (W().moveTo(*p(R+r,a1)).threePointArc(p(R+r,am),p(R+r,a2)).threePointArc(p(R,a2+math.degrees(r/R)*1.0) if False else (cx+R*math.cos(math.radians(a2))+r*math.cos(math.radians(a2+90)),cy+R*math.sin(math.radians(a2))+r*math.sin(math.radians(a2+90))),p(R-r,a2))
+            .threePointArc(p(R-r,am),p(R-r,a1)).threePointArc((cx+R*math.cos(math.radians(a1))+r*math.cos(math.radians(a1-90)),cy+R*math.sin(math.radians(a1))+r*math.sin(math.radians(a1-90))),p(R+r,a1)).close())
+
+@task(27,'Tensioner plate',['one sketch','arc slot','concentric','pattern'],ONE+' The arc slot is centered on the pivot hole: a belt idler on it swings around the pivot.')
+def t27():
+    m=W().center(35,25).rect(70,50).extrude(4).edges('|Z').fillet(5)
+    m=m.cut(W().center(10,10).circle(3).extrude(4)).cut(cq_arcslot(10,10,40,15,60,5).extrude(4))
+    m=m.cut(W().pushPoints([(62,8),(62,42)]).circle(2).extrude(4))
+    s=S(760,490,5.5);s.at(330,400);s.rrect(0,0,70,50,5);s.circ(10,10,3);s.pd(arcslot(10,10,40,15,60,5),False)
+    s.circ(62,8,2);s.circ(62,42,2)
+    s.line(10,10,10+46*math.cos(math.radians(15)),10+46*math.sin(math.radians(15)),'#c33',0.8,'10 3 2 3');s.line(10,10,10+46*math.cos(math.radians(60)),10+46*math.sin(math.radians(60)),'#c33',0.8,'10 3 2 3')
+    s.cl(4,10,16,10);s.cl(10,4,10,16)
+    s.dim(0,50,70,50,24);s.dim(0,0,0,50,30);s.dim(0,0,10,0,-24,'10');s.dim(0,0,0,10,60,'10');s.dim(0,0,62,0,-50,'62');s.dim(70,0,70,8,-26,'8');s.dim(70,8,70,42,-26,'34')
+    s.lead(10,10,-120,40,'Ø6',3);s.lead(10+37.5*math.cos(math.radians(45)),10+37.5*math.sin(math.radians(45)),-135,30,'arc slot R40 (center line), width 5',0)
+    s.lead(62,42,60,30,'Ø4 × 2',2)
+    s.e.append(f'<text x="{330+10*5.5+60:.0f}" y="{400-10*5.5-8:.0f}" font-size="14" font-family="Arial" fill="#0a3d91">15°</text><text x="{330+10*5.5+18:.0f}" y="{400-10*5.5-62:.0f}" font-size="14" font-family="Arial" fill="#0a3d91">60°</text>')
+    s.note('Thickness 4. Corners R5. Slot from 15° to 60°, angles measured from the horizontal through the pivot.',478)
+    return m,s
+
+@task(28,'Triangle link',['one sketch','tangent','circular pattern in sketch'],ONE+' Three bosses joined by tangent lines.')
+def t28():
+    R0=50/math.sqrt(3);P=[(R0*math.cos(pi/2+i*2*pi/3),R0*math.sin(pi/2+i*2*pi/3)) for i in range(3)]
+    m=W().polyline(P).close().extrude(5)
+    for p in P:m=m.union(W().center(*p).circle(10).extrude(5))
+    hull=W()
+    pts=[]
+    for i in range(3):
+        a=pi/2+i*2*pi/3
+        for da in(-pi/3,pi/3):pts.append((P[i][0]+10*math.cos(a+da),P[i][1]+10*math.sin(a+da)))
+    m=m.union(W().polyline(pts).close().extrude(5))
+    m=m.cut(W().circle(8).extrude(5)).cut(W().pushPoints(P).circle(3).extrude(5))
+    s=S(640,490,5);s.at(260,270)
+    cmd=[('M',)+pts[1]]
+    for i in range(3):
+        j=(i+1)%3;cmd.append(('L',)+pts[2*j]);cmd.append(('A',10,0,0)+pts[2*j+1])
+    s.pd(cmd+[('Z',)])
+    for p in P:s.circ(*p,3)
+    s.circ(0,0,8);s.e.append(f'<circle cx="260" cy="270" r="{R0*5:.1f}" fill="none" stroke="#c33" stroke-width="0.8" stroke-dasharray="10 3 2 3"/>')
+    s.cl(-40,0,40,0);s.cl(0,-30,0,45)
+    s.dim(*P[1],*P[2],-40,'50');s.lead(P[0][0],P[0][1]+10,60,30,'R10 × 3',0);s.lead(*P[2],30,50,'Ø6 × 3',3);s.lead(0,0,200,60,'Ø16',8)
+    s.at(560,270);s.rrect(0,-25,5,50);s.dim(0,25,5,25,24,'5')
+    s.note('Boss centers: equilateral triangle, side 50, centered on the Ø16 hole, one boss straight up.',478)
+    return m,s
+
+@task(29,'Hex pocket plate',['one sketch','polygon','two staggered linear patterns'],ONE+' Two patterns: one row of 7 and two rows of 6, shifted by half a step.')
+def t29():
+    hx=lambda x,y:W().polyline([(x+5/math.cos(pi/6)*math.cos(pi/6+k*pi/3),y+5/math.cos(pi/6)*math.sin(pi/6+k*pi/3)) for k in range(6)]).close().extrude(4)
+    m=W().rect(110,64).extrude(4).edges('|Z').fillet(5)
+    pts=[(-36+12*i,0) for i in range(7)]+[(-30+12*i,y) for i in range(6) for y in(-16,16)]
+    for p in pts:m=m.cut(hx(*p))
+    s=S(760,490,4.8);s.at(360,250);s.rrect(-55,-32,110,64,5);r=5/math.cos(pi/6)
+    for x,y in pts:s.poly([(x+r*math.cos(pi/6+a*pi/3),y+r*math.sin(pi/6+a*pi/3)) for a in range(6)],False)
+    s.cl(-60,0,60,0);s.cl(0,-36,0,36)
+    s.dim(-55,32,55,32,24);s.dim(-55,-32,-55,32,30);s.dim(-36,-32,-24,-32,-24,'12');s.dim(-36,-32,-30,-32,-48,'6')
+    s.dim(55,0,55,16,-30,'16');s.dim(55,-16,55,0,-30,'16');s.lead(30,16,60,40,'hex 10 A/F',0)
+    s.note('Hexes 10 across flats, flats vertical. Middle row: 7, x = −36 … 36. Rows y = ±16: 6, x = −30 … 30. Thickness 4, R5.',480)
+    return m,s
+
+@task(30,'Encoder disk',['one sketch','two circular patterns','construction circles'],ONE+' Two circular patterns with different counts.')
+def t30():
+    m=W().circle(30).circle(10).extrude(2)
+    sl=W().center(24.5,0).rect(7,2).extrude(2)
+    for i in range(24):m=m.cut(sl.rotate((0,0,0),(0,0,1),15*i))
+    m=m.cut(W().polarArray(13,90,360,3).circle(1.6).extrude(2))
+    s=S(640,470,6);s.at(250,240);s.circ(0,0,30);s.circ(0,0,10)
+    for i in range(24):
+        a=math.radians(15*i);c,sn=math.cos(a),math.sin(a)
+        q=[(21,-1),(28,-1),(28,1),(21,1)];s.poly([(x*c-y*sn,x*sn+y*c) for x,y in q],False)
+    for i in range(3):a=pi/2+i*2*pi/3;s.circ(13*math.cos(a),13*math.sin(a),1.6)
+    s.e.append(f'<circle cx="250" cy="240" r="{13*6}" fill="none" stroke="#c33" stroke-width="0.8" stroke-dasharray="10 3 2 3"/>')
+    s.cl(-34,0,34,0);s.cl(0,-34,0,34)
+    s.lead(0,0,-40,60,'Ø60',30);s.lead(0,0,-140,30,'Ø20',10);s.lead(13*math.cos(pi/2+2*pi/3),13*math.sin(pi/2+2*pi/3),-150,90,'Ø3.2 × 3 on Ø26',1.6)
+    s.dim(21,1,28,1,40,'7');s.lead(28*math.cos(math.radians(30)),28*math.sin(math.radians(30)),40,40,'24 slots, 2 wide, r 21 … 28',0)
+    s.at(560,240);s.rrect(0,-30,2,60);s.dim(0,30,2,30,24,'2')
+    s.note('One slot on the horizontal axis; one hole straight up.',455)
+    return m,s
+
+@task(31,'Five-window wheel',['one sketch','sketch fillet','circular pattern in sketch'],ONE+' Draw one window with its four R3 corners as sketch fillets, then pattern it.')
+def t31():
+    m=W().circle(40).circle(4).extrude(5)
+    ring=W().circle(34).circle(14).extrude(5)
+    for i in range(5):ring=ring.cut(W().center(20,0).rect(40,8).extrude(5).rotate((0,0,0),(0,0,1),90+72*i))
+    ring=ring.edges('|Z').fillet(3)
+    m=m.cut(ring)
+    s=S(660,470,4.6);s.at(240,245)
+    s.circ(0,0,40);s.circ(0,0,4)
+    for i in range(5):
+        a1=math.radians(90+72*i);a2=a1+math.radians(72)
+        def bound(a,sg,r):
+            x=r*math.cos(a);y=r*math.sin(a);return x,y
+        r_in,r_out=14,34
+        def off(a,sg,r):
+            d=4/r;return a+sg*math.asin(4/r)
+        p1=(r_out*math.cos(off(a1,1,34)),r_out*math.sin(off(a1,1,34)));p2=(r_out*math.cos(off(a2,-1,34)),r_out*math.sin(off(a2,-1,34)))
+        p3=(r_in*math.cos(off(a2,-1,14)),r_in*math.sin(off(a2,-1,14)));p4=(r_in*math.cos(off(a1,1,14)),r_in*math.sin(off(a1,1,14)))
+        s.pd([('M',)+p1,('A',34,0,0)+p2,('L',)+p3,('A',14,0,1)+p4,('Z',)],False)
+    s.cl(-44,0,44,0);s.cl(0,-44,0,44)
+    s.lead(0,0,-30,50,'Ø80',40);s.lead(0,0,-110,80,'Ø8',4)
+    s.dim(-4,24,4,24,0,'8')
+    s.at(540,245);s.rrect(0,-40,5,80);s.dim(0,40,5,40,24,'5')
+    s.note('5 spokes, 8 wide, one straight up. Windows between r = 14 and r = 34, all corners R3. Thickness 5.',460)
+    return m,s
+
+@task(32,'Truss rail',['one sketch','two linear patterns','mirror in sketch'],ONE+' Triangles pointing up and down: two linear patterns, shifted by half a step.')
+def t32():
+    m=W().rect(220,30).extrude(4).edges('|Z').fillet(4)
+    up=lambda x:W().polyline([(x-9,-9),(x+9,-9),(x,9)]).close().extrude(4)
+    dn=lambda x:W().polyline([(x-9,9),(x+9,9),(x,-9)]).close().extrude(4)
+    for k in range(8):m=m.cut(up(-84+24*k))
+    for k in range(7):m=m.cut(dn(-72+24*k))
+    m=m.cut(W().pushPoints([(x,y) for x in(-102,102) for y in(-8,8)]).circle(2.5).extrude(4))
+    s=S(900,330,3.6);s.at(460,170);s.rrect(-110,-15,220,30,4)
+    for k in range(8):x=-84+24*k;s.poly([(x-9,-9),(x+9,-9),(x,9)],False)
+    for k in range(7):x=-72+24*k;s.poly([(x-9,9),(x+9,9),(x,-9)],False)
+    for x in(-102,102):
+        for y in(-8,8):s.circ(x,y,2.5)
+    s.cl(-114,0,114,0)
+    s.dim(-110,15,110,15,24);s.dim(110,-15,110,15,-30,'30');s.dim(-84,-9,-60,-9,-40,'24');s.dim(-93,-9,-75,-9,-62,'18');s.dim(-84,-9,-84,9,0,'');s.e=s.e[:-1]
+    s.dim(-110,-15,-102,-15,-26,'8');s.dim(-110,-8,-110,8,30,'16');s.lead(102,8,120,30,'Ø5 × 4',2.5)
+    s.note('Triangles: base 18, height 18. Up: 8, centers x = −84 … 84. Down: 7, x = −72 … 72. Thickness 4.',316)
+    return m,s
+
+@task(33,'Keyhole plate',['one sketch','trim','2-direction pattern in sketch'],ONE+' Each keyhole is a circle plus a slot: trim the lines inside so one closed outline is left.')
+def t33():
+    m=W().rect(90,60).extrude(3).edges('|Z').fillet(4)
+    for x in(-25,0,25):
+        for y in(-12,12):m=m.cut(W().center(x,y).circle(4).extrude(3)).cut(W().center(x,y+4).rect(4,8).extrude(3)).cut(W().center(x,y+8).circle(2).extrude(3))
+    s=S(700,460,5.5);s.at(300,240);s.rrect(-45,-30,90,60,4)
+    for x in(-25,0,25):
+        for y in(-12,12):
+            a=math.asin(2/4);px=4*math.cos(a)
+            s.pd([('M',x-2,y+px),('L',x-2,y+8),('A',2,0,1,x+2,y+8),('L',x+2,y+px),('A',4,1,1,x-2,y+px),('Z',)],False)
+    s.cl(-50,0,50,0);s.cl(0,-34,0,34)
+    s.dim(-45,30,45,30,24);s.dim(-45,-30,-45,30,30);s.dim(-25,-30,0,-30,-24,'25');s.dim(45,-12,45,12,-30,'24')
+    s.lead(25,-12,-40,40,'Ø8 × 6',4);s.lead(0,20,40,60,'slot 4 wide, end 8 above the circle center',2)
+    s.note('Thickness 3, corners R4. Keyholes in 3 columns × 2 rows.',448)
+    return m,s
+
+@task(34,'Triangle gusset with holes',['one sketch','pattern + delete instances','fillet in sketch'],ONE+' Pattern the holes in 2 directions, then remove the ones that fall outside the triangle.')
+def t34():
+    m=W().polyline([(0,0),(80,0),(0,80)]).close().extrude(4)
+    m=m.edges('|Z').fillet(6)
+    pts=[(10+12*i,10+12*j) for i in range(4) for j in range(4) if i+j<=3]
+    m=m.cut(W().pushPoints(pts).circle(2.5).extrude(4))
+    s=S(660,560,5);s.at(120,460)
+    q=[(0,0),(80,0),(0,80)];r=6
+    c0=(6,6);c1=(80-6*(1+math.sqrt(2)),6);c2=(6,80-6*(1+math.sqrt(2)))
+    d=6/math.tan(math.radians(22.5));e=d/math.sqrt(2)
+    s.pd([('M',6,0),('L',80-d,0),('A',6,0,0,80-e,e),('L',e,80-e),('A',6,0,0,0,80-d),('L',0,6),('A',6,0,0,6,0),('Z',)])
+    for p in pts:s.circ(*p,2.5)
+    s.dim(0,0,80,0,-30);s.dim(0,0,0,80,30);s.dim(0,0,10,0,-56,'10');s.dim(10,0,22,0,-56,'12');s.dim(0,0,0,10,56,'10');s.dim(0,10,0,22,56,'12')
+    s.lead(46,10,40,50,'Ø5 × 10',2.5);s.lead(80-e,e,60,40,'R6 × 3',0)
+    s.at(560,460);s.rrect(0,0,4,80);s.dim(0,80,4,80,24,'4')
+    s.note('Holes on a 12 grid from (10, 10); keep the 10 holes with i + j ≤ 3.',548)
+    return m,s
+
 res={}
 for t in T:
     m,s=t['fn']()
