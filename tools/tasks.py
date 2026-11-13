@@ -501,7 +501,7 @@ def t32():
     for x in(-102,102):
         for y in(-8,8):s.circ(x,y,2.5)
     s.cl(-114,0,114,0)
-    s.dim(-110,15,110,15,24);s.dim(110,-15,110,15,-30,'30');s.dim(-84,-9,-60,-9,-40,'24');s.dim(-93,-9,-75,-9,-62,'18');s.dim(-84,-9,-84,9,0,'');s.e=s.e[:-1]
+    s.dim(-110,15,110,15,24);s.dim(110,-15,110,15,-30,'30');s.dim(-84,-9,-60,-9,-40,'24');s.dim(-93,-9,-75,-9,-62,'18');s.dim(-84,-9,-84,9,0,'18')
     s.dim(-110,-15,-102,-15,-26,'8');s.dim(-110,-8,-110,8,30,'16');s.lead(102,8,120,30,'Ø5 × 4',2.5)
     s.note('Triangles: base 18, height 18. Up: 8, centers x = −84 … 84. Down: 7, x = −72 … 72. Thickness 4.',316)
     return m,s
@@ -518,8 +518,8 @@ def t33():
             s.pd([('M',x-2,y+px),('L',x-2,y+8),('A',2,0,1,x+2,y+8),('L',x+2,y+px),('A',4,1,1,x-2,y+px),('Z',)],False)
     s.cl(-50,0,50,0);s.cl(0,-34,0,34)
     s.dim(-45,30,45,30,24);s.dim(-45,-30,-45,30,30);s.dim(-25,-30,0,-30,-24,'25');s.dim(45,-12,45,12,-30,'24')
-    s.lead(25,-12,-40,40,'Ø8 × 6',4);s.lead(0,20,40,60,'slot 4 wide, end 8 above the circle center',2)
-    s.note('Thickness 3, corners R4. Keyholes in 3 columns × 2 rows.',448)
+    s.lead(25,-12,-40,40,'Ø8 × 6',4);s.dim(23,22,27,22,22,'4');s.dim(25,12,25,20,-34,'8');s.cl(21,20,29,20);s.lead(23.6,21.4,135,30,'R2',0)
+    s.note('Thickness 3, corners R4. Keyholes in 3 columns × 2 rows. Slot width 4, its end R2 is 8 above the Ø8 center.',448)
     return m,s
 
 @task(34,'Triangle gusset with holes',['one sketch','pattern + delete instances','fillet in sketch'],ONE+' Pattern the holes in 2 directions, then remove the ones that fall outside the triangle.')
@@ -533,11 +533,12 @@ def t34():
     c0=(6,6);c1=(80-6*(1+math.sqrt(2)),6);c2=(6,80-6*(1+math.sqrt(2)))
     d=6/math.tan(math.radians(22.5));e=d/math.sqrt(2)
     s.pd([('M',6,0),('L',80-d,0),('A',6,0,0,80-e,e),('L',e,80-e),('A',6,0,0,0,80-d),('L',0,6),('A',6,0,0,6,0),('Z',)])
+    for a1,b1,a2,b2 in[(80-d,0,80,0),(80-e,e,80,0),(e,80-e,0,80),(0,80-d,0,80),(0,6,0,0),(6,0,0,0)]:s.line(a1,b1,a2,b2,'#555',0.8,'4 3')
     for p in pts:s.circ(*p,2.5)
     s.dim(0,0,80,0,-30);s.dim(0,0,0,80,30);s.dim(0,0,10,0,-56,'10');s.dim(10,0,22,0,-56,'12');s.dim(0,0,0,10,56,'10');s.dim(0,10,0,22,56,'12')
     s.lead(46,10,40,50,'Ø5 × 10',2.5);s.lead(80-e,e,60,40,'R6 × 3',0)
     s.at(560,460);s.rrect(0,0,4,80);s.dim(0,80,4,80,24,'4')
-    s.note('Holes on a 12 grid from (10, 10); keep the 10 holes with i + j ≤ 3.',548)
+    s.note('Holes on a 12 grid from (10, 10); keep the 10 holes with i + j ≤ 3.',548);s.note('80 × 80: to the sharp corners (dashed), before the R6 fillets.',60)
     return m,s
 
 res={}
