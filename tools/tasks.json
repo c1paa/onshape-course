@@ -233,5 +233,27 @@
    "everything: fillet, patterns, mirror, remove"
   ],
   "text": "Origin = bottom-left corner. A combined task: plan the order of features before you start."
+ },
+ "t25": {
+  "v": 20380.885263064483,
+  "title": "Grid plate with center window",
+  "topics": [
+   "linear pattern",
+   "skip instances",
+   "fillet",
+   "remove"
+  ],
+  "text": "Same 8 mm grid as T12, but the 9 holes in the middle are replaced by a 20 × 20 window. Hint: pattern the holes, then use **Skip instances** in the pattern, or cut the window and delete the extra holes."
+ },
+ "t26": {
+  "v": 20884.50685691246,
+  "title": "Rocker arm (one sketch)",
+  "topics": [
+   "one sketch",
+   "tangent",
+   "mirror in sketch",
+   "circular + linear pattern in sketch"
+  ],
+  "text": "Rule: **one sketch, one Extrude**. Everything (outline and all holes) must be in a single fully defined sketch. Draw the top tangent line once and use the sketch **Mirror** about a construction centerline; use the sketch **Circular pattern** and **Linear pattern** tools for the holes."
  }
 }

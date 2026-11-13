@@ -341,6 +341,42 @@ def t24():
     s.note('Thickness 5. Hole rows at y = 8 and y = 92, x = 16, 32 … 144. Windows 16 × 24, R3, centers x = 70, 92, 114, y = 26.',598)
     return m,s
 
+@task(25,'Grid plate with center window',['linear pattern','skip instances','fillet','remove'],'Same 8 mm grid as T12, but the 9 holes in the middle are replaced by a 20 × 20 window. Hint: pattern the holes, then use **Skip instances** in the pattern, or cut the window and delete the extra holes.')
+def t25():
+    pts=[(-32+8*i,-32+8*j) for i in range(9) for j in range(9) if not(abs(-32+8*i)<=8 and abs(-32+8*j)<=8)]
+    m=W().rect(80,80).extrude(4).edges('|Z').fillet(4)
+    m=m.cut(W().pushPoints(pts).circle(2).extrude(4))
+    m=m.cut(W().rect(20,20).extrude(4).edges('|Z').fillet(4))
+    s=S(800,660,6);s.at(300,330);s.rrect(-40,-40,80,80,4);s.rect(-10,-10,20,20,4)
+    for p in pts:s.circ(*p,2)
+    s.cl(-45,0,45,0);s.cl(0,-45,0,45)
+    s.dim(-40,40,40,40,24);s.dim(-40,-40,-40,40,30);s.dim(-40,-40,-32,-40,-24,'8');s.dim(-32,-40,-24,-40,-44,'8')
+    s.lead(32,32,40,40,'Ø4 × 72',2);s.lead(40-1.17,-40+1.17,-40,30,'R4 × 4');s.dim(-10,-7,10,-7,0,'20');s.dim(7,-10,7,10,0,'20');s.lead(-10+1.17,10-1.17,-45,20,'R4',0)
+    s.at(660,330);s.rrect(0,-40,4,80);s.dim(0,40,4,40,24,'4')
+    s.note('Thickness 4. Grid 9 × 9, pitch 8, centered. The middle 3 × 3 holes are not there.',645)
+    return m,s
+
+@task(26,'Rocker arm (one sketch)',['one sketch','tangent','mirror in sketch','circular + linear pattern in sketch'],'Rule: **one sketch, one Extrude**. Everything (outline and all holes) must be in a single fully defined sketch. Draw the top tangent line once and use the sketch **Mirror** about a construction centerline; use the sketch **Circular pattern** and **Linear pattern** tools for the holes.')
+def t26():
+    d,r1,r2=90,25,12;sf=(r1-r2)/d;cf=math.sqrt(1-sf*sf)
+    A1=(r1*sf,r1*cf);B1=(d+r2*sf,r2*cf)
+    m=(W().moveTo(*A1).lineTo(*B1).threePointArc((d+r2,0),(B1[0],-B1[1])).lineTo(A1[0],-A1[1]).threePointArc((-r1,0),A1).close().extrude(5))
+    h=[((0,0),14),((d,0),8)]+[((18*math.cos(i*pi/2),18*math.sin(i*pi/2)),4) for i in range(4)]+[((30+10*i,0),6) for i in range(5)]
+    for (x,y),dd in h:m=m.cut(W().center(x,y).circle(dd/2).extrude(5))
+    s=S(860,470,5);s.at(190,230)
+    s.pd([('M',)+A1,('L',)+B1,('A',r2,1,1,B1[0],-B1[1]),('L',A1[0],-A1[1]),('A',r1,1,1)+A1,('Z',)])
+    for (x,y),dd in h:s.circ(x,y,dd/2)
+    s.e.append(f'<circle cx="190" cy="230" r="{18*5}" fill="none" stroke="#c33" stroke-width="0.8" stroke-dasharray="10 3 2 3"/>')
+    s.cl(-30,0,107,0);s.cl(0,-30,0,30);s.cl(d,-16,d,16)
+    s.dim(0,-r1,d,-r1,-50,'90');s.dim(0,-r1,30,-r1,-26,'30');s.dim(30,0,40,0,-12,'10')
+    s.lead(-r1*0.707,r1*0.707,135,30,'R25',0);s.lead(d+r2*0.707,r2*0.707,45,40,'R12',0)
+    s.lead(0,0,-110,95,'Ø14',7);s.lead(d,0,-60,70,'Ø8',4)
+    s.lead(0,18,60,70,'Ø4 × 4 on Ø36',2)
+    s.lead(70,0,70,80,'Ø6 × 5',3)
+    s.at(790,230);s.rrect(0,-25,5,50);s.dim(0,25,5,25,24,'5')
+    s.note('Outline: R25 and R12 joined by two tangent lines. Symmetric about the centerline.',445)
+    return m,s
+
 res={}
 for t in T:
     m,s=t['fn']()

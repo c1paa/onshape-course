@@ -1,7 +1,7 @@
 import json
 d=json.load(open('tools/tasks.json'))
-lv=[('Level 1 · Sketch and extrude',1,6),('Level 2 · Fillet and chamfer',7,10),('Level 3 · Patterns',11,15),('Level 4 · Mirror and Boolean',16,19),('Level 5 · Combined',20,24)]
-o=['# Practice: 24 parts','',
+lv=[('Level 1 · Sketch and extrude',1,6),('Level 2 · Fillet and chamfer',7,10),('Level 3 · Patterns',11,15),('Level 4 · Mirror and Boolean',16,19),('Level 5 · Combined',20,26)]
+o=['# Practice: 26 parts','',
 'Parts from drawings, from easy to hard. Each one uses a few topics from Lesson 1: **sketch, extrude (New / Add / Remove), parts and Boolean, fillet, chamfer, patterns (sketch / feature / face), mirror**.','',
 '- Do them in order. Levels 1–3 are for everyone, 4–5 when you feel confident.',
 '- One Onshape document per part: `Lastname - T07 - Rounded block`.',

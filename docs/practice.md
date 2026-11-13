@@ -1,4 +1,4 @@
-# Practice: 24 parts
+# Practice: 26 parts
 
 Parts from drawings, from easy to hard. Each one uses a few topics from Lesson 1: **sketch, extrude (New / Add / Remove), parts and Boolean, fillet, chamfer, patterns (sketch / feature / face), mirror**.
 
@@ -33,6 +33,8 @@ Parts from drawings, from easy to hard. Each one uses a few topics from Lesson 1
 | [T22](#t22) | Hex-bore pulley | stacked extrudes, polygon, circular pattern, chamfer | 12 434 |
 | [T23](#t23) | Servo mount plate | sketch, chamfer, pattern, mirror | 10 125 |
 | [T24](#t24) | Shooter side plate | everything: fillet, patterns, mirror, remove | 70 204 |
+| [T25](#t25) | Grid plate with center window | linear pattern, skip instances, fillet, remove | 20 381 |
+| [T26](#t26) | Rocker arm (one sketch) | one sketch, tangent, mirror in sketch, circular + linear pattern in sketch | 20 885 |
 
 ## Level 1 · Sketch and extrude
 
@@ -341,3 +343,31 @@ Origin = bottom-left corner. A combined task: plan the order of features before 
 ??? note "3D view"
     
     ![T24 3D](img/tasks/t24-3d.svg)
+
+### T25 · Grid plate with center window {#t25}
+
+*linear pattern, skip instances, fillet, remove*
+
+Same 8 mm grid as T12, but the 9 holes in the middle are replaced by a 20 × 20 window. Hint: pattern the holes, then use **Skip instances** in the pattern, or cut the window and delete the extra holes.
+
+![T25](img/tasks/t25.svg)
+
+**Check:** volume = **20 381 mm³**
+
+??? note "3D view"
+    
+    ![T25 3D](img/tasks/t25-3d.svg)
+
+### T26 · Rocker arm (one sketch) {#t26}
+
+*one sketch, tangent, mirror in sketch, circular + linear pattern in sketch*
+
+Rule: **one sketch, one Extrude**. Everything (outline and all holes) must be in a single fully defined sketch. Draw the top tangent line once and use the sketch **Mirror** about a construction centerline; use the sketch **Circular pattern** and **Linear pattern** tools for the holes.
+
+![T26](img/tasks/t26.svg)
+
+**Check:** volume = **20 885 mm³**
+
+??? note "3D view"
+    
+    ![T26 3D](img/tasks/t26-3d.svg)
