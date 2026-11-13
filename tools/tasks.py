@@ -423,7 +423,9 @@ def t28():
     for p in P:s.circ(*p,3)
     s.circ(0,0,8);s.e.append(f'<circle cx="260" cy="270" r="{R0*5:.1f}" fill="none" stroke="#c33" stroke-width="0.8" stroke-dasharray="10 3 2 3"/>')
     s.cl(-40,0,40,0);s.cl(0,-30,0,45)
-    s.dim(*P[1],*P[2],-40,'50');s.lead(P[0][0],P[0][1]+10,60,30,'R10 × 3',0);s.lead(*P[2],30,50,'Ø6 × 3',3);s.lead(0,0,200,60,'Ø16',8)
+    for i in range(3):s.line(*P[i],*P[(i+1)%3],'#c33',0.8,'10 3 2 3')
+    s.dim(P[1][0],P[1][1],P[1][0],P[0][1],70,'43.3');s.dim(0,0,0,P[0][1],-60,'28.87');s.cl(P[1][0]-16,P[0][1],P[0][0]+2,P[0][1])
+    s.dim(*P[1],*P[2],-40,'50 (equilateral)');s.lead(P[0][0],P[0][1]+10,60,30,'R10 × 3',0);s.lead(*P[2],30,50,'Ø6 × 3',3);s.lead(0,0,200,60,'Ø16',8)
     s.at(560,270);s.rrect(0,-25,5,50);s.dim(0,25,5,25,24,'5')
     s.note('Boss centers: equilateral triangle, side 50, centered on the Ø16 hole, one boss straight up.',478)
     return m,s
@@ -438,7 +440,7 @@ def t29():
     for x,y in pts:s.poly([(x+r*math.cos(pi/6+a*pi/3),y+r*math.sin(pi/6+a*pi/3)) for a in range(6)],False)
     s.cl(-60,0,60,0);s.cl(0,-36,0,36)
     s.dim(-55,32,55,32,24);s.dim(-55,-32,-55,32,30);s.dim(-36,-32,-24,-32,-24,'12');s.dim(-36,-32,-30,-32,-48,'6')
-    s.dim(55,0,55,16,-30,'16');s.dim(55,-16,55,0,-30,'16');s.lead(30,16,60,40,'hex 10 A/F',0)
+    s.dim(55,0,55,16,-30,'16');s.dim(55,-16,55,0,-30,'16');s.lead(30,16,60,40,'hex 10 A/F',0);s.lead(55-1.46,-32+1.46,-45,30,'R5 × 4',0)
     s.note('Hexes 10 across flats, flats vertical. Middle row: 7, x = −36 … 36. Rows y = ±16: 6, x = −30 … 30. Thickness 4, R5.',480)
     return m,s
 
@@ -518,7 +520,7 @@ def t33():
             s.pd([('M',x-2,y+px),('L',x-2,y+8),('A',2,0,1,x+2,y+8),('L',x+2,y+px),('A',4,1,1,x-2,y+px),('Z',)],False)
     s.cl(-50,0,50,0);s.cl(0,-34,0,34)
     s.dim(-45,30,45,30,24);s.dim(-45,-30,-45,30,30);s.dim(-25,-30,0,-30,-24,'25');s.dim(45,-12,45,12,-30,'24')
-    s.lead(25,-12,-40,40,'Ø8 × 6',4);s.dim(23,22,27,22,22,'4');s.dim(25,12,25,20,-34,'8');s.cl(21,20,29,20);s.lead(23.6,21.4,135,30,'R2',0)
+    s.lead(25,-12,-40,40,'Ø8 × 6',4);s.lead(45-1.17,-30+1.17,-45,25,'R4 × 4',0);s.dim(23,22,27,22,22,'4');s.dim(25,12,25,20,-34,'8');s.cl(21,20,29,20);s.lead(23.6,21.4,135,30,'R2',0)
     s.note('Thickness 3, corners R4. Keyholes in 3 columns × 2 rows. Slot width 4, its end R2 is 8 above the Ø8 center.',448)
     return m,s
 

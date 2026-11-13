@@ -10,8 +10,10 @@ class S:
         s.e.append(f'<line x1="{a:.1f}" y1="{b:.1f}" x2="{c2:.1f}" y2="{e:.1f}" stroke="{c}" stroke-width="{w}"'+(f' stroke-dasharray="{d}"' if d else '')+'/>')
     def cl(s,x1,y1,x2,y2):s.line(x1,y1,x2,y2,'#c33',0.8,'10 3 2 3')
     def hid(s,x1,y1,x2,y2):s.line(x1,y1,x2,y2,'#111',1,'5 3')
-    def circ(s,x,y,r,w=1.6):
+    def circ(s,x,y,r,w=1.6,cm=True):
         a,b=s.p(x,y);s.e.append(f'<circle cx="{a:.1f}" cy="{b:.1f}" r="{r*s.k:.1f}" fill="none" stroke="#111" stroke-width="{w}"/>')
+        if cm and r*s.k>=4 and r*s.k<=60:
+            e=r+4/s.k;s.e.append(f'<g stroke="#c33" stroke-width="0.7" stroke-dasharray="6 2 1.5 2"><line x1="{a-e*s.k:.1f}" y1="{b:.1f}" x2="{a+e*s.k:.1f}" y2="{b:.1f}"/><line x1="{a:.1f}" y1="{b-e*s.k:.1f}" x2="{a:.1f}" y2="{b+e*s.k:.1f}"/></g>')
     def path(s,pts,close=True):
         q=' '.join('%.1f,%.1f'%s.p(*t) for t in pts)
         s.e.append(f'<polygon points="{q}" fill="#eef3fb" stroke="#111" stroke-width="1.6"/>' if close else f'<polyline points="{q}" fill="none" stroke="#111" stroke-width="1.6"/>')
