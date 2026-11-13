@@ -424,10 +424,10 @@ def t28():
     s.circ(0,0,8);s.e.append(f'<circle cx="260" cy="270" r="{R0*5:.1f}" fill="none" stroke="#c33" stroke-width="0.8" stroke-dasharray="10 3 2 3"/>')
     s.cl(-40,0,40,0);s.cl(0,-30,0,45)
     for i in range(3):s.line(*P[i],*P[(i+1)%3],'#c33',0.8,'10 3 2 3')
-    s.dim(P[1][0],P[1][1],P[1][0],P[0][1],70,'43.3');s.dim(0,0,0,P[0][1],-60,'28.87');s.cl(P[1][0]-16,P[0][1],P[0][0]+2,P[0][1])
-    s.dim(*P[1],*P[2],-40,'50 (equilateral)');s.lead(P[0][0],P[0][1]+10,60,30,'R10 × 3',0);s.lead(*P[2],30,50,'Ø6 × 3',3);s.lead(0,0,200,60,'Ø16',8)
+    s.dim(*P[0],*P[1],-66,'50');s.dim(*P[2],*P[0],-66,'50')
+    s.dim(*P[1],*P[2],-66,'50');s.lead(P[0][0],P[0][1]+10,60,30,'R10 × 3',0);s.lead(*P[2],30,50,'Ø6 × 3',3);s.lead(0,0,200,60,'Ø16',8)
     s.at(560,270);s.rrect(0,-25,5,50);s.dim(0,25,5,25,24,'5')
-    s.note('Boss centers: equilateral triangle, side 50, centered on the Ø16 hole, one boss straight up.',478)
+    s.note('Boss centers: equilateral triangle 50, centered on the Ø16 hole, one boss up.',478)
     return m,s
 
 @task(29,'Hex pocket plate',['one sketch','polygon','two staggered linear patterns'],ONE+' Two patterns: one row of 7 and two rows of 6, shifted by half a step.')
@@ -440,6 +440,7 @@ def t29():
     for x,y in pts:s.poly([(x+r*math.cos(pi/6+a*pi/3),y+r*math.sin(pi/6+a*pi/3)) for a in range(6)],False)
     s.cl(-60,0,60,0);s.cl(0,-36,0,36)
     s.dim(-55,32,55,32,24);s.dim(-55,-32,-55,32,30);s.dim(-36,-32,-24,-32,-24,'12');s.dim(-36,-32,-30,-32,-48,'6')
+    for x,y in[(-36,0),(-24,0),(-30,-16)]:s.cl(x,y+7,x,-34);s.cl(x-7,y,x+7,y)
     s.dim(55,0,55,16,-30,'16');s.dim(55,-16,55,0,-30,'16');s.lead(30,16,60,40,'hex 10 A/F',0);s.lead(55-1.46,-32+1.46,-45,30,'R5 × 4',0)
     s.note('Hexes 10 across flats, flats vertical. Middle row: 7, x = −36 … 36. Rows y = ±16: 6, x = −30 … 30. Thickness 4, R5.',480)
     return m,s
