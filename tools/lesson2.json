@@ -1,0 +1,68 @@
+{
+ "c1": {
+  "v": 7114,
+  "title": "Rounded rectangle",
+  "group": "min",
+  "text": "Target: **3 dimensions**. Centered on the origin."
+ },
+ "c2": {
+  "v": 9548,
+  "title": "Square with 4 holes",
+  "group": "min",
+  "text": "Target: **3 dimensions**. Hint: a construction square through the hole centers, and Equal."
+ },
+ "c3": {
+  "v": 590,
+  "title": "Hex nut",
+  "group": "min",
+  "text": "Target: **2 dimensions**. Which polygon option gives \"across flats\" directly?"
+ },
+ "c4": {
+  "v": 9262,
+  "title": "Cam (two circles + tangents)",
+  "group": "min",
+  "text": "Target: **3 dimensions**."
+ },
+ "c5": {
+  "v": 4299,
+  "title": "Trapezoid with a hole",
+  "group": "min",
+  "text": "Target: **4 dimensions**. The hole is in the middle of the height, on the axis (Midpoint, Symmetric)."
+ },
+ "c6": {
+  "v": 4561,
+  "title": "Slotted bar with 3 holes",
+  "group": "min",
+  "text": "Target: **3 dimensions**. End holes are concentric with the slot ends; the middle one sits at the midpoint."
+ },
+ "m1": {
+  "v": 6561,
+  "title": "Mirror: bracket",
+  "group": "demo",
+  "text": "Draw the **right half** only, then sketch **Mirror** about a vertical construction line through the origin."
+ },
+ "p1": {
+  "v": 6003,
+  "title": "Circular pattern: flange with notches",
+  "group": "demo",
+  "text": "Two sketch circular patterns: 6 holes, and 6 notches on the rim shifted by 30°."
+ },
+ "o1": {
+  "v": 3088,
+  "title": "Offset: frame",
+  "group": "demo",
+  "text": "Draw the outer outline, then **Offset** it 5 inward. Extrude the region between the two outlines."
+ },
+ "a": {
+  "v": 9109,
+  "title": "Intake arm plate",
+  "group": "model",
+  "text": "Uses: tangent, Mirror, polygon (circumscribed), circular pattern, Offset, Trim, sketch fillet. One sketch, Extrude 5."
+ },
+ "b": {
+  "v": 10985,
+  "title": "Adjustable motor mount",
+  "group": "model",
+  "text": "Uses: center rectangle, sketch chamfer, concentric, arc + Offset for slots, circular pattern, Symmetric. One sketch, Extrude 4."
+ }
+}
