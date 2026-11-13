@@ -56,6 +56,39 @@ Typical use: a part centered on the origin. Draw a vertical construction line th
 !!! tip
     Hold ++shift++ while drawing to stop Onshape from adding constraints by itself. Click any constraint icon and press ++delete++ to remove it.
 
+### Inferencing: hints while you draw
+
+While you draw, Onshape watches what the cursor is near and **suggests** a constraint:
+
+- A small **icon next to the cursor** (coincident, horizontal, tangent, …) means: if you click now, this constraint is added automatically.
+- **Dashed blue lines** appear when the cursor lines up with a point you already drew: horizontally or vertically. Click there and the new point is placed exactly in line with it.
+- To get those dashed lines from a point, first **hover over that point** for a moment: Onshape "remembers" it and starts showing alignment with it.
+
+This saves a lot of constraints: a rectangle drawn this way is already horizontal and vertical, a line started on a circle is already coincident.
+
+The danger: it also adds constraints you **didn't want** (a near-horizontal line becomes horizontal, two near-equal lines become equal). Hold ++shift++ while drawing to turn hints off, and check the constraint icons afterwards.
+
+### Dimensions
+
+The **Dimension** tool (++d++) looks at **what you selected** and makes the right kind of dimension:
+
+| You select | You get |
+|---|---|
+| one line | its length |
+| two points | the distance. Move the mouse before placing: **horizontal**, **vertical** or **aligned** (straight between them) |
+| a point and a line | the perpendicular distance from the point to the line |
+| two parallel lines | the distance between them |
+| two lines that are **not** parallel | the **angle**. Where you move the mouse decides which of the 4 angles you get |
+| a circle | the **diameter** (an arc gives the **radius**). You can switch between diameter and radius |
+| a circle and a point or a line | distance to the circle's **center** |
+| two circles | distance between the centers |
+
+Tips:
+
+- You can type **expressions** in a dimension: `30 / 2`, `#width - 10`, `1 in`. The unit is added if you leave it out.
+- **Double-click** a dimension to change it. Drag it to move the number.
+- If Onshape says the dimension would **over-define** the sketch, something already fixes that size (a constraint or another dimension). Find it instead of forcing it.
+
 ### Practice: minimum dimensions
 
 Make each sketch **fully defined (black)** using **no more dimensions than the target**. Everything else must come from constraints. The drawings show all the sizes; your job is to need as few of them as possible.
