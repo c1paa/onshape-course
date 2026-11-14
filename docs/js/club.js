@@ -1,6 +1,6 @@
 (()=>{
-const URL='https://xkbgsoppludqxdgfjlcd.supabase.co',KEY='sb_publishable_RDj-YzmEX4dK_T_0e4Qwrg_otjui5g5',DOM='@ftc-club.test',B='shots';
-const sb=window.supabase.createClient(URL,KEY);
+const SBU='https://xkbgsoppludqxdgfjlcd.supabase.co',KEY='sb_publishable_RDj-YzmEX4dK_T_0e4Qwrg_otjui5g5',DOM='@ftc-club.test',B='shots';
+const sb=window.supabase.createClient(SBU,KEY);
 const ST={new:'waiting',ok:'accepted',redo:'redo'};
 const h=(t,a={},...c)=>{const e=document.createElement(t);for(const k in a){if(k.startsWith('on'))e.addEventListener(k.slice(2),a[k]);else if(k==='html')e.innerHTML=a[k];else e.setAttribute(k,a[k])}for(const x of c.flat())if(x!=null)e.append(x.nodeType?x:document.createTextNode(x));return e};
 const dt=s=>new Date(s).toLocaleString([], {day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
@@ -89,6 +89,8 @@ function account(){
 }
 (async()=>{
   const ws=document.querySelectorAll('.cl-sub[data-task]'),rv=document.getElementById('cl-review');
-  me=await who();account();ws.forEach(widget);if(rv)review(rv);
+  try{me=await who()}catch(e){console.error(e)}
+  try{account()}catch(e){console.error(e)}
+  ws.forEach(widget);if(rv)review(rv);
 })();
 })();
