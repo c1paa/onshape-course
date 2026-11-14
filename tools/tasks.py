@@ -544,6 +544,19 @@ def t34():
     s.note('Holes on a 12 grid from (10, 10); keep the 10 holes with i + j ≤ 3.',548);s.note('80 × 80: to the sharp corners (dashed), before the R6 fillets.',60)
     return m,s
 
+@task(35,'Flange with notches',['one sketch','two circular patterns'],'Two sketch circular patterns: 6 holes, and 6 notches on the rim shifted by 30°.')
+def t35():
+    m=W().circle(25).circle(5).extrude(4).cut(W().polarArray(17,0,360,6).circle(4).extrude(4)).cut(W().polarArray(25,30,360,6).circle(3).extrude(4))
+    s=S(560,340,5);s.at(220,175)
+    n=6;b=2*math.asin(3/50);p=lambda a,r:(r*math.cos(a),r*math.sin(a));ang=[(pi/6+i*pi/3-b,pi/6+i*pi/3+b) for i in range(n)]
+    cmd=[('M',)+p(ang[0][1],25)]
+    for i in range(n):j=(i+1)%n;cmd+=[('A',25,0,0)+p(ang[j][0],25),('A',3,0,1)+p(ang[j][1],25)]
+    s.pd(cmd+[('Z',)]);s.circ(0,0,5)
+    for i in range(6):s.circ(17*math.cos(i*pi/3),17*math.sin(i*pi/3),4)
+    s.e.append(f'<circle cx="220" cy="175" r="{17*5}" fill="none" stroke="#c33" stroke-width="0.8" stroke-dasharray="10 3 2 3"/>')
+    s.lead(0,0,-40,40,'Ø50',25);s.lead(17,0,30,50,'Ø8 × 6 on Ø34',4);s.lead(25*math.cos(5*pi/6)+3*0.87,25*math.sin(5*pi/6)-1.5,150,30,'R3 × 6, at 30°',0);s.note('Center hole Ø10.',330)
+    return m,s
+
 res={}
 for t in T:
     m,s=t['fn']()

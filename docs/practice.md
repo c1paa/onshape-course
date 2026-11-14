@@ -17,6 +17,7 @@ Parts from drawings. Most of them are **one sketch, one Extrude**: the work is i
 | [T32](#t32) | Truss rail | one sketch, two linear patterns, mirror in sketch |
 | [T33](#t33) | Keyhole plate | one sketch, trim, 2-direction pattern in sketch |
 | [T34](#t34) | Triangle gusset with holes | one sketch, pattern + delete instances, fillet in sketch |
+| [T35](#t35) | Flange with notches | one sketch, two circular patterns |
 
 ## T25 · Grid plate with center window {#t25}
 
@@ -143,3 +144,17 @@ Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. 
     ![T34 3D](img/tasks/t34-3d.svg)
 
 <div class="cl-sub" data-task="t34"></div>
+
+## T35 · Flange with notches {#t35}
+
+*one sketch, two circular patterns*
+
+Two sketch circular patterns: 6 holes, and 6 notches on the rim shifted by 30°.
+
+![T35](img/tasks/t35.svg)
+
+??? note "3D view"
+    
+    ![T35 3D](img/tasks/t35-3d.svg)
+
+<div class="cl-sub" data-task="t35"></div>

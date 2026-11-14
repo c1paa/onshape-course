@@ -336,5 +336,14 @@
    "fillet in sketch"
   ],
   "text": "Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. Pattern the holes in 2 directions, then remove the ones that fall outside the triangle."
+ },
+ "t35": {
+  "v": 6002.801897054427,
+  "title": "Flange with notches",
+  "topics": [
+   "one sketch",
+   "two circular patterns"
+  ],
+  "text": "Two sketch circular patterns: 6 holes, and 6 notches on the rim shifted by 30°."
  }
 }

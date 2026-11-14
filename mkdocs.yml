@@ -18,9 +18,9 @@ markdown_extensions:
       permalink: true
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2
-  - js/club.js
+  - js/club.js?v=4
 extra_css:
-  - css/club.css
+  - css/club.css?v=4
 not_in_nav: |
   review.md
 exclude_docs: |
