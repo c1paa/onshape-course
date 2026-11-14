@@ -19,7 +19,9 @@
 .cl-c{margin:.3em 0;padding:.3em .5em;background:#fff;border-radius:4px;border-left:3px solid #3f51b5}
 .cl-c.cl-mine{border-left-color:#999}
 .cl-reply textarea{width:100%;box-sizing:border-box}
-.cl-grid table{font-size:.85em}
-.cl-grid td{text-align:center}
+.cl-grid table{font-size:.8em;border-collapse:collapse}
+.cl-grid th,.cl-grid td{padding:.1em .45em!important;text-align:center;min-width:1.6em}
+.cl-grid td.cl-n{text-align:left}
+.cl-grid td.cl-ok,.cl-grid td.cl-redo,.cl-grid td.cl-new{cursor:pointer;font-weight:bold}
 .cl-filters{margin:.5em 0}
 @media (max-width:600px){.cl-card{flex-direction:column}.cl-card img{width:100%}}

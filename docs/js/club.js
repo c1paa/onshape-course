@@ -19,7 +19,7 @@ function thread(s,cs,onsend){
 }
 function card(s,u,cs,reload,admin){
   const img=h('a',{href:u[s.path]||'#',target:'_blank'},h('img',{src:u[s.path]||'',loading:'lazy'}));
-  const set=async v=>{const {error}=await sb.from('submissions').update({status:v}).eq('id',s.id);if(error)alert(error.message);else reload()};
+  const set=async v=>{const {data,error}=await sb.from('submissions').update({status:v}).eq('id',s.id).select('id');if(error)alert(error.message);else if(!data.length)alert('Not saved: no permission');else reload()};
   const del=async()=>{if(!confirm('Delete this submission?'))return;await sb.storage.from(B).remove([s.path]);await sb.from('submissions').delete().eq('id',s.id);reload()};
   return h('div',{class:'cl-card'},img,h('div',{class:'cl-body'},
     h('div',{},admin?h('b',{},(s.profiles?.name||'?')+' · '+s.task.toUpperCase()+' '):null,h('span',{class:'cl-st cl-'+s.status},ST[s.status]),' ',h('small',{},dt(s.created_at)),
@@ -61,9 +61,12 @@ async function review(box){
   fs.value='new';
   const grid=h('div',{class:'cl-grid'}),list=h('div');
   const draw=async()=>{
-    const {data:all}=await sb.from('submissions').select('user_id,task,status,created_at').order('created_at');
-    const last={};(all||[]).forEach(s=>last[s.user_id+s.task]=s.status);
-    grid.replaceChildren(h('table',{},h('tr',{},h('th'),tasks.map(t=>h('th',{},t.toUpperCase()))),(ps||[]).map(p=>h('tr',{},h('td',{},p.name),tasks.map(t=>{const v=last[p.id+t];return h('td',{class:v?'cl-'+v:''},v?ST[v]:'')})))));
+    const {data:all}=await sb.from('submissions').select('id,user_id,task,status,created_at').order('created_at').order('id');
+    const last={},cnt={};(all||[]).forEach(s=>{const k=s.user_id+s.task;last[k]=s.status;cnt[k]=(cnt[k]||0)+1});
+    const SY={ok:'+',redo:'−',new:'?'};
+    const pick=(p,t)=>{fp.value=p;ft.value=t;fs.value='';draw()};
+    grid.replaceChildren(h('table',{},h('tr',{},h('th'),tasks.map(t=>h('th',{},t.slice(1)))),(ps||[]).map(p=>h('tr',{},h('td',{class:'cl-n'},p.name),tasks.map(t=>{const k=p.id+t,v=last[k];return h('td',v?{class:'cl-'+v,title:ST[v]+' · '+cnt[k]+' submission(s)',onclick:()=>pick(p.id,t)}:{},v?SY[v]:'')})))),
+      h('small',{},'+ accepted · − redo · ? waiting. The latest submission counts. Click a cell to see it.'));
     let q=sb.from('submissions').select('*,profiles(name)');if(fs.value)q=q.eq('status',fs.value);if(ft.value)q=q.eq('task',ft.value);if(fp.value)q=q.eq('user_id',fp.value);
     const {ss,u,cm}=await load(q);list.replaceChildren(ss.length?'':'Nothing here.',...ss.map(s=>card(s,u,cm[s.id]||[],draw,true)));
   };
