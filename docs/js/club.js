@@ -9,7 +9,7 @@ async function who(){const {data:{session}}=await sb.auth.getSession();if(!sessi
 function login(box,done){
   const u=h('input',{placeholder:'name',autocomplete:'username'}),p=h('input',{type:'password',placeholder:'password',autocomplete:'current-password'}),m=h('span',{class:'cl-err'});
   const go=async e=>{e.preventDefault();m.textContent='';const {error}=await sb.auth.signInWithPassword({email:u.value.trim().toLowerCase()+DOM,password:p.value});if(error){m.textContent='Wrong name or password';return}location.reload()};
-  box.replaceChildren(h('form',{class:'cl-login',onsubmit:go},h('b',{},'Sign in to submit: '),u,p,h('button',{type:'submit'},'Sign in'),m));
+  box.replaceChildren(h('form',{class:'cl-login',onsubmit:go},u,p,h('button',{type:'submit'},'Sign in'),m));
 }
 async function urls(paths){if(!paths.length)return{};const {data}=await sb.storage.from(B).createSignedUrls(paths,3600);const r={};(data||[]).forEach(x=>r[x.path]=x.signedUrl);return r}
 function thread(s,cs,onsend){
@@ -52,30 +52,43 @@ async function widget(box){
 }
 async function review(box){
   if(!me){login(box);return}
-  if(!me.is_admin){box.textContent='Only for the coach.';return}
+  const adm=me.is_admin;
   const {data:ps}=await sb.from('profiles').select('id,name').eq('is_admin',false).order('name');
-  const tasks=[...new Set([...document.querySelectorAll('[data-tasks]')].flatMap(e=>e.dataset.tasks.split(',')))];
+  const tasks=box.dataset.tasks.split(',');
   const fs=h('select',{},h('option',{value:''},'all statuses'),Object.entries(ST).map(([k,v])=>h('option',{value:k},v)));
   const ft=h('select',{},h('option',{value:''},'all tasks'),tasks.map(t=>h('option',{value:t},t.toUpperCase())));
   const fp=h('select',{},h('option',{value:''},'all students'),(ps||[]).map(p=>h('option',{value:p.id},p.name)));
   fs.value='new';
   const grid=h('div',{class:'cl-grid'}),list=h('div');
   const draw=async()=>{
-    const {data:all}=await sb.from('submissions').select('id,user_id,task,status,created_at').order('created_at').order('id');
+    const {data:all,error}=await sb.rpc('overview');if(error){grid.textContent='Table error: '+error.message}
     const last={},cnt={};(all||[]).forEach(s=>{const k=s.user_id+s.task;last[k]=s.status;cnt[k]=(cnt[k]||0)+1});
     const SY={ok:'+',redo:'−',new:'?'};
     const pick=(p,t)=>{fp.value=p;ft.value=t;fs.value='';draw()};
-    grid.replaceChildren(h('table',{},h('tr',{},h('th'),tasks.map(t=>h('th',{},t.slice(1)))),(ps||[]).map(p=>h('tr',{},h('td',{class:'cl-n'},p.name),tasks.map(t=>{const k=p.id+t,v=last[k];return h('td',v?{class:'cl-'+v,title:ST[v]+' · '+cnt[k]+' submission(s)',onclick:()=>pick(p.id,t)}:{},v?SY[v]:'')})))),
-      h('small',{},'+ accepted · − redo · ? waiting. The latest submission counts. Click a cell to see it.'));
+    if(!error)grid.replaceChildren(h('table',{},h('tr',{},h('th'),tasks.map(t=>h('th',{},t.slice(1)))),(ps||[]).map(p=>h('tr',{class:p.id===me.id?'cl-me':''},h('td',{class:'cl-n'},p.name),tasks.map(t=>{const k=p.id+t,v=last[k];const a={class:v?'cl-'+v:'',title:v?ST[v]+' · '+cnt[k]+' submission(s)':''};if(v&&adm)a.onclick=()=>pick(p.id,t);return h('td',a,v?SY[v]:'')})))),
+      h('small',{},'+ accepted · − redo · ? waiting. The latest submission counts.'+(adm?' Click a cell to see it.':'')));
+    if(!adm)return;
     let q=sb.from('submissions').select('*,profiles(name)');if(fs.value)q=q.eq('status',fs.value);if(ft.value)q=q.eq('task',ft.value);if(fp.value)q=q.eq('user_id',fp.value);
     const {ss,u,cm}=await load(q);list.replaceChildren(ss.length?'':'Nothing here.',...ss.map(s=>card(s,u,cm[s.id]||[],draw,true)));
   };
   [fs,ft,fp].forEach(e=>e.onchange=draw);
-  box.replaceChildren(h('h2',{},'Overview (latest status)'),grid,h('h2',{},'Submissions'),h('div',{class:'cl-filters'},fs,ft,fp),list);
+  box.replaceChildren(grid,adm?[h('h2',{},'Submissions'),h('div',{class:'cl-filters'},fs,ft,fp),list]:[]);
   draw();
 }
+function base(){const l=document.querySelector('a.md-logo,a.md-header__button[href]');return new URL(l?l.getAttribute('href'):'./',location)}
+function account(){
+  const hdr=document.querySelector('.md-header__inner');if(!hdr)return;
+  const box=h('div',{class:'cl-acct'}),tbl=new URL('review/',base()).href;
+  if(me){
+    box.append(h('a',{href:tbl},'Table'),h('span',{class:'cl-who'},me.name),h('a',{href:'#',onclick:async e=>{e.preventDefault();await sb.auth.signOut();location.reload()}},'Sign out'));
+  }else{
+    const pop=h('div',{class:'cl-pop',hidden:''});login(pop);
+    box.append(h('a',{href:'#',onclick:e=>{e.preventDefault();pop.hidden=!pop.hidden;const i=pop.querySelector('input');if(i&&!pop.hidden)i.focus()}},'Sign in'),pop);
+  }
+  const s=hdr.querySelector('.md-search');hdr.insertBefore(box,s||null);
+}
 (async()=>{
-  const ws=document.querySelectorAll('.cl-sub[data-task]'),rv=document.getElementById('cl-review');if(!ws.length&&!rv)return;
-  me=await who();ws.forEach(widget);if(rv)review(rv);
+  const ws=document.querySelectorAll('.cl-sub[data-task]'),rv=document.getElementById('cl-review');
+  me=await who();account();ws.forEach(widget);if(rv)review(rv);
 })();
 })();

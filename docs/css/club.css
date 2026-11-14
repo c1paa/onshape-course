@@ -25,3 +25,11 @@
 .cl-grid td.cl-ok,.cl-grid td.cl-redo,.cl-grid td.cl-new{cursor:pointer;font-weight:bold}
 .cl-filters{margin:.5em 0}
 @media (max-width:600px){.cl-card{flex-direction:column}.cl-card img{width:100%}}
+.cl-acct{display:flex;align-items:center;gap:.8em;margin:0 .6em;font-size:.7rem;position:relative;white-space:nowrap}
+.cl-acct a{color:inherit;opacity:.9}.cl-acct a:hover{opacity:1;text-decoration:underline}
+.cl-who{font-weight:bold}
+.cl-pop{position:absolute;top:2.4em;right:0;z-index:10;background:#fff;color:#222;padding:.6em;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,.25);font-size:.75rem}
+.cl-pop input{display:block;width:12em;margin:.3em 0;border:1px solid #bbb;border-radius:4px;padding:.3em .5em;font:inherit}
+.cl-pop button{border:1px solid #3f51b5;background:#3f51b5;color:#fff;border-radius:4px;padding:.3em .8em;cursor:pointer;font:inherit}
+.cl-pop .cl-login{display:block}
+.cl-grid tr.cl-me td.cl-n{font-weight:bold}
