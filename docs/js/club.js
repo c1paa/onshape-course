@@ -72,7 +72,7 @@ async function review(box){
     const {ss,u,cm}=await load(q);list.replaceChildren(ss.length?'':'Nothing here.',...ss.map(s=>card(s,u,cm[s.id]||[],draw,true)));
   };
   [fs,ft,fp].forEach(e=>e.onchange=draw);
-  box.replaceChildren(grid,adm?[h('h2',{},'Submissions'),h('div',{class:'cl-filters'},fs,ft,fp),list]:[]);
+  box.replaceChildren(grid,...(adm?[h('h2',{},'Submissions'),h('div',{class:'cl-filters'},fs,ft,fp),list]:[]));
   draw();
 }
 function base(){const l=document.querySelector('a.md-logo,a.md-header__button[href]');return new URL(l?l.getAttribute('href'):'./',location)}
