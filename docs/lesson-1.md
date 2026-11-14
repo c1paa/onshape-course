@@ -4,8 +4,6 @@
 
 ![Pattern plate](img/p0-plate.svg)
 
-**Check:** volume = **16 655 mm³** (±20).
-
 ## 1. Create a document and set units
 
 1. On the Onshape home page click **Create → Document**, name it `Lastname - L1 - Plate`.
@@ -77,13 +75,9 @@ Drawing 22 holes by hand is slow and easy to get wrong. Draw one, then copy it w
 
 1. **Fillet** (++shift+f++). Select the 4 vertical corner edges. Radius `4`. ✔
 
-## 8. Material and check
+## 8. Check
 
-1. Right-click the part in the Parts list → **Assign material** → **Aluminum - 6061**.
-2. Bottom right, open **Mass properties**, select the part.
-3. Compare the **volume** with the drawing: **16 655 mm³**. If it's off, look at the drawing again: wrong hole count, wrong diameter, or a wrong depth are the usual reasons.
-
-<!-- SCREENSHOT: Mass properties panel with volume highlighted -->
+Compare your part with the drawing: number of holes, diameters, thickness, fillets. Wrong hole count, wrong diameter or wrong depth are the usual mistakes.
 
 ## 9. If you finish early
 

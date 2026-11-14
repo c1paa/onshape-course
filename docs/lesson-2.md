@@ -170,7 +170,6 @@ Draw the **right half** only, then sketch **Mirror** about a vertical constructi
 ??? note "3D view"
     ![](img/l2/m1-3d.svg)
 
-**Check:** volume = **6 561 mm³**.
 
 #### Circular pattern: flange with notches
 
@@ -181,7 +180,6 @@ Two sketch circular patterns: 6 holes, and 6 notches on the rim shifted by 30°.
 ??? note "3D view"
     ![](img/l2/p1-3d.svg)
 
-**Check:** volume = **6 003 mm³**.
 
 #### Offset: frame
 
@@ -192,7 +190,6 @@ Draw the outer outline, then **Offset** it 5 inward. Extrude the region between 
 ??? note "3D view"
     ![](img/l2/o1-3d.svg)
 
-**Check:** volume = **3 088 mm³**.
 
 ## 4. A model for the lesson
 
@@ -207,4 +204,3 @@ Uses: center rectangle, sketch chamfer, concentric, arc + Offset for slots, circ
 ??? note "3D view"
     ![](img/l2/b-3d.svg)
 
-**Check:** volume = **10 985 mm³**.

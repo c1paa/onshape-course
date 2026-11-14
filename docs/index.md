@@ -19,5 +19,5 @@ In this course you learn to model robot parts in Onshape, a free CAD that runs i
 ## Rules
 
 - Every homework part goes in its own Onshape document named `Lastname - T25 - Grid plate` and so on.
-- You check your own model before submitting: every drawing comes with the **volume** your part must have.
+- Check your part against the drawing before you send it.
 - Stuck for more than 15 minutes? Ask in the team chat with a screenshot. Asking is faster than guessing.
