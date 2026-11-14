@@ -4,6 +4,7 @@ Parts from drawings. Most of them are **one sketch, one Extrude**: the work is i
 
 - One Onshape document per part: `Lastname - T26 - Rocker arm`.
 - Try to guess how you would build the part *before* opening the 3D view.
+- Submit a screenshot in the box under each task. Sign in with the name and password from the coach.
 
 | # | Part | Topics |
 |---|---|---|
@@ -29,6 +30,8 @@ Same 8 mm grid as T12, but the 9 holes in the middle are replaced by a 20 × 20 
     
     ![T25 3D](img/tasks/t25-3d.svg)
 
+<div class="cl-sub" data-task="t25"></div>
+
 ## T26 · Rocker arm (one sketch) {#t26}
 
 *one sketch, tangent, mirror in sketch, circular + linear pattern in sketch*
@@ -40,6 +43,8 @@ Rule: **one sketch, one Extrude**. Everything (outline and all holes) must be in
 ??? note "3D view"
     
     ![T26 3D](img/tasks/t26-3d.svg)
+
+<div class="cl-sub" data-task="t26"></div>
 
 ## T27 · Tensioner plate {#t27}
 
@@ -53,6 +58,8 @@ Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. 
     
     ![T27 3D](img/tasks/t27-3d.svg)
 
+<div class="cl-sub" data-task="t27"></div>
+
 ## T29 · Hex pocket plate {#t29}
 
 *one sketch, polygon, two staggered linear patterns*
@@ -64,6 +71,8 @@ Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. 
 ??? note "3D view"
     
     ![T29 3D](img/tasks/t29-3d.svg)
+
+<div class="cl-sub" data-task="t29"></div>
 
 ## T30 · Encoder disk {#t30}
 
@@ -77,6 +86,8 @@ Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. 
     
     ![T30 3D](img/tasks/t30-3d.svg)
 
+<div class="cl-sub" data-task="t30"></div>
+
 ## T31 · Five-window wheel {#t31}
 
 *one sketch, sketch fillet, circular pattern in sketch*
@@ -88,6 +99,8 @@ Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. 
 ??? note "3D view"
     
     ![T31 3D](img/tasks/t31-3d.svg)
+
+<div class="cl-sub" data-task="t31"></div>
 
 ## T32 · Truss rail {#t32}
 
@@ -101,6 +114,8 @@ Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. 
     
     ![T32 3D](img/tasks/t32-3d.svg)
 
+<div class="cl-sub" data-task="t32"></div>
+
 ## T33 · Keyhole plate {#t33}
 
 *one sketch, trim, 2-direction pattern in sketch*
@@ -113,6 +128,8 @@ Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. 
     
     ![T33 3D](img/tasks/t33-3d.svg)
 
+<div class="cl-sub" data-task="t33"></div>
+
 ## T34 · Triangle gusset with holes {#t34}
 
 *one sketch, pattern + delete instances, fillet in sketch*
@@ -124,3 +141,5 @@ Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. 
 ??? note "3D view"
     
     ![T34 3D](img/tasks/t34-3d.svg)
+
+<div class="cl-sub" data-task="t34"></div>

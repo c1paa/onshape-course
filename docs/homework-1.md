@@ -1,6 +1,6 @@
 # Homework 1
 
-Model each part from its drawing, one Onshape document per part: `Lastname - T25 - Grid plate`. When it is done, check it against the drawing and send a screenshot.
+Model each part from its drawing, one Onshape document per part: `Lastname - T25 - Grid plate`. When it is done, check it against the drawing and submit a screenshot in the box under the task (sign in with the name and password from the coach).
 
 | # | Part | Topics |
 |---|---|---|
@@ -23,6 +23,8 @@ Same 8 mm grid as T12, but the 9 holes in the middle are replaced by a 20 × 20 
     
     ![T25 3D](img/tasks/t25-3d.svg)
 
+<div class="cl-sub" data-task="t25"></div>
+
 ## T26 · Rocker arm (one sketch) {#t26}
 
 *one sketch, tangent, mirror in sketch, circular + linear pattern in sketch*
@@ -34,6 +36,8 @@ Rule: **one sketch, one Extrude**. Everything (outline and all holes) must be in
 ??? note "3D view"
     
     ![T26 3D](img/tasks/t26-3d.svg)
+
+<div class="cl-sub" data-task="t26"></div>
 
 ## T29 · Hex pocket plate {#t29}
 
@@ -47,6 +51,8 @@ Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. 
     
     ![T29 3D](img/tasks/t29-3d.svg)
 
+<div class="cl-sub" data-task="t29"></div>
+
 ## T32 · Truss rail {#t32}
 
 *one sketch, two linear patterns, mirror in sketch*
@@ -58,6 +64,8 @@ Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. 
 ??? note "3D view"
     
     ![T32 3D](img/tasks/t32-3d.svg)
+
+<div class="cl-sub" data-task="t32"></div>
 
 ## T33 · Keyhole plate {#t33}
 
@@ -71,6 +79,8 @@ Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. 
     
     ![T33 3D](img/tasks/t33-3d.svg)
 
+<div class="cl-sub" data-task="t33"></div>
+
 ## T34 · Triangle gusset with holes {#t34}
 
 *one sketch, pattern + delete instances, fillet in sketch*
@@ -82,3 +92,5 @@ Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. 
 ??? note "3D view"
     
     ![T34 3D](img/tasks/t34-3d.svg)
+
+<div class="cl-sub" data-task="t34"></div>

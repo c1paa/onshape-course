@@ -16,6 +16,13 @@ markdown_extensions:
   - tables
   - toc:
       permalink: true
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2
+  - js/club.js
+extra_css:
+  - css/club.css
+not_in_nav: |
+  review.md
 exclude_docs: |
   advanced.md
   submit.md
