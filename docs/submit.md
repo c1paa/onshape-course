@@ -1,6 +1,6 @@
 # How to submit
 
-1. Name the document `Lastname - HW1 - Spacer` (HW2, HW3…).
+1. Name the document `Lastname - T25 - Grid plate` (T26, T29…).
 2. Check the volume in **Mass properties** against the table in the homework.
 3. Click **Share** (top right) → enter the coach's Onshape email (it's in the team chat) → permission **Can view** → **Share**.
 4. Post in the team chat: your name, which parts are done, and the volume you got for each.

@@ -10,6 +10,8 @@ class S:
         s.e.append(f'<line x1="{a:.1f}" y1="{b:.1f}" x2="{c2:.1f}" y2="{e:.1f}" stroke="{c}" stroke-width="{w}"'+(f' stroke-dasharray="{d}"' if d else '')+'/>')
     def cl(s,x1,y1,x2,y2):s.line(x1,y1,x2,y2,'#c33',0.8,'10 3 2 3')
     def hid(s,x1,y1,x2,y2):s.line(x1,y1,x2,y2,'#111',1,'5 3')
+    def disc(s,x,y,r):
+        a,b=s.p(x,y);s.e.append(f'<circle cx="{a:.1f}" cy="{b:.1f}" r="{r*s.k:.1f}" fill="#eef3fb" stroke="#111" stroke-width="1.6"/>')
     def circ(s,x,y,r,w=1.6,cm=True):
         a,b=s.p(x,y);s.e.append(f'<circle cx="{a:.1f}" cy="{b:.1f}" r="{r*s.k:.1f}" fill="none" stroke="#111" stroke-width="{w}"/>')
         if cm and r*s.k>=4 and r*s.k<=60:

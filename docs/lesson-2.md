@@ -194,20 +194,9 @@ Draw the outer outline, then **Offset** it 5 inward. Extrude the region between 
 
 **Check:** volume = **3 088 mm³**.
 
-## 4. Two models for the lesson
+## 4. A model for the lesson
 
-We build these together, step by step. Plan the sketch before drawing: what is symmetric, what is concentric, what can be a pattern.
-
-### Intake arm plate
-
-Uses: tangent, Mirror, polygon (circumscribed), circular pattern, Offset, Trim, sketch fillet. One sketch, Extrude 5.
-
-![Intake arm plate](img/l2/a.svg)
-
-??? note "3D view"
-    ![](img/l2/a-3d.svg)
-
-**Check:** volume = **9 109 mm³**.
+We build this one together, step by step. Plan the sketch before drawing: what is symmetric, what is concentric, what can be a pattern.
 
 ### Adjustable motor mount
 
@@ -219,7 +208,3 @@ Uses: center rectangle, sketch chamfer, concentric, arc + Offset for slots, circ
     ![](img/l2/b-3d.svg)
 
 **Check:** volume = **10 985 mm³**.
-
-## 5. On your own
-
-[Practice](practice.md), Level 6: **T26, T27, T28, T33**. If you finish: T29–T32.

@@ -451,16 +451,16 @@ def t30():
     sl=W().center(24.5,0).rect(7,2).extrude(2)
     for i in range(24):m=m.cut(sl.rotate((0,0,0),(0,0,1),15*i))
     m=m.cut(W().polarArray(13,90,360,3).circle(1.6).extrude(2))
-    s=S(640,470,6);s.at(250,240);s.circ(0,0,30);s.circ(0,0,10)
+    s=S(720,470,6);s.at(310,240);s.disc(0,0,30);s.circ(0,0,10)
     for i in range(24):
         a=math.radians(15*i);c,sn=math.cos(a),math.sin(a)
         q=[(21,-1),(28,-1),(28,1),(21,1)];s.poly([(x*c-y*sn,x*sn+y*c) for x,y in q],False)
     for i in range(3):a=pi/2+i*2*pi/3;s.circ(13*math.cos(a),13*math.sin(a),1.6)
-    s.e.append(f'<circle cx="250" cy="240" r="{13*6}" fill="none" stroke="#c33" stroke-width="0.8" stroke-dasharray="10 3 2 3"/>')
+    s.e.append(f'<circle cx="310" cy="240" r="{13*6}" fill="none" stroke="#c33" stroke-width="0.8" stroke-dasharray="10 3 2 3"/>')
     s.cl(-34,0,34,0);s.cl(0,-34,0,34)
-    s.lead(0,0,-40,60,'Ø60',30);s.lead(0,0,-140,30,'Ø20',10);s.lead(13*math.cos(pi/2+2*pi/3),13*math.sin(pi/2+2*pi/3),-150,90,'Ø3.2 × 3 on Ø26',1.6)
-    s.dim(21,1,28,1,40,'7');s.lead(28*math.cos(math.radians(30)),28*math.sin(math.radians(30)),40,40,'24 slots, 2 wide, r 21 … 28',0)
-    s.at(560,240);s.rrect(0,-30,2,60);s.dim(0,30,2,30,24,'2')
+    s.lead(0,0,-40,60,'Ø60',30);s.lead(0,0,-60,110,'Ø20',10);s.lead(13*math.cos(pi/2+2*pi/3),13*math.sin(pi/2+2*pi/3),-150,90,'Ø3.2 × 3 on Ø26',1.6)
+    s.dim(21,1,28,1,40,'7');s.lead(28*math.cos(math.radians(60)),28*math.sin(math.radians(60)),60,30,'24 slots, 2 wide, r 21 … 28',0)
+    s.at(650,240);s.rrect(0,-30,2,60);s.dim(0,30,2,30,24,'2')
     s.note('One slot on the horizontal axis; one hole straight up.',455)
     return m,s
 
@@ -472,7 +472,7 @@ def t31():
     ring=ring.edges('|Z').fillet(3)
     m=m.cut(ring)
     s=S(660,470,4.6);s.at(240,245)
-    s.circ(0,0,40);s.circ(0,0,4)
+    s.disc(0,0,40);s.circ(0,0,4)
     for i in range(5):
         a1=math.radians(90+72*i);a2=a1+math.radians(72)
         def bound(a,sg,r):

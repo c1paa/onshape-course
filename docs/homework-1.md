@@ -1,52 +1,96 @@
 # Homework 1
 
-Model each part from its drawing, one Onshape document per part. Assign **Aluminum - 6061** and check the volume in **Mass properties** before you submit. Then [submit](submit.md) the links.
+Model each part from its drawing, one Onshape document per part: `Lastname - T25 - Grid plate`. Assign **Aluminum - 6061** and check the **volume** in **Mass properties** before you submit (±1% counts as correct). Then [submit](submit.md) the links.
 
-HW1–HW3 are for everyone. Bonus parts are for those who have used CAD before, or who finished early.
+| # | Part | Topics | Volume, mm³ |
+|---|---|---|---|
+| [T25](#t25) | Grid plate with center window | linear pattern, skip instances, fillet, remove | 20 381 |
+| [T26](#t26) | Rocker arm (one sketch) | one sketch, tangent, mirror in sketch, circular + linear pattern in sketch | 20 885 |
+| [T29](#t29) | Hex pocket plate | one sketch, polygon, two staggered linear patterns | 21 492 |
+| [T32](#t32) | Truss rail | one sketch, two linear patterns, mirror in sketch | 16 311 |
+| [T33](#t33) | Keyhole plate | one sketch, trim, 2-direction pattern in sketch | 14 840 |
+| [T34](#t34) | Triangle gusset with holes | one sketch, pattern + delete instances, fillet in sketch | 11 628 |
 
-| Part | Volume, mm³ | Mass, g (Al 6061) |
-|---|---|---|
-| HW1 Spacer | 3 393 | 9.2 |
-| HW2 L-bracket | 4 893 | 13.2 |
-| HW3 Motor plate | 14 049 | 37.9 |
-| HW4 bonus U-channel | 41 229 | 111.3 |
-| HW5 bonus Shaft collar | 2 587 | 7.0 |
+## T25 · Grid plate with center window {#t25}
 
-Volume within ±1% counts as correct. Mass can differ a little if the material library uses a different density, so trust the volume.
+*linear pattern, skip instances, fillet, remove*
 
-## HW1 · Spacer
+Same 8 mm grid as T12, but the 9 holes in the middle are replaced by a 20 × 20 window. Hint: pattern the holes, then use **Skip instances** in the pattern, or cut the window and delete the extra holes.
 
-![Spacer](img/hw1-spacer.svg)
+![T25](img/tasks/t25.svg)
 
-??? tip "Hint"
-    One sketch with two circles on the same center. Extrude selects the ring between them, so the hole comes for free.
+**Check:** volume = **20 381 mm³**
 
-## HW2 · L-bracket
+??? note "3D view"
+    
+    ![T25 3D](img/tasks/t25-3d.svg)
 
-![L-bracket](img/hw2-bracket.svg)
+## T26 · Rocker arm (one sketch) {#t26}
 
-??? tip "Hint"
-    Sketch the L profile on the **Front** plane, not Top. Then extrude it `24`, using **Symmetric** so the part stays centered. Add the holes with sketches on the outer face of each leg.
+*one sketch, tangent, mirror in sketch, circular + linear pattern in sketch*
 
-## HW3 · Motor plate
+Rule: **one sketch, one Extrude**. Everything (outline and all holes) must be in a single fully defined sketch. Draw the top tangent line once and use the sketch **Mirror** about a construction centerline; use the sketch **Circular pattern** and **Linear pattern** tools for the holes.
 
-![Motor plate](img/hw3-motor-plate.svg)
+![T26](img/tasks/t26.svg)
 
-??? tip "Hint"
-    Make one Ø4 hole on the Ø32 circle, then use **Circular pattern** around the center axis, count `4`. Corner holes: one hole plus a linear pattern in two directions, like in the lesson.
+**Check:** volume = **20 885 mm³**
 
-## HW4 (bonus) · U-channel
+??? note "3D view"
+    
+    ![T26 3D](img/tasks/t26-3d.svg)
 
-![U-channel](img/hw4-channel.svg)
+## T29 · Hex pocket plate {#t29}
 
-This is what a real goBILDA U-channel looks like, simplified.
+*one sketch, polygon, two staggered linear patterns*
 
-??? tip "Hint"
-    Either sketch the U profile and extrude 120, or extrude a 48×48 block and use **Shell** with thickness 2.5. Try both: which is easier to change later?
+Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. Two patterns: one row of 7 and two rows of 6, shifted by half a step.
 
-## HW5 (bonus) · Shaft collar
+![T29](img/tasks/t29.svg)
 
-![Shaft collar](img/hw5-collar.svg)
+**Check:** volume = **21 492 mm³**
 
-??? tip "Hint"
-    Try the **Hole** feature for the radial hole. It needs a sketch point on a plane through the center. You may need a new plane: **Plane** → offset from a face, or through a line.
+??? note "3D view"
+    
+    ![T29 3D](img/tasks/t29-3d.svg)
+
+## T32 · Truss rail {#t32}
+
+*one sketch, two linear patterns, mirror in sketch*
+
+Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. Triangles pointing up and down: two linear patterns, shifted by half a step.
+
+![T32](img/tasks/t32.svg)
+
+**Check:** volume = **16 311 mm³**
+
+??? note "3D view"
+    
+    ![T32 3D](img/tasks/t32-3d.svg)
+
+## T33 · Keyhole plate {#t33}
+
+*one sketch, trim, 2-direction pattern in sketch*
+
+Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. Each keyhole is a circle plus a slot: trim the lines inside so one closed outline is left.
+
+![T33](img/tasks/t33.svg)
+
+**Check:** volume = **14 840 mm³**
+
+??? note "3D view"
+    
+    ![T33 3D](img/tasks/t33-3d.svg)
+
+## T34 · Triangle gusset with holes {#t34}
+
+*one sketch, pattern + delete instances, fillet in sketch*
+
+Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. Pattern the holes in 2 directions, then remove the ones that fall outside the triangle.
+
+![T34](img/tasks/t34.svg)
+
+**Check:** volume = **11 628 mm³**
+
+??? note "3D view"
+    
+    ![T34 3D](img/tasks/t34-3d.svg)
