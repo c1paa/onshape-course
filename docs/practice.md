@@ -18,6 +18,10 @@ Parts from drawings. Most of them are **one sketch, one Extrude**: the work is i
 | [T33](#t33) | Keyhole plate | one sketch, trim, 2-direction pattern in sketch |
 | [T34](#t34) | Triangle gusset with holes | one sketch, pattern + delete instances, fillet in sketch |
 | [T35](#t35) | Flange with notches | one sketch, two circular patterns |
+| [T36](#t36) | Shaft and bracket | two parts, Boolean subtract, keep tools |
+| [T37](#t37) | Part from two views | extrude, Boolean intersect |
+| [T38](#t38) | Box with a lid | remove, plane, split |
+| [T39](#t39) | Bracket with "up to" cuts | variables, through all / up to next |
 
 ## T25 · Grid plate with center window {#t25}
 
@@ -158,3 +162,59 @@ Two sketch circular patterns: 6 holes, and 6 notches on the rim shifted by 30°.
     ![T35 3D](img/tasks/t35-3d.svg)
 
 <div class="cl-sub" data-task="t35"></div>
+
+## T36 · Shaft and bracket {#t36}
+
+*two parts, Boolean subtract, keep tools*
+
+Make the shaft first (New), then the bracket block around it (New, so it does not merge). Then **Boolean → Subtract**: target = bracket, tool = shaft, tick **Keep tools**. Change the shaft to Ø12: the hole must follow.
+
+![T36](img/tasks/t36.svg)
+
+??? note "3D view"
+    
+    ![T36 3D](img/tasks/t36-3d.svg)
+
+<div class="cl-sub" data-task="t36"></div>
+
+## T37 · Part from two views {#t37}
+
+*extrude, Boolean intersect*
+
+Extrude the front view (New), extrude the top view (New), then **Boolean → Intersect**. Only the volume inside both is left.
+
+![T37](img/tasks/t37.svg)
+
+??? note "3D view"
+    
+    ![T37 3D](img/tasks/t37-3d.svg)
+
+<div class="cl-sub" data-task="t37"></div>
+
+## T38 · Box with a lid {#t38}
+
+*remove, plane, split*
+
+Box 60 × 40 × 30, pocket with a 3 mm wall and 3 mm floor (Extrude Remove from a sketch on the top face). Then **Plane** offset 24 from the bottom and **Split** the box: you get a lid and a base, two parts.
+
+![T38](img/tasks/t38.svg)
+
+??? note "3D view"
+    
+    ![T38 3D](img/tasks/t38-3d.svg)
+
+<div class="cl-sub" data-task="t38"></div>
+
+## T39 · Bracket with "up to" cuts {#t39}
+
+*variables, through all / up to next*
+
+Make `t` a **Variable** (4 mm). Holes and the slot are cut with **Through all** or **Up to next**. Then change `t` to 6: everything must still cut through.
+
+![T39](img/tasks/t39.svg)
+
+??? note "3D view"
+    
+    ![T39 3D](img/tasks/t39-3d.svg)
+
+<div class="cl-sub" data-task="t39"></div>

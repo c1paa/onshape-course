@@ -73,69 +73,120 @@ Every Extrude (and Revolve, Sweep…) has these options at the top:
 
 ## 5. Practice
 
-### Shaft and bracket {#l31}
+Numbers match the columns in the progress table (3.1 … 3.8).
 
-Boolean Subtract with **Keep tools**. Make the shaft first (New), then the bracket block around it (New, so it does not merge). Then **Boolean → Subtract**: target = bracket, tool = shaft, tick **Keep tools**. Change the shaft to Ø12: the hole must follow.
+| # | Part | Topics |
+|---|---|---|
+| [L3-1](#l31) | Bearing blocks | Multiple parts, **Plane** (mid plane), **Mirror** of a part, **Boolean Subtract** with Keep tools. |
+| [L3-2](#l32) | Latch from two views | **Intersect** of two extrudes, **Through all**. |
+| [L3-3](#l33) | Electronics box | **Plane**, Remove from a plane, **Up to face**, **Split**, two parts. |
+| [L3-4](#l34) | Bracket with variable thickness | **Variables**, **Up to next / Through all**, 3D **Fillet**, **Mirror** of a feature. |
+| [L3-5](#l35) | Thin channel | **Thin** extrude, sketch on a face. |
+| [L3-6](#l36) | Plate stack | Multiple parts, **Use**. |
+| [L3-7](#l37) | Revolved hub | **Revolve**, 3D **Chamfer**, **Circular pattern** of a feature, **Up to next**. |
+| [L3-8](#l38) | Slide carriage | Two parts, **Use** + **Offset**, Remove **Through all**. |
 
-![Shaft and bracket](img/l3/a.svg)
+### L3-1 · Bearing blocks {#l31}
+
+*Multiple parts, **Plane** (mid plane), **Mirror** of a part, **Boolean Subtract** with Keep tools.*
+
+Shaft first (Revolve or Extrude, New). Then one block (New). Bore = **Boolean → Subtract**, target the block, tool the shaft, **Keep tools** ticked. Second block: **Mirror** the part across a mid plane. Change the shaft to Ø10: both bores must follow.
+
+![Bearing blocks](img/l3/l31.svg)
 
 ??? note "3D view"
-    ![](img/l3/a-3d.svg)
+    ![](img/l3/l31-3d.svg)
 
 <div class="cl-sub" data-task="l31"></div>
 
-### Part from two views {#l32}
+### L3-2 · Latch from two views {#l32}
 
-A shape that is hard to sketch directly. Extrude the front view (New), extrude the top view (New), then **Boolean → Intersect**. Only the volume inside both is left.
+***Intersect** of two extrudes, **Through all**.*
 
-![Part from two views](img/l3/b.svg)
+The shape is hard to sketch in one view. Extrude the front view (New, symmetric), extrude the top view (New), then **Boolean → Intersect**. Then the Ø8 hole down and the Ø6 hole through the hook.
+
+![Latch from two views](img/l3/l32.svg)
 
 ??? note "3D view"
-    ![](img/l3/b-3d.svg)
+    ![](img/l3/l32-3d.svg)
 
 <div class="cl-sub" data-task="l32"></div>
 
-### Box with a lid {#l33}
+### L3-3 · Electronics box {#l33}
 
-Box 60 × 40 × 30, pocket with a 3 mm wall and 3 mm floor (Extrude Remove from a sketch on the top face). Then **Plane** offset 24 from the bottom and **Split** the box: you get a lid and a base, two parts.
+***Plane**, Remove from a plane, **Up to face**, **Split**, two parts.*
 
-![Box with a lid](img/l3/c.svg)
+Solid box → hollow it from a **Plane** 2.5 below the top (Remove, depth 31) so the top stays closed. Bosses: sketch on the floor, Extrude Add **Up to face** (the ceiling). Holes Through all. Then a **Plane** at 30 and **Split**: base and lid.
+
+![Electronics box](img/l3/l33.svg)
 
 ??? note "3D view"
-    ![](img/l3/c-3d.svg)
+    ![](img/l3/l33-3d.svg)
 
 <div class="cl-sub" data-task="l33"></div>
 
-### Bracket with "up to" cuts {#l34}
+### L3-4 · Bracket with variable thickness {#l34}
 
-Make `t` a **Variable** (4 mm). Holes and the slot are cut with **Through all** or **Up to next**. Then change `t` to 6: everything must still cut through.
+***Variables**, **Up to next / Through all**, 3D **Fillet**, **Mirror** of a feature.*
 
-![Bracket with "up to" cuts](img/l3/d.svg)
+Make `t` a Variable. One gusset, then **Mirror** it. Inner bend: 3D fillet R4. All cuts Through all or Up to next. Then set `t = 6`: nothing may break.
+
+![Bracket with variable thickness](img/l3/l34.svg)
 
 ??? note "3D view"
-    ![](img/l3/d-3d.svg)
+    ![](img/l3/l34-3d.svg)
 
 <div class="cl-sub" data-task="l34"></div>
 
-### Thin channel {#l35}
+### L3-5 · Thin channel {#l35}
 
-**Thin** extrude: sketch only the U line, no thickness. Holes in the bottom with a sketch on the bottom face.
+***Thin** extrude, sketch on a face.*
 
-![Thin channel](img/l3/e.svg)
+Sketch only the U line, no thickness. Extrude with **Thin**, 2.5, to the inside. Holes with a sketch on the bottom face.
+
+![Thin channel](img/l3/l35.svg)
 
 ??? note "3D view"
-    ![](img/l3/e-3d.svg)
+    ![](img/l3/l35-3d.svg)
 
 <div class="cl-sub" data-task="l35"></div>
 
-### Plate stack {#l36}
+### L3-6 · Plate stack {#l36}
 
-Several parts in one Part Studio, linked with **Use**. Base plate first. Standoffs: sketch on the top face of the base, **Use** the hole edges, draw Ø8 around them, Extrude **New** 20. Top plate: sketch on top of a standoff, **Use** the base outline and holes, Extrude **New** 4. Change a hole position in the base: everything follows.
+*Multiple parts, **Use**.*
 
-![Plate stack](img/l3/f.svg)
+Base plate first. Standoffs: sketch on the top face of the base, **Use** the hole edges, draw Ø8 around them, Extrude **New** 20. Top plate: sketch on top of a standoff, **Use** the base outline and holes, Extrude **New** 4. Move a hole in the base: everything follows.
+
+![Plate stack](img/l3/l36.svg)
 
 ??? note "3D view"
-    ![](img/l3/f-3d.svg)
+    ![](img/l3/l36-3d.svg)
 
 <div class="cl-sub" data-task="l36"></div>
+
+### L3-7 · Revolved hub {#l37}
+
+***Revolve**, 3D **Chamfer**, **Circular pattern** of a feature, **Up to next**.*
+
+Revolve the right half of the section. Chamfer the two outer top edges. One Ø5 hole + Circular pattern × 6. Radial Ø2.5 hole from a plane through the axis, **Up to next** so it goes through one wall only.
+
+![Revolved hub](img/l3/l37.svg)
+
+??? note "3D view"
+    ![](img/l3/l37-3d.svg)
+
+<div class="cl-sub" data-task="l37"></div>
+
+### L3-8 · Slide carriage {#l38}
+
+*Two parts, **Use** + **Offset**, Remove **Through all**.*
+
+Rail: extrude the T profile 120 (New). Carriage: block 40 × 36 × 22, 0.5 above the rail base (New). Channel: sketch on the carriage end face, **Use** the rail outline, **Offset** it 0.5 outward, Extrude Remove Through all, only from the carriage.
+
+![Slide carriage](img/l3/l38.svg)
+
+??? note "3D view"
+    ![](img/l3/l38-3d.svg)
+
+<div class="cl-sub" data-task="l38"></div>
 

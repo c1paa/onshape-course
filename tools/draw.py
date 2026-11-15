@@ -19,24 +19,25 @@ class S:
     def path(s,pts,close=True):
         q=' '.join('%.1f,%.1f'%s.p(*t) for t in pts)
         s.e.append(f'<polygon points="{q}" fill="#eef3fb" stroke="#111" stroke-width="1.6"/>' if close else f'<polyline points="{q}" fill="none" stroke="#111" stroke-width="1.6"/>')
-    def pd(s,cmds,fill=True):
+    def pd(s,cmds,fill=True,col=None):
         o=''
         for c in cmds:
             if c[0]=='M' or c[0]=='L':o+='%s%.1f,%.1f '%((c[0],)+s.p(c[1],c[2]))
             elif c[0]=='A':
                 x,y=s.p(c[4],c[5]);o+='A%.1f,%.1f 0 %d %d %.1f,%.1f '%(c[1]*s.k,c[1]*s.k,c[2],c[3],x,y)
             else:o+='Z '
-        s.e.append(f'<path d="{o}" fill="{"#eef3fb" if fill else "none"}" stroke="#111" stroke-width="1.6"/>')
+        s.e.append(f'<path d="{o}" fill="{col or ("#eef3fb" if fill else "none")}" fill-rule="evenodd" stroke="#111" stroke-width="1.6"/>')
     def slot(s,cx,cy,L,W,fill=False):
         r=W/2;a=L/2-r
         s.pd([('M',cx-a,cy+r),('L',cx+a,cy+r),('A',r,0,1,cx+a,cy-r),('L',cx-a,cy-r),('A',r,0,1,cx-a,cy+r),('Z',)],fill)
     def poly(s,pts,fill=True):
         q=' '.join('%.1f,%.1f'%s.p(*t) for t in pts)
-        s.e.append(f'<polygon points="{q}" fill="{"#eef3fb" if fill else "none"}" stroke="#111" stroke-width="1.6"/>')
+        c=fill if isinstance(fill,str) else ("#eef3fb" if fill else "none")
+        s.e.append(f'<polygon points="{q}" fill="{c}" stroke="#111" stroke-width="1.6"/>')
     def rect(s,x,y,w,h,r=0):
         a,b=s.p(x,y+h);s.e.append(f'<rect x="{a:.1f}" y="{b:.1f}" width="{w*s.k:.1f}" height="{h*s.k:.1f}" rx="{r*s.k:.1f}" fill="none" stroke="#111" stroke-width="1.6"/>')
-    def rrect(s,x,y,w,h,r=0):
-        a,b=s.p(x,y+h);s.e.append(f'<rect x="{a:.1f}" y="{b:.1f}" width="{w*s.k:.1f}" height="{h*s.k:.1f}" rx="{r*s.k:.1f}" fill="#eef3fb" stroke="#111" stroke-width="1.6"/>')
+    def rrect(s,x,y,w,h,r=0,col="#eef3fb"):
+        a,b=s.p(x,y+h);s.e.append(f'<rect x="{a:.1f}" y="{b:.1f}" width="{w*s.k:.1f}" height="{h*s.k:.1f}" rx="{r*s.k:.1f}" fill="{col}" stroke="#111" stroke-width="1.6"/>')
     def txt(s,x,y,t,sz=15,anc='middle',rot=0,px=False,bold=False):
         a,b=(x,y) if px else s.p(x,y)
         tr=f' transform="rotate({rot} {a:.1f} {b:.1f})"' if rot else ''
