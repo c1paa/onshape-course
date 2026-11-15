@@ -39,3 +39,13 @@
 | 65–90 | Модель Adjustable motor mount вместе | |
 
 Домашка: C5, C6.
+
+# Занятие 3 — от скетча к деталям (90 мин)
+
+| Время | Что |
+|---|---|
+| 0–15 | Типы окончания Extrude, Second direction, Thin, один скетч → несколько фич |
+| 15–35 | Part / feature, New / Add / Remove / Intersect, Merge scope, Boolean (Keep tools), Split |
+| 35–45 | Скетч на грани и на плоскости, Plane, Use |
+| 45–60 | 3D fillet/chamfer, паттерны в 3D (Part / Feature / Face), Revolve |
+| 60–90 | Практика: вместе Shaft and bracket и Plate stack, остальное — домашка |

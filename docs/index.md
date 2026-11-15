@@ -8,3 +8,4 @@ In this course you learn to model robot parts in Onshape, a free CAD that runs i
 |---|---|---|
 | 1 | [Lesson 1](lesson-1.md) | Sketches: draw, dimension, extrude |
 | 2 | [Lesson 2](lesson-2.md) | Deeper into sketches: constraints, trim, mirror, patterns, offset |
+| 3 | [Lesson 3](lesson-3.md) | From sketch to parts: extrude options, multiple parts, Boolean, Split, planes, Use |
