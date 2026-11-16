@@ -1,0 +1,105 @@
+import sys,os,math,html;sys.path.insert(0,'.');sys.path.insert(0,'..')
+from model import *
+from draw import S
+import numpy as np
+from OCP.HLRBRep import HLRBRep_Algo,HLRBRep_HLRToShape
+from OCP.HLRAlgo import HLRAlgo_Projector
+from OCP.gp import gp_Ax2,gp_Pnt,gp_Dir
+V={'front':((0,-1,0),(1,0,0)),'top':((0,0,1),(1,0,0)),'right':((1,0,0),(0,1,0)),'iso':((1,-1,0.8),(1,1,0))}
+def hlr(sh,v):
+    sh=sh.val() if hasattr(sh,'val') else sh
+    d,x=V[v];a=HLRBRep_Algo();a.Add(sh.wrapped)
+    a.Projector(HLRAlgo_Projector(gp_Ax2(gp_Pnt(0,0,0),gp_Dir(*d),gp_Dir(*x))));a.Update();a.Hide()
+    h=HLRBRep_HLRToShape(a);vis,hid,cir=[],[],[]
+    for g,L in((h.VCompound(),vis),(h.OutLineVCompound(),vis),(h.HCompound(),hid)):
+        if g is None or g.IsNull():continue
+        for e in cq.Shape.cast(g).Edges():
+            t=e.geomType()
+            if t=='LINE':L.append([e.startPoint().toTuple()[:2],e.endPoint().toTuple()[:2]]);continue
+            n=max(8,int(e.Length()/1.5));L.append([p.toTuple()[:2] for p in e.positions(np.linspace(0,1,n))])
+            if t=='CIRCLE' and L is vis and e.IsClosed():
+                c=e.arcCenter().toTuple()[:2];cir.append((round(c[0],2),round(c[1],2),round(e.radius(),2)))
+    cir=sorted(set(cir));cir=[c for c in cir if not any(abs(c[0]-d[0])<0.05 and abs(c[1]-d[1])<0.05 and 0<d[2]-c[2]<0.8 for d in cir)]
+    return vis,hid,cir
+def bb(ls):
+    a=np.array([p for l in ls for p in l]);return a.min(0),a.max(0)
+def pl2(s,pts,w=1.5,d=None,c='#111'):
+    q=' '.join('%.1f,%.1f'%s.p(*p) for p in pts)
+    s.e.append(f'<polyline points="{q}" fill="none" stroke="{c}" stroke-width="{w}" stroke-linejoin="round"'+(f' stroke-dasharray="{d}"' if d else '')+'/>')
+def fmt(v):
+    r=round(v)
+    return '%g'%(r if abs(v-r)<0.08 else round(v,1))
+def thin(L):
+    o=[]
+    for a in sorted(L):
+        if not o or a-o[-1]>0.15:o.append(a)
+    if len(o)>16:o=[o[0],o[1],o[-1]]
+    return o
+def ordin(s,mn,mx,cir):
+    if not cir:return
+    k=s.k;c='#0a3d91'
+    xs=thin([x-mn[0] for x,y,r in cir]);ys=thin([y-mn[1] for x,y,r in cir])
+    for i,a in enumerate([0]+xs):
+        x=mn[0]+a;h=(14+(i%3)*24)/k
+        for cx,cy,r in cir:
+            if abs(cx-x)<0.2:s.line(x,cy+r,x,mx[1],'#9ab',0.6,'2 3')
+        s.line(x,mx[1]+3/k,x,mx[1]+h,c,0.7);s.txt(x+4/k,mx[1]+h+3/k,fmt(a),12,anc='start',rot=-90)
+    for i,a in enumerate([0]+ys):
+        y=mn[1]+a;h=(14+(i%3)*30)/k
+        for cx,cy,r in cir:
+            if abs(cy-y)<0.2:s.line(cx+r,y,mx[0],y,'#9ab',0.6,'2 3')
+        s.line(mx[0]+3/k,y,mx[0]+h,y,c,0.7);s.txt(mx[0]+h+3/k,y-4/k,fmt(a),12,anc='start')
+def drawing(code,out):
+    p=P[code];sh=p['fn']()
+    R={v:hlr(sh,v) for v in V}
+    B={v:bb(R[v][0]+R[v][1]) for v in V}
+    sz={v:B[v][1]-B[v][0] for v in V}
+    W0,H0,g=1200,780,115
+    k=min((W0-2*g-260)/(sz['front'][0]+sz['right'][0]+1e-9),(H0-2*g-60)/(sz['front'][1]+sz['top'][1]+1e-9),6)
+    k=min(k,(W0-2*g)/(sz['front'][0]+1e-9))
+    fx,fy=60+g*0.6,175+sz['top'][1]*k+g
+    org={'front':(fx,fy+sz['front'][1]*k),'top':(fx,fy-g),'right':(fx+sz['front'][0]*k+g,fy+sz['front'][1]*k)}
+    dl=p['dims'];nl=len(dl)+(1 if p['note'] else 0)
+    th=org['front'][1]+80;Ht=int(th+26*nl+40)
+    s=S(W0,Ht,k);done=set()
+    mv=max(('top','front','right'),key=lambda v:(len([c for c in R[v][2] if c[2]*k>=2]),v=='top'))
+    for v,(ox,oy) in org.items():
+        mn,mx=B[v];s.at(ox-mn[0]*k,oy+mn[1]*k);vis,hid,cir=R[v]
+        for l in hid:pl2(s,l,0.9,'5 3','#555')
+        for l in vis:pl2(s,l,1.6)
+        for x,y,r in cir:
+            if r*k>=3:
+                e=r+5/k;s.cl(x-e,y,x+e,y);s.cl(x,y-e,x,y+e)
+        if v=='front':
+            s.dim(mn[0],mn[1],mx[0],mn[1],-34,fmt(mx[0]-mn[0]));s.dim(mn[0],mn[1],mn[0],mx[1],34,fmt(mx[1]-mn[1]))
+        if v=='top':s.dim(mn[0],mn[1],mn[0],mx[1],34,fmt(mx[1]-mn[1]))
+        if v=='right':s.dim(mn[0],mn[1],mx[0],mn[1],-34,fmt(mx[0]-mn[0]))
+        if v==mv:ordin(s,mn,mx,[c for c in cir if c[2]*k>=2])
+        grp={}
+        for x,y,r in cir:grp.setdefault(round(2*r,2),[]).append((x,y,r))
+        j=0
+        for d,cs in sorted(grp.items(),key=lambda a:-a[0]):
+            if d in done or d*k<4:continue
+            done.add(d);x,y,r=max(cs,key=lambda c:(c[0]+c[1]))
+            n=len(cs);cx,cy=(mn[0]+mx[0])/2,(mn[1]+mx[1])/2
+            a=math.degrees(math.atan2(y-cy,x-cx)) if math.hypot(x-cx,y-cy)>1 else 45
+            a=45 if -90<=a<=90 else 135
+            rm=max(c[2] for c in cir if math.hypot(c[0]-cx,c[1]-cy)<1)*k if any(math.hypot(c[0]-cx,c[1]-cy)<1 for c in cir) else 0
+            s.lead(x,y,a,(26+22*j) if math.hypot(x-cx,y-cy)>1 else max(18,rm+26+24*j-r*k),(f'{n}× ' if n>1 else '')+'Ø'+fmt(d),r);j+=1
+        s.txt(ox+sz[v][0]*k/2,oy+22+(34 if v in('front','right') else 0),{'front':'Front','top':'Top','right':'Right'}[v],13,px=True)
+    mn,mx=B['iso'];ki=min(240/max(sz['iso']),k);s.k=ki
+    s.at(W0-30-sz['iso'][0]*ki-mn[0]*ki,80+mx[1]*ki)
+    for l in R['iso'][0]:pl2(s,l,1.1)
+    s.k=k
+    sub,who=SUB[p['sub']]
+    s.note(html.escape(f"Subassembly {p['sub']}: {sub} — {who}.  Quantity: {p['qty']}"),52)
+    y=th+10
+    if any(c[2]*k>=2 for c in R[mv][2]):dl=dl+['Small numbers at the edges of the '+{'top':'Top','front':'Front','right':'Right'}[mv]+' view: hole positions from the corner marked 0']
+    for t in dl+([p['note']] if p['note'] else []):
+        s.e.append(f'<text x="24" y="{y}" font-size="15" font-family="Arial,Helvetica,sans-serif" fill="#111">• {html.escape(t)}</text>');y+=26
+    s.svg(out,html.escape(f"{code}  {p['name']}"))
+if __name__=='__main__':
+    o=sys.argv[1];os.makedirs(o,exist_ok=True)
+    for c in (sys.argv[2:] or P):
+        try:drawing(c,f'{o}/p{c.replace(".","-")}.svg');print('ok',c)
+        except Exception as e:print('ERR',c,e)

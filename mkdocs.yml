@@ -34,3 +34,19 @@ nav:
   - "Lesson 2: Sketch in depth": lesson-2.md
   - "Lesson 3: From sketch to parts": lesson-3.md
   - "Practice": practice.md
+  - "Team robot":
+    - robot/index.md
+    - robot/sub-1.md
+    - robot/sub-2.md
+    - robot/sub-3.md
+    - robot/sub-4.md
+    - robot/sub-5.md
+    - robot/sub-7.md
+    - robot/sub-8.md
+    - robot/sub-9.md
+    - robot/sub-10.md
+    - robot/sub-11.md
+    - robot/sub-12.md
+    - robot/sub-13.md
+    - robot/sub-14.md
+    - robot/sub-15.md
