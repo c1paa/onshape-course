@@ -6,24 +6,24 @@ Parts from drawings. Most of them are **one sketch, one Extrude**: the work is i
 - Try to guess how you would build the part *before* opening the 3D view.
 - Submit a screenshot in the box under each task. Sign in with the name and password from the coach.
 
-| # | Part | Topics |
-|---|---|---|
-| [T25](#t25) | Grid plate with center window | linear pattern, skip instances, fillet, remove |
-| [T26](#t26) | Rocker arm (one sketch) | one sketch, tangent, mirror in sketch, circular + linear pattern in sketch |
-| [T27](#t27) | Tensioner plate | one sketch, arc slot, concentric, pattern |
-| [T29](#t29) | Hex pocket plate | one sketch, polygon, two staggered linear patterns |
-| [T30](#t30) | Encoder disk | one sketch, two circular patterns, construction circles |
-| [T31](#t31) | Five-window wheel | one sketch, sketch fillet, circular pattern in sketch |
-| [T32](#t32) | Truss rail | one sketch, two linear patterns, mirror in sketch |
-| [T33](#t33) | Keyhole plate | one sketch, trim, 2-direction pattern in sketch |
-| [T34](#t34) | Triangle gusset with holes | one sketch, pattern + delete instances, fillet in sketch |
-| [T35](#t35) | Flange with notches | one sketch, two circular patterns |
-| [T36](#t36) | Shaft and bracket | two parts, Boolean subtract, keep tools |
-| [T37](#t37) | Part from two views | extrude, Boolean intersect |
-| [T38](#t38) | Box with a lid | remove, plane, split |
-| [T39](#t39) | Bracket with "up to" cuts | variables, through all / up to next |
+| # | Part | Topics | Required |
+|---|---|---|---|
+| [T25](#t25) | Grid plate with center window | linear pattern, skip instances, fillet, remove | ✔ |
+| [T26](#t26) | Rocker arm (one sketch) | one sketch, tangent, mirror in sketch, circular + linear pattern in sketch | ✔ |
+| [T27](#t27) | Tensioner plate | one sketch, arc slot, concentric, pattern |  |
+| [T29](#t29) | Hex pocket plate | one sketch, polygon, two staggered linear patterns | ✔ |
+| [T30](#t30) | Encoder disk | one sketch, two circular patterns, construction circles | ✔ |
+| [T31](#t31) | Five-window wheel | one sketch, sketch fillet, circular pattern in sketch | ✔ |
+| [T32](#t32) | Truss rail | one sketch, two linear patterns, mirror in sketch | ✔ |
+| [T33](#t33) | Keyhole plate | one sketch, trim, 2-direction pattern in sketch | ✔ |
+| [T34](#t34) | Triangle gusset with holes | one sketch, pattern + delete instances, fillet in sketch |  |
+| [T35](#t35) | Flange with notches | one sketch, two circular patterns | ✔ |
+| [T36](#t36) | Shaft and bracket | two parts, Boolean subtract, keep tools |  |
+| [T37](#t37) | Part from two views | extrude, Boolean intersect | ✔ |
+| [T38](#t38) | Box with a lid | remove, plane, split |  |
+| [T39](#t39) | Bracket with "up to" cuts | variables, through all / up to next |  |
 
-## T25 · Grid plate with center window {#t25}
+## T25 · Grid plate with center window <span class="cl-req">required</span> {#t25}
 
 *linear pattern, skip instances, fillet, remove*
 
@@ -37,7 +37,7 @@ Same 8 mm grid as T12, but the 9 holes in the middle are replaced by a 20 × 20 
 
 <div class="cl-sub" data-task="t25"></div>
 
-## T26 · Rocker arm (one sketch) {#t26}
+## T26 · Rocker arm (one sketch) <span class="cl-req">required</span> {#t26}
 
 *one sketch, tangent, mirror in sketch, circular + linear pattern in sketch*
 
@@ -65,7 +65,7 @@ Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. 
 
 <div class="cl-sub" data-task="t27"></div>
 
-## T29 · Hex pocket plate {#t29}
+## T29 · Hex pocket plate <span class="cl-req">required</span> {#t29}
 
 *one sketch, polygon, two staggered linear patterns*
 
@@ -79,7 +79,7 @@ Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. 
 
 <div class="cl-sub" data-task="t29"></div>
 
-## T30 · Encoder disk {#t30}
+## T30 · Encoder disk <span class="cl-req">required</span> {#t30}
 
 *one sketch, two circular patterns, construction circles*
 
@@ -93,7 +93,7 @@ Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. 
 
 <div class="cl-sub" data-task="t30"></div>
 
-## T31 · Five-window wheel {#t31}
+## T31 · Five-window wheel <span class="cl-req">required</span> {#t31}
 
 *one sketch, sketch fillet, circular pattern in sketch*
 
@@ -107,7 +107,7 @@ Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. 
 
 <div class="cl-sub" data-task="t31"></div>
 
-## T32 · Truss rail {#t32}
+## T32 · Truss rail <span class="cl-req">required</span> {#t32}
 
 *one sketch, two linear patterns, mirror in sketch*
 
@@ -121,7 +121,7 @@ Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. 
 
 <div class="cl-sub" data-task="t32"></div>
 
-## T33 · Keyhole plate {#t33}
+## T33 · Keyhole plate <span class="cl-req">required</span> {#t33}
 
 *one sketch, trim, 2-direction pattern in sketch*
 
@@ -149,7 +149,7 @@ Rule: **one sketch, one Extrude**. Everything in a single fully defined sketch. 
 
 <div class="cl-sub" data-task="t34"></div>
 
-## T35 · Flange with notches {#t35}
+## T35 · Flange with notches <span class="cl-req">required</span> {#t35}
 
 *one sketch, two circular patterns*
 
@@ -177,7 +177,7 @@ Make the shaft first (New), then the bracket block around it (New, so it does no
 
 <div class="cl-sub" data-task="t36"></div>
 
-## T37 · Part from two views {#t37}
+## T37 · Part from two views <span class="cl-req">required</span> {#t37}
 
 *extrude, Boolean intersect*
 

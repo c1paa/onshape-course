@@ -75,18 +75,18 @@ Every Extrude (and Revolve, Sweep…) has these options at the top:
 
 Numbers match the columns in the progress table (3.1 … 3.8).
 
-| # | Part | Topics |
-|---|---|---|
-| [L3-1](#l31) | Bearing blocks | Multiple parts, **Plane** (mid plane), **Mirror** of a part, **Boolean Subtract** with Keep tools. |
-| [L3-2](#l32) | Latch from two views | **Intersect** of two extrudes, **Through all**. |
-| [L3-3](#l33) | Electronics box | **Plane**, Remove from a plane, **Up to face**, **Split**, two parts. |
-| [L3-4](#l34) | Bracket with variable thickness | **Variables**, **Up to next / Through all**, 3D **Fillet**, **Mirror** of a feature. |
-| [L3-5](#l35) | Thin channel | **Thin** extrude, sketch on a face. |
-| [L3-6](#l36) | Plate stack | Multiple parts, **Use**. |
-| [L3-7](#l37) | Revolved hub | **Revolve**, 3D **Chamfer**, **Circular pattern** of a feature, **Up to next**. |
-| [L3-8](#l38) | Slide carriage | Two parts, **Use** + **Offset**, Remove **Through all**. |
+| # | Part | Topics | Required |
+|---|---|---|---|
+| [L3-1](#l31) | Bearing blocks | Multiple parts, **Plane** (mid plane), **Mirror** of a part, **Boolean Subtract** with Keep tools. | ✔ |
+| [L3-2](#l32) | Latch from two views | **Intersect** of two extrudes, **Through all**. | ✔ |
+| [L3-3](#l33) | Electronics box | **Plane**, Remove from a plane, **Up to face**, **Split**, two parts. |  |
+| [L3-4](#l34) | Bracket with variable thickness | **Variables**, **Up to next / Through all**, 3D **Fillet**, **Mirror** of a feature. | ✔ |
+| [L3-5](#l35) | Thin channel | **Thin** extrude, sketch on a face. | ✔ |
+| [L3-6](#l36) | Plate stack | Multiple parts, **Use**. |  |
+| [L3-7](#l37) | Revolved hub | **Revolve**, 3D **Chamfer**, **Circular pattern** of a feature, **Up to next**. | ✔ |
+| [L3-8](#l38) | Slide carriage | Two parts, **Use** + **Offset**, Remove **Through all**. |  |
 
-### L3-1 · Bearing blocks {#l31}
+### L3-1 · Bearing blocks <span class="cl-req">required</span> {#l31}
 
 *Multiple parts, **Plane** (mid plane), **Mirror** of a part, **Boolean Subtract** with Keep tools.*
 
@@ -99,7 +99,7 @@ Shaft first (Revolve or Extrude, New). Then one block (New). Bore = **Boolean �
 
 <div class="cl-sub" data-task="l31"></div>
 
-### L3-2 · Latch from two views {#l32}
+### L3-2 · Latch from two views <span class="cl-req">required</span> {#l32}
 
 ***Intersect** of two extrudes, **Through all**.*
 
@@ -125,7 +125,7 @@ Solid box → hollow it from a **Plane** 2.5 below the top (Remove, depth 31) so
 
 <div class="cl-sub" data-task="l33"></div>
 
-### L3-4 · Bracket with variable thickness {#l34}
+### L3-4 · Bracket with variable thickness <span class="cl-req">required</span> {#l34}
 
 ***Variables**, **Up to next / Through all**, 3D **Fillet**, **Mirror** of a feature.*
 
@@ -138,7 +138,7 @@ Make `t` a Variable. One gusset, then **Mirror** it. Inner bend: 3D fillet R4. A
 
 <div class="cl-sub" data-task="l34"></div>
 
-### L3-5 · Thin channel {#l35}
+### L3-5 · Thin channel <span class="cl-req">required</span> {#l35}
 
 ***Thin** extrude, sketch on a face.*
 
@@ -164,7 +164,7 @@ Base plate first. Standoffs: sketch on the top face of the base, **Use** the hol
 
 <div class="cl-sub" data-task="l36"></div>
 
-### L3-7 · Revolved hub {#l37}
+### L3-7 · Revolved hub <span class="cl-req">required</span> {#l37}
 
 ***Revolve**, 3D **Chamfer**, **Circular pattern** of a feature, **Up to next**.*
 
