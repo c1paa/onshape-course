@@ -66,7 +66,9 @@ async function review(box){
     const last={},cnt={};(all||[]).forEach(s=>{const k=s.user_id+s.task;last[k]=s.status;cnt[k]=(cnt[k]||0)+1});
     const SY={ok:'+',redo:'−',new:'?'};
     const pick=(p,t)=>{fp.value=p;ft.value=t;fs.value='';draw()};
-    if(!error)grid.replaceChildren(h('table',{class:'cl-t'},h('tr',{},h('th'),tasks.map(t=>h('th',{class:req.has(t)?'cl-rq':'',title:req.has(t)?'required':''},t[0]==='l'?t[1]+'.'+t.slice(2):t.slice(1)))),(ps||[]).map(p=>h('tr',{class:p.id===me.id?'cl-me':''},h('td',{class:'cl-n'},p.name),tasks.map(t=>{const k=p.id+t,v=last[k];const a={class:v?'cl-'+v:'',title:v?ST[v]+' · '+cnt[k]+' submission(s)':''};if(v&&adm)a.onclick=()=>pick(p.id,t);return h('td',a,v?SY[v]:'')})))),
+    const sum=p=>tasks.filter(t=>last[p.id+t]==='ok').length;
+    const rows=[...(ps||[])].sort((a,b)=>sum(b)-sum(a)||a.name.localeCompare(b.name));
+    if(!error)grid.replaceChildren(h('table',{class:'cl-t'},h('tr',{},h('th'),h('th',{title:'accepted'},'Σ'),tasks.map(t=>h('th',{class:req.has(t)?'cl-rq':'',title:req.has(t)?'required':''},t[0]==='l'?t[1]+'.'+t.slice(2):t.slice(1)))),rows.map(p=>h('tr',{class:p.id===me.id?'cl-me':''},h('td',{class:'cl-n'},p.name),h('td',{class:'cl-sum'},String(sum(p))),tasks.map(t=>{const k=p.id+t,v=last[k];const a={class:v?'cl-'+v:'',title:v?ST[v]+' · '+cnt[k]+' submission(s)':''};if(v&&adm)a.onclick=()=>pick(p.id,t);return h('td',a,v?SY[v]:'')})))),
       h('small',{},'+ accepted · − redo · ? waiting · orange number = required. The latest submission counts.'+(adm?' Click a cell to see it.':'')));
     if(!adm)return;
     let q=sb.from('submissions').select('*,profiles(name)');if(fs.value)q=q.eq('status',fs.value);if(ft.value)q=q.eq('task',ft.value);if(fp.value)q=q.eq('user_id',fp.value);

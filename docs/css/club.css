@@ -40,3 +40,4 @@
 .md-typeset table.cl-t th.cl-rq{background:#ff9800;color:#fff}
 .cl-grid{overflow-x:auto}
 .cl-req{display:inline-block;margin-left:.5em;padding:.05em .5em;border-radius:3px;background:#ff9800;color:#fff;font-size:.6em;font-weight:bold;vertical-align:middle}
+.md-typeset table.cl-t td.cl-sum{font-weight:bold;background:#eef1fb}
