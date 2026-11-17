@@ -78,6 +78,18 @@ async function review(box){
   box.replaceChildren(grid,...(adm?[h('h2',{},'Submissions'),h('div',{class:'cl-filters'},fs,ft,fp),list]:[]));
   draw();
 }
+async function linkbox(box){
+  const task=box.dataset.task;
+  if(!me){login(box);return}
+  const m=h('span',{class:'cl-err'}),inp=h('input',{type:'url',class:'cl-url',placeholder:'https://cad.onshape.com/documents/...'}),cur=h('div',{class:'cl-hint'}),tb=h('div');
+  const load=async()=>{const {data,error}=await sb.from('links').select('url,updated_at').eq('task',task).eq('user_id',me.id).maybeSingle();if(error){m.textContent=error.message;return}if(data){inp.value=data.url;cur.replaceChildren('Saved '+dt(data.updated_at)+' · ',h('a',{href:data.url,target:'_blank'},'open'))}else cur.textContent='Nothing saved yet'};
+  const all=async()=>{const {data:ps}=await sb.from('profiles').select('id,name').eq('is_admin',false).order('name');const {data:ls}=await sb.from('links').select('user_id,url,updated_at').eq('task',task);const L={};(ls||[]).forEach(x=>L[x.user_id]=x);
+    tb.replaceChildren(h('table',{class:'cl-t'},h('tr',{},h('th',{},'Student'),h('th',{},'Document'),h('th',{},'Updated')),(ps||[]).map(p=>{const x=L[p.id];return h('tr',{},h('td',{},p.name),h('td',{},x?h('a',{href:x.url,target:'_blank'},'open'):'—'),h('td',{},x?dt(x.updated_at):''))})))};
+  const save=async()=>{const u=inp.value.trim();if(!/^https:\/\/cad\.onshape\.com\/documents\//.test(u)){m.textContent='Paste a link that starts with https://cad.onshape.com/documents/';return}
+    const {error}=await sb.from('links').upsert({user_id:me.id,task,url:u,updated_at:new Date().toISOString()});if(error){m.textContent=error.message;return}m.textContent='Saved ✔';load();if(me.is_admin)all()};
+  box.replaceChildren(h('div',{class:'cl-head'},h('b',{},'Your Onshape document'),h('small',{},' signed in as '+me.name)),h('div',{class:'cl-up'},inp,h('button',{onclick:save},'Save'),m,cur),tb);
+  load();if(me.is_admin)all();
+}
 function base(){const l=document.querySelector('a.md-logo,a.md-header__button[href]');return new URL(l?l.getAttribute('href'):'./',location)}
 function account(){
   const hdr=document.querySelector('.md-header__inner');if(!hdr)return;
@@ -94,6 +106,6 @@ function account(){
   const ws=document.querySelectorAll('.cl-sub[data-task]'),rv=document.getElementById('cl-review');
   try{me=await who()}catch(e){console.error(e)}
   try{account()}catch(e){console.error(e)}
-  ws.forEach(widget);if(rv)review(rv);
+  ws.forEach(widget);if(rv)review(rv);document.querySelectorAll('.cl-link[data-task]').forEach(b=>linkbox(b).catch(e=>console.error(e)));
 })();
 })();

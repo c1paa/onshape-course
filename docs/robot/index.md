@@ -9,10 +9,25 @@ Every student builds one subassembly of about 5 parts. Together they make a smal
 !!! warning "Read this first"
     This robot is a **training example**. It is not connected to FTC and does not follow FTC rules — it only has a similar structure (drive, intake, turret, shooter).
 
-!!! note "How we work in Onshape"
-    - The whole team works in **one Onshape document** (one file). Do not make your own copies.
-    - **Every part gets its own Part Studio.** Name the tab with the part number and name, for example `4.3 Intake roller`.
-    - Each subassembly is put together in its own Assembly tab, and all of them go into one main robot assembly.
+## How to work in Onshape
+
+1. **Each of you makes your own Onshape document** for your subassembly. Name it `Surname_teamtask_Subassembly`, for example `Ivanov_teamtask_Intake`.
+2. **Every part gets its own Part Studio.** Click **+** at the bottom left → **Create Part Studio**. Rename the tab with the part number and name, for example `4.3 Intake roller`.
+
+    ![Create Part Studio](../img/robot/howto-part-studio.png){width=45%}
+
+3. When all parts are ready, click **+** → **Create Assembly**, insert your parts and put them together as on the assembly sheet of your subassembly.
+4. **Share the document with Vlad.** Click **Share** at the top right.
+
+    ![Share button](../img/robot/howto-share-button.png){width=45%}
+
+    On the **Individuals** tab type `vglazunov@isl.cy`, choose **Can edit**, tick **Copy**, **Export** and **Comment**, then click **Share**.
+
+    ![Share with Vlad](../img/robot/howto-share-email.png){width=60%}
+
+5. Copy the link of your document from the browser address bar and paste it into the field below. You can change it later.
+
+<div class="cl-link" data-task="robot"></div>
 
 ## Coordinates
 
