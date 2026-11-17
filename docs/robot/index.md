@@ -17,7 +17,7 @@ All parts are placed in one robot coordinate system: **X** forward, **Y** left, 
 | 1 | [Chassis](sub-1.md) | Mirzo | 4 |
 | 2 | [Drive module ×2](sub-2.md) | Luchezar | 4 |
 | 3 | [Ball casters](sub-3.md) | Leonid | 3 |
-| 4 | [Intake](sub-4.md) | Malika | 5 |
+| 4 | [Intake](sub-4.md) | Malika | 6 |
 | 5 | [Ball track](sub-5.md) | Nikita | 5 |
 | 7 | [Turret base](sub-7.md) | Alexey | 4 |
 | 8 | [Turret platform + drive](sub-8.md) | Fedor | 6 |
@@ -26,7 +26,7 @@ All parts are placed in one robot coordinate system: **X** forward, **Y** left, 
 | 11 | [Battery box](sub-11.md) | Gulasal | 4 |
 | 12 | [Control hub housing](sub-12.md) | Elias | 3 |
 | 13 | [Camera mount](sub-13.md) | Jason | 4 |
-| 14 | [Number plates](sub-14.md) | Ayusha | 1 |
+| 14 | [Number plates](sub-14.md) | Arina | 1 |
 | 15 | [Power switch](sub-15.md) | Alexandros | 3 |
 
 !!! note "Standard motor and servo"

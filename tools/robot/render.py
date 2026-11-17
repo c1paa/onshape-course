@@ -5,12 +5,13 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 C={'1':'#9aa3ad','2':'#3b6fb6','3':'#555','4':'#e07a2f','5':'#7fbf6a','7':'#b58fd1','8':'#8e5fb8','9':'#d64545','10':'#f0b429','11':'#4a4a4a','12':'#2f9e9e','13':'#222','14':'#2d5fd6','15':'#c0392b'}
 MOTS={'2.1','4.5','9.6','7.6'}
-def tri(A,only=None):
+def tri(A,only=None,hl=None):
     T=[];K=[];L=np.array([0.4,-0.5,0.8]);L/=np.linalg.norm(L)
     for c,s in A:
         sb=P[c]['sub']
         if only and sb!=only:continue
         col='#333' if 'standard' in P[c]['name'].lower() else C[sb]
+        if hl and sb!=hl:col='#dcdcdc'
         v,f=s.val().tessellate(0.4,0.3);v=np.array([x.toTuple() for x in v]);rgb=np.array(matplotlib.colors.to_rgb(col))
         for a,b,d in f:
             t=v[[a,b,d]];n=np.cross(t[1]-t[0],t[2]-t[0]);l=np.linalg.norm(n)

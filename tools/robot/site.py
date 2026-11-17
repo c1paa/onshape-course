@@ -1,6 +1,6 @@
 import sys,os,shutil;sys.path.insert(0,'.');sys.path.insert(0,'..')
 from model import *
-import render,drawings
+import render,drawings,asm
 R='../../docs/robot';I='../../docs/img/robot'
 os.makedirs(R,exist_ok=True);os.makedirs(I,exist_ok=True)
 A=build();T,K=render.tri(A)
@@ -18,12 +18,15 @@ L+=['','!!! note "Standard motor and servo"','    Every motor on the robot (driv
 open(R+'/index.md','w').write('\n'.join(L))
 for s in subs:
     n,w=SUB[s];ps=[c for c in P if P[c]['sub']==s]
-    T2,K2=render.tri(A,s);render.view(T2,K2,22,-38,f'{I}/sub-{s}.png')
-    L=[f'# {s}. {n}','',f'**Student:** {w}','',f'![{n}](../img/robot/sub-{s}.png){{width=60%}}','','| Part | Name | Qty |','|---|---|---|']
+    T2,K2=render.tri(A,hl=s);render.view(T2,K2,22,-38,f'{I}/sub-{s}.png')
+    asm.sheet(s,A,f'{I}/asm-{s}.svg')
+    L=[f'# {s}. {n}','',f'**Student:** {w}','','## Where it goes','',f'![{n} on the robot](../img/robot/sub-{s}.png){{width=60%}}','','## Assembly','',f'![Assembly](../img/robot/asm-{s}.svg)','','## Parts','','| Part | Name | Qty |','|---|---|---|']
     for c in ps:L.append(f'| [{c}](#{fn(c)}) | {P[c]["name"]} | {P[c]["qty"]} |')
     L.append('')
     for c in ps:
-        drawings.drawing(c,f'{I}/{fn(c)}.svg')
-        L+=[f'## {c} {P[c]["name"]} {{#{fn(c)}}}','',f'![{c}](../img/robot/{fn(c)}.svg)','']
+        f=f'{I}/{fn(c)}.svg';drawings.drawing(c,f);e='svg'
+        if os.path.getsize(f)>1500000:
+            import cairosvg;cairosvg.svg2png(url=f,write_to=f[:-3]+'png',output_width=1600);os.remove(f);e='png'
+        L+=[f'### {c} {P[c]["name"]} {{#{fn(c)}}}','',f'![{c}](../img/robot/{fn(c)}.{e})','']
     open(f'{R}/sub-{s}.md','w').write('\n'.join(L))
     print('sub',s)

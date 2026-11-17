@@ -41,13 +41,14 @@ place('1.2',[('x',90)],(0,144,18));place('1.2',[('x',90)],(0,-141,18))
 @part('1.3','Rear crossbar','1',dims=['282 × 32 × 3','Holes Ø4: 9 … 273 step 8 from the left end, rows 8, 16, 24 from the bottom edge','Switch cutout 19 × 13 in the middle, center 16 from the bottom'])
 def p13():return holes(pl(-141,141,0,32,3),[p for p in grid(-132,132,8,24) if abs(p[0])>16],4).cut(pl(-9.5,9.5,9.5,22.5,10).translate((0,0,-2)))
 place('1.3',[('x',90),('z',-90)],(-141,0,18))
-@part('1.4','L-bracket','1',8,['Angle 24 long, legs 16 × 16, thickness 3','Each leg: 3 holes Ø4 at −8, 0, 8 along the length','Horizontal leg: holes 9 from the corner; vertical leg: holes 8 above the bottom'])
+@part('1.4','L-bracket','1',6,['Angle 24 long, legs 16 × 16, thickness 3','Each leg: 3 holes Ø4 at −8, 0, 8 along the length','Horizontal leg: holes 9 from the corner; vertical leg: holes 8 above the bottom'])
 def p14():
     m=pl(-12,12,0,16,3).union(pl(-12,12,0,3,16))
     m=holes(m,[(x,9) for x in(-8,0,8)],4)
     return m.cut(W('XZ').pushPoints([(x,8) for x in(-8,0,8)]).circle(2).extrude(-10).translate((0,-2,0)))
-for x in(-100,-52,60,108):
-    place('1.4',[('z',180)],(x+4,141,18));place('1.4',[],(x+4,-141,18))
+for x in(-100,100):
+    place('1.4',[('z',180)],(x,141,18));place('1.4',[],(x,-141,18))
+for y in(-28,28):place('1.4',[('z',-90)],(-141,y,18))
 # ---------- 2 drive ----------
 @part('2.1','Drive motor (standard motor)','2',2,MOT,'Same model for every motor on the robot.')
 def p21():return motor()
@@ -56,7 +57,7 @@ place('2.1',[('x',-90)],(0,128,45));place('2.1',[('x',90)],(0,-128,45))
 def p22():
     m=pl(-24,24,0,24,4).union(pl(-24,24,20,24,52))
     m=m.edges(cq.selectors.NearestToPointSelector((0,20,4))).fillet(4)
-    m=holes(m,[(x,y) for x in(-12,12) for y in(4,12)],4)
+    m=holes(m,[(x,y) for x in(-12,12) for y in(8,16)],4)
     m=m.cut(W('XZ').workplane(offset=-30).center(0,27).circle(6.5).extrude(20))
     return m.cut(W('XZ').workplane(offset=-30).pushPoints([(12*math.cos(pi/4+i*pi/2),27+12*math.sin(pi/4+i*pi/2)) for i in range(4)]).circle(1.6).extrude(20))
 place('2.2',[],(0,108,18));place('2.2',[('z',180)],(0,-108,18))
@@ -77,8 +78,8 @@ place('2.4',[('x',-90)],(0,145,45));place('2.4',[('x',90)],(0,-145,45))
 # ---------- 3 casters ----------
 @part('3.1','Caster housing','3',2,['Flange 40 × 20 × 3, R4, 2 holes Ø4 at x = ±12','Cup Ø24, from 3 to 12 below the flange top','Ball seat: sphere R7.2, center 8 below the flange top','Opening Ø13 at the bottom'])
 def p31():
-    m=pl(-20,20,-10,10,3).edges('|Z').fillet(4).translate((0,0,-3)).union(cz(12,-12,-3))
-    m=holes(m,[(-12,0),(12,0)],4)
+    m=pl(-24,24,-10,10,3).edges('|Z').fillet(4).translate((0,0,-3)).union(cz(12,-12,-3))
+    m=holes(m,[(-16,0),(16,0)],4)
     return m.cut(W().sphere(7.2).translate((0,0,-8))).cut(cz(6.5,-13,-8))
 place('3.1',[],(124,4,15));place('3.1',[],(-124,4,15))
 @part('3.2','Caster ball','3',2,['Sphere Ø14'])
@@ -89,16 +90,16 @@ def p33():return ring(6,12,0,2)
 place('3.3',[],(124,4,1));place('3.3',[],(-124,4,1))
 # ---------- 4 intake ----------
 def ispl():
-    m=pl(0,96,0,80,3).edges('|Z').fillet(4)
-    return holes(m,[(4,8),(12,8)],4)
+    m=pl(0,120,0,80,3).edges('|Z').fillet(4)
+    return holes(m,[(x,8) for x in(4,12,20,28,36,44)],4)
 @part('4.1','Intake plate, motor side','4',dims=['96 × 80 × 3, corners R4','Mount holes Ø4 at (4, 8) and (12, 8)','Motor hole Ø13 at (80, 62)','4 holes Ø3.2 on Ø24 around it, at 45°'])
 def p41():
-    m=ispl().cut(cz(6.5,-1,4,80,62))
-    return holes(m,[(80+12*math.cos(pi/4+i*pi/2),62+12*math.sin(pi/4+i*pi/2)) for i in range(4)],3.2)
-place('4.1',[('x',90)],(120,99,18))
+    m=ispl().cut(cz(6.5,-1,4,104,62))
+    return holes(m,[(104+12*math.cos(pi/4+i*pi/2),62+12*math.sin(pi/4+i*pi/2)) for i in range(4)],3.2)
+place('4.1',[('x',90)],(96,99,18))
 @part('4.2','Intake plate, free side','4',dims=['96 × 80 × 3, corners R4','Mount holes Ø4 at (4, 8) and (12, 8)','Shaft hole Ø8.2 at (80, 62)'])
-def p42():return ispl().cut(cz(4.1,-1,4,80,62))
-place('4.2',[('x',90)],(120,-96,18))
+def p42():return ispl().cut(cz(4.1,-1,4,104,62))
+place('4.2',[('x',90)],(96,-96,18))
 @part('4.3','Intake roller','4',dims=['Tube Ø30 × 186','12 grooves R2 along the length, centers on Ø30','Motor end: D-bore Ø6 × 18 deep; free end: bore Ø8 × 20 deep'])
 def p43():
     m=cz(15,-93,93)
@@ -112,8 +113,11 @@ place('4.4',[('x',90)],(200,-73,80))
 @part('4.5','Intake motor (standard motor)','4',1,MOT)
 def p45():return motor()
 place('4.5',[('x',90)],(200,99,80))
+@part('4.6','Intake bracket (same as 1.4)','4',4)
+def p46():return p14()
+for x in(108,132):place('4.6',[('z',180)],(x,-99,18));place('4.6',[],(x,99,18))
 # ---------- 5 track ----------
-TRK=[(196,4),(170,11),(140,21.5),(120,21.5),(60,23),(0,30),(-40,40),(-68,52),(-87,72)]
+TRK=[(196,4),(170,12),(150,21),(130,22),(110,22),(60,23),(0,30),(-40,40),(-68,52),(-87,72)]
 def tcurve(n=80):
     from scipy.interpolate import PchipInterpolator as PI
     xs=[p[0] for p in TRK][::-1];zs=[p[1] for p in TRK][::-1];f=PI(xs,zs)
@@ -122,15 +126,17 @@ def tcurve(n=80):
 def tz(x):
     from scipy.interpolate import PchipInterpolator as PI
     xs=[p[0] for p in TRK][::-1];zs=[p[1] for p in TRK][::-1];return float(PI(xs,zs)(x))
+def tsp(dz=0):
+    return [(x,z+dz) for x,z in TRK]
 @part('5.1','Track floor','5',dims=['Curved floor 3 thick, 82 wide (y = ±41)','Top surface through the points (x, z), x from the back end: (0, 72) (19, 52) (47, 40) (87, 30) (147, 23) (207, 21.5) (227, 21.5) (257, 11) (283, 4)','Smooth spline through the points; sketch it on the Front plane'])
 def p51():
-    c=tcurve();poly=c+[(x,z-3) for x,z in reversed(c)]
-    return W('XZ').polyline(poly).close().extrude(41,both=True)
+    a=tsp();b=tsp(-3)[::-1]
+    return W('XZ').moveTo(*a[0]).spline(a[1:],includeCurrent=True).lineTo(*b[0]).spline(b[1:],includeCurrent=True).close().extrude(41,both=True)
 place('5.1',[],(0,0,0))
 @part('5.2','Track wall','5',2,['Follows the floor curve, 25 high above the floor top','3 thick, inner face at y = ±38'])
 def p52():
-    c=tcurve();poly=c+[(x,z+25) for x,z in reversed(c)]
-    return W('XZ').polyline(poly).close().extrude(-3).translate((0,38,0))
+    a=tsp();b=tsp(25)[::-1]
+    return W('XZ').moveTo(*a[0]).spline(a[1:],includeCurrent=True).lineTo(*b[0]).spline(b[1:],includeCurrent=True).close().extrude(-3).translate((0,38,0))
 P['5.2']['place']=[([],(0,0,0)),([],(0,-79,0))]
 @part('5.3','Chimney back wall','5',dims=['76 × 38 × 3 (y × z)','Closes the back end of the track; the turret rings guide the ball above it'])
 def p53():return pl(-90,-87,-38,38,38)
@@ -138,12 +144,13 @@ place('5.3',[],(0,0,70))
 def sup(h):
     m=pl(-1.5,1.5,-30,30,h).union(pl(-1.5,10.5,-30,30,3))
     return holes(m,[(6,-20),(6,20)],4,8)
-@part('5.4','Track support, low','5',dims=['Plate 60 wide, 3 thick, 18 high (to the floor underside)','Foot 60 × 12 × 3, holes Ø4 at y = ±20, 6 from the plate'])
-def p54():return sup(18)
-place('5.4',[],(-40+1.5,0,18))
-@part('5.5','Track support, high','5',dims=['Same as 5.4 but 28.5 high'])
-def p55():return sup(28.5)
-place('5.5',[],(-68+1.5,0,18))
+def sh(x):return round(min(tz(x+d) for d in(-1.5,0,1.5))-3-18-0.3,1)
+@part('5.4','Track support, low','5')
+def p54():return sup(sh(-42))
+place('5.4',[],(-42,0,18))
+@part('5.5','Track support, high','5')
+def p55():return sup(sh(-66))
+place('5.5',[],(-66,0,18))
 # ---------- 7 turret base ----------
 TX=-52
 POST=[(-4,52),(-4,-52),(-100,52),(-100,-52)]
@@ -157,22 +164,23 @@ place('7.2',[],(TX,0,110))
 def p73():
     m=pl(-30,30,-15,15,4).union(pl(-27,-21,-10,10,88)).union(pl(21,27,-10,10,88))
     m=holes(m,[(x,y) for x in(-22,26) for y in(-10,6)],4,8)
-    return m.cut(W().pushPoints([(-24,0),(24,0)]).circle(1.65).extrude(10).translate((0,0,80)))
+    return m.cut(W().pushPoints([(x,y) for x in(-24,24) for y in(-5,5)]).circle(1.65).extrude(10).translate((0,0,80)))
 place('7.3',[],(-62,-90,18))
 @part('7.4','Turret servo (standard servo)','7',1,SRV)
 def p74():return servo()
 place('7.4',[],(-62,-90,79.5))
 # ---------- 8 turret platform ----------
+RH=[(63*math.cos(i*pi/2),63*math.sin(i*pi/2)) for i in range(4)]
 @part('8.1','Turret platform','8',dims=['Ring Ø190 / Ø96, 4 thick','Holes Ø3.3: shooter brackets, camera base and guide tube (positions on the drawing)'])
 def p81():
     m=ring(48,95,0,4)
-    return holes(m,[(x,y) for x in(-15,15) for y in(-61,61)]+[(70,-10),(70,10)]+[(51.5*math.cos(pi/4+i*pi/2),51.5*math.sin(pi/4+i*pi/2)) for i in range(4)],3.3)
+    return holes(m,RH+[(x,y) for x in(-15,15) for y in(-61,61)]+[(70,-10),(70,10)]+[(51.5*math.cos(pi/4+i*pi/2),51.5*math.sin(pi/4+i*pi/2)) for i in range(4)],3.3)
 place('8.1',[],(TX,0,122))
 @part('8.2','Upper bearing ring','8',dims=['Ring Ø152 / Ø100, 4 thick'])
-def p82():return ring(50,76,0,4)
+def p82():return holes(ring(50,76,0,4),RH,3.3)
 place('8.2',[],(TX,0,114))
 @part('8.3','Turret gear','8',dims=['Spur gear: module 1, 160 teeth, 4 thick (pitch Ø160)','Bore Ø96'])
-def p83():return ring(48,81,0,4)
+def p83():return holes(ring(48,81,0,4),RH,3.3)
 place('8.3',[],(TX,0,118))
 @part('8.4','Servo pinion','8',dims=['Spur gear: module 1, 20 teeth, 4 thick (pitch Ø20)','Spline bore Ø5.8 (fits the servo output)'])
 def p84():return cz(11,0,4).cut(cz(2.9,-3,5))
@@ -239,7 +247,7 @@ P['10.2']['place']=[([],(0,47,0)),([],(0,-50,0))]
 @part('11.1','Battery tray','11',dims=['Box 78 × 63 × 45, walls 2.5, open top','Vertical edges R5','Floor holes Ø4 at grid points (see drawing)'])
 def p111():
     m=pl(0,78,0,63,45).edges('|Z').fillet(5).faces('>Z').shell(-2.5)
-    return holes(m,[(x,y) for x in(14,62) for y in(13,53)],4,6)
+    return holes(m,[(x,y) for x in(16,64) for y in(17,49)],4,6)
 place('11.1',[],(-140,59,18))
 @part('11.2','Battery lid','11',dims=['78 × 63 × 3, R5, with a 2 mm lip inside the tray','Slot 20 × 4 for the strap'])
 def p112():
@@ -258,7 +266,8 @@ def p121():
     m=pl(0,48,0,63,22).faces('>Z').shell(-2)
     m=m.union(W().pushPoints([(8,8),(40,8),(8,55),(40,55)]).circle(3).extrude(10).translate((0,0,2)))
     m=m.cut(W().pushPoints([(8,8),(40,8),(8,55),(40,55)]).circle(1.25).extrude(12))
-    return m.cut(pl(46,49,16,46,10).translate((0,0,8)))
+    m=m.cut(pl(46,49,16,46,10).translate((0,0,8)))
+    return holes(m,[(16,30),(32,30)],4,6)
 place('12.1',[],(-140,-122,18))
 @part('12.2','Hub cover','12',dims=['48 × 63 × 2 with 4 holes Ø3 matching the bosses','Vent slots 3 × 30, 6 of them'])
 def p122():
@@ -300,9 +309,11 @@ place('15.1',[('x',90),('z',-90)],(-144,0,18))
 def p152():return pl(-6.3,6.3,-9.3,9.3,20).translate((0,0,-20)).union(pl(-7.5,7.5,-10.5,10.5,2)).union(pl(-4.5,4.5,-7,7,3).translate((0,0,2)))
 place('15.2',[('y',-90)],(-147,0,34))
 @part('15.3','Switch guard','15',dims=['U guard 30 × 22, 2 thick, 12 deep','2 tabs with holes Ø4'])
-def p153():return pl(-15,15,0,2,22).union(pl(-15,-13,-12,0,22)).union(pl(13,15,-12,0,22))
+def p153():
+    m=pl(-15,15,0,2,22).union(pl(-15,-13,-12,0,22)).union(pl(13,15,-12,0,22)).union(pl(-25,-13,-12,-10,22)).union(pl(13,25,-12,-10,22))
+    return m.cut(W('XZ').pushPoints([(x,z) for x in(-20,20) for z in(3,19)]).circle(2).extrude(-20).translate((0,-15,0)))
 place('15.3',[('z',90)],(-159,0,23))
-SUB={'1':('Chassis','Mirzo'),'2':('Drive module ×2','Luchezar'),'3':('Ball casters','Leonid'),'4':('Intake','Malika'),'5':('Ball track','Nikita'),'7':('Turret base','Alexey'),'8':('Turret platform + drive','Fedor'),'9':('Shooter','Andrey'),'10':('Hood','Mansur'),'11':('Battery box','Gulasal'),'12':('Control hub housing','Elias'),'13':('Camera mount','Jason'),'14':('Number plates','Ayusha'),'15':('Power switch','Alexandros')}
+SUB={'1':('Chassis','Mirzo'),'2':('Drive module ×2','Luchezar'),'3':('Ball casters','Leonid'),'4':('Intake','Malika'),'5':('Ball track','Nikita'),'7':('Turret base','Alexey'),'8':('Turret platform + drive','Fedor'),'9':('Shooter','Andrey'),'10':('Hood','Mansur'),'11':('Battery box','Gulasal'),'12':('Control hub housing','Elias'),'13':('Camera mount','Jason'),'14':('Number plates','Arina'),'15':('Power switch','Alexandros')}
 def build():
     out=[]
     for c,p in P.items():
