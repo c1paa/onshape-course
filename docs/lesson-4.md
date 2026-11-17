@@ -6,8 +6,8 @@ Until now every part lived in a Part Studio. Today we put parts together in an *
 
 The kit plate below can be any size. It is built with variables:
 
-- `#nx`, `#ny` — number of holes, `#p` — hole pitch.
-- The plate size is an expression, for example `#nx * #p`, and the hole pattern uses `#nx` and `#ny` as counts.
+- `#N`, `#M` — number of holes along each side.
+- The plate size is an expression of `#N` and `#M`, and the hole pattern uses them as counts.
 - A **Configuration** turns these values into a choice in a list: pick a size and the part rebuilds.
 
 You don't have to build this yourself today — just understand how it works. You will use the plate in your assemblies.
