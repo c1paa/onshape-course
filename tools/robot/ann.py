@@ -18,7 +18,7 @@ AN={
 '6.1':[('n','front',(0,0,92),'M4 thread 10 deep, both ends',30)],
 '6.3':[('d','front',(-27,0,88),(-21,0,88),18,'h'),('d','front',(30,0,0),(30,0,4),-18,'v')],
 '6.4':[('d','front',(27,0,0),(27,0,26.5),-22,'v'),('d','front',(27,0,26.5),(27,0,29),-55,'v')],
-'7.3':[('n','top',(0,-81,4),'spur gear m1, 160 teeth',-45)],'7.4':[('n','top',(0,-11,4),'spur gear m1, 20 teeth',-45)],
+'7.3':[('n','top',(0,-81,4),'spur gear m1, 160 teeth, Ø162 outside',-45)],'7.4':[('n','top',(0,-11,4),'spur gear m1, 20 teeth, Ø22 outside',-45),('noord','top'),('nobox','front'),('nobox','top'),('nobox','right'),('d','front',(11,0,0),(11,0,4),-20,'v')],
 '7.5':[('d','front',(50,0,0),(50,0,3),-18,'v')],
 '8.3':[('n','front',(30,0,3),'web 6 thick in the middle',30),('n','front',(44,0,20),'rim 8 thick',30)],
 '8.5':[('n','front',(0,0,0),'bore Ø8, 10 deep',-45),('n','front',(0,0,29),'D-bore Ø6, 19 deep',45)],

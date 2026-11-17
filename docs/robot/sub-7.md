@@ -31,7 +31,7 @@
 
 ### 7.3 Turret gear {#p7-3}
 
-![7.3](../img/robot/p7-3.svg)
+![7.3](../img/robot/p7-3.png)
 
 ### 7.4 Servo pinion {#p7-4}
 

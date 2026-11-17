@@ -118,8 +118,8 @@ def drawing(code,out):
         nb=('nobox',v) in [o[:2] for o in an]
         if v=='front' and not nb:
             s.dim(mn[0],mn[1],mx[0],mn[1],-34,fmt(mx[0]-mn[0]));s.dim(mn[0],mn[1],mn[0],mx[1],34,fmt(mx[1]-mn[1]))
-        if v=='top':s.dim(mn[0],mn[1],mn[0],mx[1],34,fmt(mx[1]-mn[1]))
-        if v=='right':s.dim(mn[0],mn[1],mx[0],mn[1],-34,fmt(mx[0]-mn[0]))
+        if v=='top' and ('nobox','top') not in [o[:2] for o in an]:s.dim(mn[0],mn[1],mn[0],mx[1],34,fmt(mx[1]-mn[1]))
+        if v=='right' and ('nobox','right') not in [o[:2] for o in an]:s.dim(mn[0],mn[1],mx[0],mn[1],-34,fmt(mx[0]-mn[0]))
         box=(ox,oy-sz[v][1]*k,ox+sz[v][0]*k,oy)
         cs0=[c for c in cir if c[2]*k>=2]
         PT,used=pats(cs0,mn,mx)

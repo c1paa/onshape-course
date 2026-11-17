@@ -188,11 +188,25 @@ place('7.1',[],(TX,0,122))
 @part('7.2','Upper bearing ring','7',dims=['Ring Ø152 / Ø100, 4 thick'])
 def p82():return holes(ring(50,76,0,4),RH,3.3)
 place('7.2',[],(TX,0,114))
+def gear2d(z,m=1,ph=0,n=6):
+    pa=math.radians(20);rp=m*z/2;rb=rp*math.cos(pa);ra=rp+m;rf=rp-1.25*m
+    inv=lambda a:math.tan(a)-a
+    def th(r):return pi/(2*z)+inv(pa)-inv(math.acos(min(1,rb/r)))
+    r0=max(rb,rf);rs=[r0+(ra-r0)*i/n for i in range(n+1)];pts=[]
+    P2=lambda r,a:(r*math.cos(a),r*math.sin(a))
+    for i in range(z):
+        c=2*pi*i/z+ph
+        if rf<r0:pts.append(P2(rf,c-th(r0)))
+        pts+=[P2(r,c-th(r)) for r in rs]+[P2(ra,c)]+[P2(r,c+th(r)) for r in rs[::-1]]
+        if rf<r0:pts.append(P2(rf,c+th(r0)))
+        pts.append(P2(rf,c+pi/z))
+    return pts
+def gear(z,h,ph=0):return W().polyline(gear2d(z,ph=ph)).close().extrude(h)
 @part('7.3','Turret gear','7',dims=['Spur gear: module 1, 160 teeth, 4 thick (pitch Ø160)','Bore Ø96'])
-def p83():return holes(ring(48,81,0,4),RH,3.3)
+def p83():return holes(gear(160,4).cut(cz(48,-1,5)),RH,3.3)
 place('7.3',[],(TX,0,118))
 @part('7.4','Servo pinion','7',dims=['Spur gear: module 1, 20 teeth, 4 thick (pitch Ø20)','Spline bore Ø5.8 (fits the servo output)'])
-def p84():return cz(11,0,4).cut(cz(2.9,-3,5))
+def p84():return gear(20,4,pi/20).cut(cz(2.9,-3,5))
 place('7.4',[],(TX,-90,118))
 @part('7.5','Ball guide tube','7',dims=['Tube Ø84 / Ø76, 15 high (stops 1 below the flywheel)','Flange Ø110 × 3, cut flat to 100 × 98, 4 holes Ø3.3 on Ø103 at 45°'])
 def p85():return holes(ring(38,42,0,15).union(ring(38,55,0,3).intersect(pl(-50,50,-49,49,3))),[(51.5*math.cos(pi/4+i*pi/2),51.5*math.sin(pi/4+i*pi/2)) for i in range(4)],3.3)
