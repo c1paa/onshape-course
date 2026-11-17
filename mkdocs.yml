@@ -33,6 +33,7 @@ nav:
   - "Homework 1": homework-1.md
   - "Lesson 2: Sketch in depth": lesson-2.md
   - "Lesson 3: From sketch to parts": lesson-3.md
+  - "Lesson 4: Assemblies": lesson-4.md
   - "Practice": practice.md
   - "Team robot":
     - robot/index.md
