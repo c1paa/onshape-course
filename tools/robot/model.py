@@ -185,8 +185,8 @@ def p81():
     m=ring(48,95,0,4)
     return holes(m,RH+[(x,y) for x in(-15,15) for y in(-61,61)]+[(51.5*math.cos(pi/4+i*pi/2),51.5*math.sin(pi/4+i*pi/2)) for i in range(4)],3.3)
 place('7.1',[],(TX,0,122))
-@part('7.2','Upper bearing ring','7',dims=['Ring Ø152 / Ø100, 4 thick'])
-def p82():return holes(ring(50,76,0,4),RH,3.3)
+@part('7.2','Upper ring with centering bushing','7')
+def p82():return holes(ring(44,76,0,4).union(ring(44,47.5,-6,0)),RH,3.3)
 place('7.2',[],(TX,0,114))
 def gear2d(z,m=1,ph=0,n=6):
     pa=math.radians(20);rp=m*z/2;rb=rp*math.cos(pa);ra=rp+m;rf=rp-1.25*m
