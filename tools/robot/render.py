@@ -3,8 +3,8 @@ from model import *
 import numpy as np,matplotlib;matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
-C={'1':'#9aa3ad','2':'#3b6fb6','3':'#555','4':'#e07a2f','5':'#7fbf6a','7':'#b58fd1','8':'#8e5fb8','9':'#d64545','10':'#f0b429','11':'#4a4a4a','12':'#2f9e9e','13':'#222','14':'#2d5fd6','15':'#c0392b'}
-MOTS={'2.1','4.5','9.6','7.6'}
+C={'1':'#9aa3ad','2':'#3b6fb6','3':'#555','4':'#e07a2f','5':'#7fbf6a','6':'#b58fd1','7':'#8e5fb8','8':'#d64545','9':'#f0b429','10':'#4a4a4a','11':'#2f9e9e','12':'#222','13':'#2d5fd6','14':'#c0392b'}
+MOTS={'2.1','4.5','8.6','6.6'}
 def tri(A,only=None,hl=None):
     T=[];K=[];L=np.array([0.4,-0.5,0.8]);L/=np.linalg.norm(L)
     for c,s in A:

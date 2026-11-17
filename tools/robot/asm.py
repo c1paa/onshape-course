@@ -20,33 +20,40 @@ def sheet(sub,A,out,f=0.9):
         for c in cnt:
             L=[s for cc,s in I if cc==c];J.append((c,min(L,key=lambda s:np.linalg.norm(np.array(s.val().Center().toTuple())-a0))))
         I=J
-    f={'9':2.2,'8':(1.3,1.3,9),'7':(1.2,1.2,2),'2':1.6,'15':1.8,'13':1.6,'12':1.4,'11':1.3,'3':1.8}.get(sub,f)
+    f={'8':2.2,'7':(1.3,1.3,9),'6':(1.2,1.2,2),'2':1.6,'14':1.8,'12':1.6,'11':1.4,'10':1.3,'3':1.8}.get(sub,f)
     cen=np.mean([s.val().Center().toTuple() for c,s in I],axis=0)
     E=[]
     for c,s in I:
         d=np.array(s.val().Center().toTuple())-cen
         E.append((c,s.translate(tuple(d*np.array(f if isinstance(f,tuple) else (f,f,f))))))
-    ra=hlr(comp([s for c,s in I]),'iso');re=hlr(comp([s for c,s in E]),'iso')
-    ba=bb(ra['vis']);be=bb(re['vis'])
-    sa=ba[1]-ba[0];se=be[1]-be[0]
-    ka=min(520/sa[0],460/sa[1]);ke=min(640/se[0],460/se[1])
-    W0=1400;H0=int(120+max(sa[1]*ka,se[1]*ke)+120)
+    iv='isob' if sub=='3' else 'iso'
+    ra=hlr(comp([s for c,s in I]),iv);re=hlr(comp([s for c,s in E]),iv);rs=hlr(comp([s for c,s in I]),'front')
+    ba=bb(ra['vis']);be=bb(re['vis']);bs=bb(rs['vis']+rs['hid'])
+    sa=ba[1]-ba[0];se=be[1]-be[0];ss=bs[1]-bs[0]
+    ka=min(360/sa[0],380/sa[1]);kss=min(340/ss[0],380/ss[1]);ke=min(520/se[0],420/se[1])
+    W0=1400;H0=int(120+max(sa[1]*ka,ss[1]*kss,se[1]*ke)+110)
     s=D(W0,H0,ka)
-    s.at(40-ba[0][0]*ka,120+ba[1][1]*ka)
+    def cap(x,y,t):
+        s.e.append(f'<text x="{x:.0f}" y="{y:.0f}" font-size="14" font-family="Arial" text-anchor="middle" fill="#555">{t}</text>');s.occ.append((x-45,y-16,x+45,y+4))
+    s.at(30-ba[0][0]*ka,110+ba[1][1]*ka)
     for l in ra['vis']:poly(s,l,1.2)
-    s.e.append(f'<text x="{40+sa[0]*ka/2:.0f}" y="{140+sa[1]*ka:.0f}" font-size="14" font-family="Arial" text-anchor="middle" fill="#555">Assembled</text>')
-    s.k=ke;ox=W0-40-se[0]*ke;s.at(ox-be[0][0]*ke,120+be[1][1]*ke)
+    cap(30+sa[0]*ka/2,135+sa[1]*ka,'Assembled'+(' (from below)' if iv=='isob' else ''))
+    s.k=kss;x0=420;s.at(x0-bs[0][0]*kss,110+bs[1][1]*kss)
+    for l in rs['hid']:poly(s,l,0.6,'4 3','#999')
+    for l in rs['vis']:poly(s,l,1.2)
+    cap(x0+ss[0]*kss/2,135+ss[1]*kss,'Side view')
+    s.k=ke;ox=W0-30-se[0]*ke;s.at(ox-be[0][0]*ke,110+be[1][1]*ke)
     for l in re['vis']:poly(s,l,1.2)
-    s.e.append(f'<text x="{ox+se[0]*ke/2:.0f}" y="{140+se[1]*ke:.0f}" font-size="14" font-family="Arial" text-anchor="middle" fill="#555">Exploded</text>');s.occ.append((ox+se[0]*ke/2-40,140+se[1]*ke-16,ox+se[0]*ke/2+40,140+se[1]*ke+4))
+    cap(ox+se[0]*ke/2,135+se[1]*ke,'Exploded')
     vp=np.array([p for l in re['vis'] for p in l])
-    s.soft.append((ox,120,ox+se[0]*ke,120+se[1]*ke))
+    s.soft.append((ox,110,ox+se[0]*ke,110+se[1]*ke))
     cnt={}
     for c,_ in I:cnt[c]=cnt.get(c,0)+1
     done=set();mc=s.p(*((be[0]+be[1])/2))
     for c,sh in E:
         if c in done:continue
         done.add(c)
-        own=hlr(sh,'iso');pts=np.array([p for l in own['vis'] for p in l])
+        own=hlr(sh,iv);pts=np.array([p for l in own['vis'] for p in l])
         if len(pts)==0:continue
         pc=pts.mean(0)
         dv=np.linalg.norm(vp[None,:,:]-pts[::max(1,len(pts)//200),None,:],axis=2).min(1)

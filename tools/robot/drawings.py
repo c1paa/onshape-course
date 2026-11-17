@@ -115,7 +115,8 @@ def drawing(code,out):
         for x,y,r in cir:
             if r*k>=3:
                 e=r+5/k;s.cl(x-e,y,x+e,y);s.cl(x,y-e,x,y+e)
-        if v=='front':
+        nb=('nobox',v) in [o[:2] for o in an]
+        if v=='front' and not nb:
             s.dim(mn[0],mn[1],mx[0],mn[1],-34,fmt(mx[0]-mn[0]));s.dim(mn[0],mn[1],mn[0],mx[1],34,fmt(mx[1]-mn[1]))
         if v=='top':s.dim(mn[0],mn[1],mn[0],mx[1],34,fmt(mx[1]-mn[1]))
         if v=='right':s.dim(mn[0],mn[1],mx[0],mn[1],-34,fmt(mx[0]-mn[0]))
@@ -124,7 +125,15 @@ def drawing(code,out):
         PT,used=pats(cs0,mn,mx)
         for cen,Rr,r,ps in PT:
             a_,b_=s.p(*cen);s.e.append(f'<circle cx="{a_:.1f}" cy="{b_:.1f}" r="{Rr*k:.1f}" fill="none" stroke="#c33" stroke-width="0.7" stroke-dasharray="10 3 2 3"/>')
-        if True:
+        for op in an:
+            if op[0]=='d' and op[1]==v:
+                _,_,p1,p2,off,mode=op[:6];q1,q2=pj(v,p1),pj(v,p2)
+                val={'h':abs(q2[0]-q1[0]),'v':abs(q2[1]-q1[1])}.get(mode,math.hypot(q2[0]-q1[0],q2[1]-q1[1]))
+                s.dimp(q1,q2,off,op[6] if len(op)>6 else fmt(val),mode)
+        for op in an:
+            if op[0]=='c' and op[1]==v:
+                u,w=pj(v,op[2]);e=8/k;s.cl(u-e,w,u+e,w);s.cl(u,w-e,u,w+e)
+        if ('noord',v) not in [o[:2] for o in an]:
             L=[c for c in cs0 if c not in used]
             outer=[c for c in L if abs(2*c[2]-(mx[0]-mn[0]))<0.3 and abs((mn[0]+mx[0])/2-c[0])<0.1]
             L=[c for c in L if not any(abs(c[0]-o[0])<0.05 and abs(c[1]-o[1])<0.05 for o in outer)]
@@ -133,14 +142,6 @@ def drawing(code,out):
             for op in an:
                 if op[0]=='o' and op[1]==v:L+=[pj(v,q)+(0,) for q in op[2]]
             ordin(s,mn,mx,L)
-            for op in an:
-                if op[0]=='c' and op[1]==v:
-                    u,w=pj(v,op[2]);e=8/k;s.cl(u-e,w,u+e,w);s.cl(u,w-e,u,w+e)
-            for op in an:
-                if op[0]=='d' and op[1]==v:
-                    _,_,p1,p2,off,mode=op[:6];q1,q2=pj(v,p1),pj(v,p2)
-                    val={'h':abs(q2[0]-q1[0]),'v':abs(q2[1]-q1[1])}.get(mode,math.hypot(q2[0]-q1[0],q2[1]-q1[1]))
-                    s.dimp(q1,q2,off,op[6] if len(op)>6 else fmt(val),mode)
         for cen,Rr,r,ps in PT:
             x,y,_=max(ps,key=lambda c:c[0]+c[1]);d=round(2*r,2)
             s.callout(x,y,r,f'{len(ps)}× Ø{fmt(d)} on Ø{fmt(2*Rr)}',45,box)
@@ -161,6 +162,8 @@ def drawing(code,out):
             n=len(dd);s.callout(mxp,myp,0,(f'{n}× ' if n>1 else '')+'R'+fmt(r),a,box)
         for op in an:
             if op[1]!=v:continue
+            if op[0]=='a':
+                q=pj(v,op[2]);s.angd(q,op[3],op[4],op[5])
             if op[0]=='n':
                 q=pj(v,op[2]);s.callout(q[0],q[1],0,op[3],op[4] if len(op)>4 else 45,box)
         s.txt(ox+sz[v][0]*k/2,oy+22+(34 if v in('front','right') else 0),{'front':'Front','top':'Top','right':'Right'}[v],13,px=True)

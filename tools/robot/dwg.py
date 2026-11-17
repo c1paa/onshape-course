@@ -8,7 +8,7 @@ from OCP.gp import gp_Ax2,gp_Pnt,gp_Dir
 from OCP.TopoDS import TopoDS_Compound
 from OCP.BRep import BRep_Builder
 from ann import AN
-V={'front':((0,-1,0),(1,0,0)),'top':((0,0,1),(1,0,0)),'right':((1,0,0),(0,1,0)),'iso':((1,-1,0.8),(1,1,0))}
+V={'front':((0,-1,0),(1,0,0)),'top':((0,0,1),(1,0,0)),'right':((1,0,0),(0,1,0)),'iso':((1,-1,0.8),(1,1,0)),'isob':((1,-1,-0.8),(1,1,0))}
 NM={'front':'Front','top':'Top','right':'Right'}
 BL='#0a3d91'
 def frame(v):

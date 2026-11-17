@@ -1,10 +1,10 @@
-# 12. Control hub housing
+# 12. Camera mount
 
-**Student:** Elias
+**Student:** Jason
 
 ## Where it goes
 
-![Control hub housing on the robot](../img/robot/sub-12.png){width=60%}
+![Camera mount on the robot](../img/robot/sub-12.png){width=60%}
 
 ## Assembly
 
@@ -14,18 +14,23 @@
 
 | Part | Name | Qty |
 |---|---|---|
-| [12.1](#p12-1) | Hub tray | 1 |
-| [12.2](#p12-2) | Hub cover | 1 |
-| [12.3](#p12-3) | Control hub board | 1 |
+| [12.1](#p12-1) | Camera base | 1 |
+| [12.2](#p12-2) | Camera fork | 1 |
+| [12.3](#p12-3) | Camera body | 1 |
+| [12.4](#p12-4) | Pivot pin | 1 |
 
-### 12.1 Hub tray {#p12-1}
+### 12.1 Camera base {#p12-1}
 
 ![12.1](../img/robot/p12-1.svg)
 
-### 12.2 Hub cover {#p12-2}
+### 12.2 Camera fork {#p12-2}
 
 ![12.2](../img/robot/p12-2.svg)
 
-### 12.3 Control hub board {#p12-3}
+### 12.3 Camera body {#p12-3}
 
 ![12.3](../img/robot/p12-3.svg)
+
+### 12.4 Pivot pin {#p12-4}
+
+![12.4](../img/robot/p12-4.svg)
