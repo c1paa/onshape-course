@@ -32,7 +32,7 @@ for s in ([] if os.environ.get('IDX') else subs):
     T2,K2=render.tri(A,hl=s);render.view(T2,K2,-25 if s=='3' else 22,-38,f'{I}/sub-{s}.png')
     asm.sheet(s,A,f'{I}/asm-{s}.svg')
     L=[f'# {s}. {n}','',f'**Student:** {w}','','## Where it goes','',f'![{n} on the robot](../img/robot/sub-{s}.png){{width=60%}}','','## Assembly','',f'![Assembly](../img/robot/asm-{s}.svg)','','## Parts','','| Part | Name | Qty |','|---|---|---|']
-    if s=='7':i=L.index('## Parts');L[i:i]=['## How the turret turns','','There is no shaft: the ball goes up through the middle. The bushing on 7.2 goes through the Ø96 hole of the fixed ring 6.2, so the turret is centred on it and turns around it.','','![Turret section](../img/robot/turret-bushing.png)','']
+    if s=='7':i=L.index('## Parts');L[i:i]=['## How the turret turns','','There is no shaft: the ball goes up through the middle. The bushing on 7.1 goes through the Ø96 hole of the fixed ring 6.2, so the turret is centred on it and turns around it.','','![Turret section](../img/robot/turret-bushing.png)','']
     for c in ps:L.append(f'| [{c}](#{fn(c)}) | {P[c]["name"]} | {P[c]["qty"]} |')
     L.append('')
     for c in ps:

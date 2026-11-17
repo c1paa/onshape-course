@@ -18,7 +18,7 @@ def hlr(sh,v):
         for e in cq.Shape.cast(g).Edges():
             t=e.geomType()
             if t=='LINE':L.append([e.startPoint().toTuple()[:2],e.endPoint().toTuple()[:2]]);continue
-            n=max(8,int(e.Length()/1.5));L.append([p.toTuple()[:2] for p in e.positions(np.linspace(0,1,n))])
+            n=max(32,int(e.Length()/1.5));L.append([p.toTuple()[:2] for p in e.positions(np.linspace(0,1,n))])
             if t=='CIRCLE' and L is vis:
                 c=e.arcCenter().toTuple()[:2]
                 if e.IsClosed():cir.append((round(c[0],2),round(c[1],2),round(e.radius(),2)))
@@ -86,10 +86,17 @@ def ordin(s,mn,mx,cir):
 def drawing(code,out):
     p=P[code];sh=p['fn']()
     R={v:hlr(sh,v) for v in V}
+    SEC=[]
+    if ('sec','front') in [o[:2] for o in AN.get(code,[])]:
+        half=sh.cut(cq.Workplane().box(2000,1000,2000).translate((0,-500,0)))
+        vis,hid,cir,arcs=hlr(half,'front');R['front']=(vis,[],cir,arcs)
+        for f in half.faces().vals():
+            if f.geomType()=='PLANE' and abs(f.normalAt().y+1)<1e-6 and abs(f.Center().y)<1e-6:
+                SEC.append([[(p.x,p.z) for p in [w.positionAt(u) for u in np.linspace(0,1,120)]] for w in [f.outerWire()]+f.innerWires()])
     B={v:bb(R[v][0]+R[v][1]) for v in V}
     sz={v:B[v][1]-B[v][0] for v in V}
     W0,H0,g=1200,780,115
-    k=min((W0-2*g-260)/(sz['front'][0]+sz['right'][0]+1e-9),(H0-2*g-60)/(sz['front'][1]+sz['top'][1]+1e-9),6)
+    k=min((W0-2*g-260)/(sz['front'][0]+sz['right'][0]+1e-9),(H0-2*g-60)/(sz['front'][1]+sz['top'][1]+1e-9),9)
     k=min(k,(W0-2*g)/(sz['front'][0]+1e-9))
     an=AN.get(code,[]);ext=0
     for op in an:
@@ -110,6 +117,11 @@ def drawing(code,out):
     mv=max(('top','front','right'),key=lambda v:(len([c for c in R[v][2] if c[2]*k>=2]),v=='top'))
     for v,(ox,oy) in org.items():
         mn,mx=B[v];s.at(ox-mn[0]*k,oy+mn[1]*k);vis,hid,cir,arcs=R[v];PX[v]=(s.ox,s.oy)
+        if v=='front' and SEC:
+            for ws in SEC:
+                d=' '.join('M'+' L'.join('%.1f,%.1f'%s.p(*q) for q in w)+' Z' for w in ws)
+                s.e.append(f'<path d="{d}" fill="url(#hatch)" fill-rule="evenodd" stroke="none"/>')
+            s.e.append('<defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#777" stroke-width="1"/></pattern></defs>')
         for l in hid:pl2(s,l,0.9,'5 3','#555')
         for l in vis:pl2(s,l,1.6)
         for x,y,r in cir:
@@ -166,7 +178,7 @@ def drawing(code,out):
                 q=pj(v,op[2]);s.angd(q,op[3],op[4],op[5])
             if op[0]=='n':
                 q=pj(v,op[2]);s.callout(q[0],q[1],0,op[3],op[4] if len(op)>4 else 45,box)
-        s.txt(ox+sz[v][0]*k/2,oy+22+(34 if v in('front','right') else 0),{'front':'Front','top':'Top','right':'Right'}[v],13,px=True)
+        s.txt(ox+sz[v][0]*k/2,oy+22+(34 if v in('front','right') else 0),{'front':'Section through the middle' if SEC else 'Front','top':'Top','right':'Right'}[v],13,px=True)
     mn,mx=B['iso'];ki=min(240/max(sz['iso']),k);s.k=ki
     s.at(W0-30-sz['iso'][0]*ki-mn[0]*ki,80+mx[1]*ki)
     for l in R['iso'][0]:pl2(s,l,1.1)

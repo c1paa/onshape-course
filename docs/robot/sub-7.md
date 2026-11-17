@@ -1,10 +1,10 @@
-# 7. Turret platform + drive
+# 7. Turret gears
 
 **Student:** Fedor
 
 ## Where it goes
 
-![Turret platform + drive on the robot](../img/robot/sub-7.png){width=60%}
+![Turret gears on the robot](../img/robot/sub-7.png){width=60%}
 
 ## Assembly
 
@@ -12,7 +12,7 @@
 
 ## How the turret turns
 
-There is no shaft: the ball goes up through the middle. The bushing on 7.2 goes through the Ø96 hole of the fixed ring 6.2, so the turret is centred on it and turns around it.
+There is no shaft: the ball goes up through the middle. The bushing on 7.1 goes through the Ø96 hole of the fixed ring 6.2, so the turret is centred on it and turns around it.
 
 ![Turret section](../img/robot/turret-bushing.png)
 
@@ -20,33 +20,18 @@ There is no shaft: the ball goes up through the middle. The bushing on 7.2 goes 
 
 | Part | Name | Qty |
 |---|---|---|
-| [7.1](#p7-1) | Turret platform | 1 |
-| [7.2](#p7-2) | Upper ring with centering bushing | 1 |
-| [7.3](#p7-3) | Turret gear | 1 |
-| [7.4](#p7-4) | Servo pinion | 1 |
-| [7.5](#p7-5) | Ball guide tube | 1 |
-| [7.6](#p7-6) | Shooter bracket | 2 |
+| [7.1](#p7-1) | Upper ring with centering bushing | 1 |
+| [7.2](#p7-2) | Turret gear | 1 |
+| [7.3](#p7-3) | Servo pinion | 1 |
 
-### 7.1 Turret platform {#p7-1}
+### 7.1 Upper ring with centering bushing {#p7-1}
 
 ![7.1](../img/robot/p7-1.svg)
 
-### 7.2 Upper ring with centering bushing {#p7-2}
+### 7.2 Turret gear {#p7-2}
 
-![7.2](../img/robot/p7-2.svg)
+![7.2](../img/robot/p7-2.png)
 
-### 7.3 Turret gear {#p7-3}
+### 7.3 Servo pinion {#p7-3}
 
-![7.3](../img/robot/p7-3.png)
-
-### 7.4 Servo pinion {#p7-4}
-
-![7.4](../img/robot/p7-4.svg)
-
-### 7.5 Ball guide tube {#p7-5}
-
-![7.5](../img/robot/p7-5.svg)
-
-### 7.6 Shooter bracket {#p7-6}
-
-![7.6](../img/robot/p7-6.svg)
+![7.3](../img/robot/p7-3.svg)

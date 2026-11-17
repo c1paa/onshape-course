@@ -20,7 +20,7 @@ def sheet(sub,A,out,f=0.9):
         for c in cnt:
             L=[s for cc,s in I if cc==c];J.append((c,min(L,key=lambda s:np.linalg.norm(np.array(s.val().Center().toTuple())-a0))))
         I=J
-    f={'8':2.2,'7':(1.3,1.3,9),'6':(1.2,1.2,2),'2':1.6,'14':1.8,'12':1.6,'11':1.4,'10':1.3,'3':1.8}.get(sub,f)
+    f={'9':2.2,'7':(1.3,1.3,9),'8':(1.3,1.3,4),'6':(1.2,1.2,2),'2':1.6,'15':1.8,'13':1.6,'12':1.4,'11':1.3,'3':1.8}.get(sub,f)
     cen=np.mean([s.val().Center().toTuple() for c,s in I],axis=0)
     E=[]
     for c,s in I:

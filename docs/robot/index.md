@@ -43,14 +43,15 @@ All parts are placed in one robot coordinate system: **X** forward, **Y** left, 
 | 4 | [Intake](sub-4.md) | Malika | 6 |
 | 5 | [Ball track](sub-5.md) | Nikita | 5 |
 | 6 | [Turret base](sub-6.md) | Alexey | 4 |
-| 7 | [Turret platform + drive](sub-7.md) | Fedor | 6 |
-| 8 | [Shooter](sub-8.md) | Andrey | 6 |
-| 9 | [Hood](sub-9.md) | Mansur | 2 |
-| 10 | [Battery box](sub-10.md) | Gulasal | 4 |
-| 11 | [Control hub housing](sub-11.md) | Elias | 3 |
-| 12 | [Camera mount](sub-12.md) | Jason | 4 |
-| 13 | [Number plates](sub-13.md) | Arina | 1 |
-| 14 | [Power switch](sub-14.md) | Alexandros | 3 |
+| 7 | [Turret gears](sub-7.md) | Fedor | 3 |
+| 8 | [Turret platform](sub-8.md) | Egor | 3 |
+| 9 | [Shooter](sub-9.md) | Andrey | 6 |
+| 10 | [Hood](sub-10.md) | Mansur | 2 |
+| 11 | [Battery box](sub-11.md) | Gulasal | 4 |
+| 12 | [Control hub housing](sub-12.md) | Elias | 3 |
+| 13 | [Camera mount](sub-13.md) | Jason | 4 |
+| 14 | [Number plates](sub-14.md) | Arina | 1 |
+| 15 | [Power switch](sub-15.md) | Alexandros | 3 |
 
 !!! note "Standard motor and servo"
     Every motor on the robot (drive, intake, shooter) is the same simplified model: [2.1](sub-2.md#p2-1). The servo: [6.4](sub-6.md#p6-4). Each student models his own copy from that drawing.
