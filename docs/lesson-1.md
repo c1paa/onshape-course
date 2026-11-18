@@ -6,6 +6,8 @@
 
 ## 1. Create a document and set units
 
+Reference: [Interface](reference/basics/interface.md) · [Units](reference/basics/units.md)
+
 1. On the Onshape home page click **Create → Document**, name it `Lastname - L1 - Plate`.
 2. Open the document menu (☰, top left) → **Workspace units** → Length **Millimeter**, Mass **Gram**.
 
@@ -14,6 +16,8 @@ You are in a **Part Studio**, where parts are modeled. The left panel is the **F
 <!-- SCREENSHOT: Part Studio with Feature list, toolbar and view cube labeled -->
 
 ## 2. Move around
+
+Reference: [Navigation and shortcuts](reference/basics/navigation.md)
 
 | Action | How |
 |---|---|
@@ -24,6 +28,8 @@ You are in a **Part Studio**, where parts are modeled. The left panel is the **F
 | Look straight at a face or plane | click that side of the view cube, or select the face and press ++n++ |
 
 ## 3. Sketch the outline
+
+Reference: [Rectangle](reference/sketch/rectangle.md) · [Dimensions](reference/sketch/dimensions.md) · [Constraints](reference/sketch/constraints.md)
 
 A **sketch** is a 2D drawing on a plane. Most 3D features start from one.
 
@@ -44,6 +50,8 @@ Always aim for a fully defined sketch. If something is blue, it can change by ac
 
 ## 4. Extrude
 
+Reference: [Extrude](reference/part/extrude.md)
+
 1. Click **Extrude** (++shift+e++), select the sketch region.
 2. Depth `4`. Click ✔.
 
@@ -51,11 +59,15 @@ You now have a part. It shows up in the **Parts** list at the bottom of the Feat
 
 ## 5. Center hole
 
+Reference: [Circle](reference/sketch/circle.md)
+
 1. New sketch on the **top face** of the plate.
 2. **Center point circle** (++c++) on the origin. Dimension it `14`. (Onshape shows diameter by default.)
 3. Close the sketch. **Extrude** → choose **Remove** at the top of the dialog → End type **Through all**. ✔
 
 ## 6. One small hole, then a pattern
+
+Reference: [Linear pattern](reference/part/linear-pattern.md)
 
 Drawing 22 holes by hand is slow and easy to get wrong. Draw one, then copy it with a pattern.
 
@@ -72,6 +84,8 @@ Drawing 22 holes by hand is slow and easy to get wrong. Draw one, then copy it w
     If you later change the first hole to Ø5, all 22 holes change. That's the whole point of keeping a model parametric.
 
 ## 7. Round the corners
+
+Reference: [Fillet](reference/part/fillet.md)
 
 1. **Fillet** (++shift+f++). Select the 4 vertical corner edges. Radius `4`. ✔
 
