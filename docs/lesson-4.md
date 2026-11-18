@@ -4,6 +4,8 @@ Until now every part lived in a Part Studio. Today we put parts together in an *
 
 ## 1. Variables and configurations (overview)
 
+Reference: [Variables](reference/params/variables.md) · [Configurations](reference/params/configurations.md)
+
 The kit plate below can be any size. It is built with variables:
 
 - `#N`, `#M` — number of holes along each side.
@@ -16,6 +18,8 @@ You don't have to build this yourself today — just understand how it works. Yo
 
 ## 2. Versions — git inside Onshape
 
+Reference: [Versions and History](reference/document/versions.md)
+
 - **Version** — a saved snapshot of the document, like a commit.
 - **History** — the list of all changes; you can open or restore an older state.
 - A part from another document can be inserted only from a **Version**. When the author makes a new version, you get an **Update** button.
@@ -26,6 +30,8 @@ Read the [Team robot](robot/index.md) page: your subassembly, your drawings, how
 
 ## 4. Assembly
 
+Reference: [Insert](reference/assembly/insert.md) · [Fix](reference/assembly/fix.md) · [Mate connector](reference/assembly/mate-connector.md) · [Fastened](reference/assembly/fastened.md) · [Revolute](reference/assembly/revolute.md) · [Slider](reference/assembly/slider.md)
+
 - **Insert → Other documents** — add the kit plate and bracket; choose the configuration when inserting.
 - **Fix** the first part, so the assembly has a base.
 - **Mate connector** — a point with axes, placed at a hole center or a face.
@@ -35,6 +41,8 @@ Read the [Team robot](robot/index.md) page: your subassembly, your drawings, how
 - Several copies of one part; changing the configuration of a part that is already inserted.
 
 ## 5. Derived and STEP
+
+Reference: [Derived](reference/document/derived.md) · [Import and Export](reference/document/import-export.md)
 
 - **Derived** (in a Part Studio) — bring a part from another document to model around it, for example a bracket that fits the holes of the base.
 - **Import / Export STEP** — exchange models with other CAD programs and manufacturers. Imported STEP is plain geometry without a feature tree.

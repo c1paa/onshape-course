@@ -4,6 +4,8 @@ A sketch is flat. Today: how it becomes solid parts, how parts interact, and how
 
 ## 1. Extrude in depth
 
+Reference: [Extrude](reference/part/extrude.md)
+
 ### End types
 
 | End type | What it does | Use it when |
@@ -24,6 +26,8 @@ A sketch is flat. Today: how it becomes solid parts, how parts interact, and how
 - **One sketch, several features**: one sketch can feed several extrudes. Pick different regions each time.
 
 ## 2. Parts, bodies, features
+
+Reference: [New / Add / Remove / Intersect](reference/part/new-add-remove.md) · [Boolean](reference/part/boolean.md) · [Split](reference/part/split.md)
 
 ### Words
 
@@ -60,12 +64,16 @@ Every Extrude (and Revolve, Sweep…) has these options at the top:
 
 ## 3. Where to sketch
 
+Reference: [Plane](reference/part/plane.md) · [Use](reference/sketch/use.md)
+
 - **Sketch on a face**: the sketch moves with that face. Change the thickness and the sketch goes along.
 - **Sketch on a plane**: stays where the plane is.
 - **Plane** feature: **Offset** from a plane or face, **Mid plane** between two faces, **Line angle** (through an edge, at an angle).
 - **Use** (++u++ in a sketch): projects edges of another part into your sketch, linked. If the other part changes, your sketch follows.
 
 ## 4. 3D operations on parts
+
+Reference: [Fillet](reference/part/fillet.md) · [Chamfer](reference/part/chamfer.md) · [Linear pattern](reference/part/linear-pattern.md) · [Circular pattern](reference/part/circular-pattern.md) · [Mirror](reference/part/mirror.md) · [Revolve](reference/part/revolve.md)
 
 - **3D Fillet / Chamfer**: pick edges. **Tangent propagation** follows the chain of smooth edges. Order matters: fillets near holes are easier if you fillet first, then cut.
 - **Patterns in 3D**: **Part pattern** copies whole parts, **Feature pattern** repeats features (with **Reapply** they are rebuilt at each place), **Face pattern** copies faces. **Mirror** has the same three options.

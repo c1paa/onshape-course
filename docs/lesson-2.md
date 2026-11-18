@@ -4,6 +4,8 @@ Last time we drew sketches and extruded them. Today: how a sketch really works, 
 
 ## 1. One shape, several ways to draw it
 
+Reference: [Line](reference/sketch/line.md) · [Rectangle](reference/sketch/rectangle.md) · [Circle](reference/sketch/circle.md) · [Arc](reference/sketch/arc.md) · [Polygon](reference/sketch/polygon.md) · [Slot](reference/sketch/slot.md)
+
 Almost every tool has options. Pick the one that needs **fewer constraints later**.
 
 | Tool | Options | When it helps |
@@ -14,6 +16,8 @@ Almost every tool has options. Pick the one that needs **fewer constraints later
 | Polygon | **Inscribed** (vertices on the circle) · **Circumscribed** (circle touches the sides) | Circumscribed Ø10 hexagon = **10 across flats**, the size of a wrench or hex shaft |
 
 ## 2. Constraints and degrees of freedom
+
+Reference: [Constraints](reference/sketch/constraints.md) · [Dimensions](reference/sketch/dimensions.md)
 
 ### The idea
 
@@ -148,6 +152,8 @@ Target: **3 dimensions**. End holes are concentric with the slot ends; the middl
     ![](img/l2/c6-3d.svg)
 
 ## 3. Editing tools
+
+Reference: [Trim](reference/sketch/trim.md) · [Extend and Split](reference/sketch/extend.md) · [Sketch fillet](reference/sketch/fillet.md) · [Mirror](reference/sketch/mirror.md) · [Linear pattern](reference/sketch/linear-pattern.md) · [Circular pattern](reference/sketch/circular-pattern.md) · [Offset](reference/sketch/offset.md)
 
 | Tool | What it does |
 |---|---|
