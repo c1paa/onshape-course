@@ -21,11 +21,11 @@ Every student builds one subassembly of about 5 parts. Together they make a smal
 
     ![Share button](../img/robot/howto-share-button.png){width=45%}
 
-    On the **Individuals** tab type `vglazunov@isl.cy`, choose **Can edit**, tick **Copy**, **Export** and **Comment**, then click **Share**.
+    On the **Individuals** tab type `vglazunov@isl.cy`, choose **Can edit**, tick **Copy**, **Link document**, **Export** and **Comment**, then click **Share**. **Link document** is required — without it I cannot insert your assembly into the robot.
 
     ![Share with Vlad](../img/robot/howto-share-email.png){width=60%}
 
-5. Copy the link of your document from the browser address bar and paste it into the field below. You can change it later.
+5. **Send me the link.** Open your document, copy the address from the browser address bar (it starts with `https://cad.onshape.com/documents/`), paste it into the field below and press **Save**. You can change it later.
 
 <div class="cl-link" data-task="robot"></div>
 

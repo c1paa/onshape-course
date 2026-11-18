@@ -16,9 +16,9 @@ L=['# Team robot','','Every student builds one subassembly of about 5 parts. Tog
 "3. When all parts are ready, click **+** → **Create Assembly**, insert your parts and put them together as on the assembly sheet of your subassembly.",
 "4. **Share the document with Vlad.** Click **Share** at the top right.","",
 "    ![Share button](../img/robot/howto-share-button.png){width=45%}","",
-"    On the **Individuals** tab type `vglazunov@isl.cy`, choose **Can edit**, tick **Copy**, **Export** and **Comment**, then click **Share**.","",
+"    On the **Individuals** tab type `vglazunov@isl.cy`, choose **Can edit**, tick **Copy**, **Link document**, **Export** and **Comment**, then click **Share**. **Link document** is required — without it I cannot insert your assembly into the robot.","",
 "    ![Share with Vlad](../img/robot/howto-share-email.png){width=60%}","",
-"5. Copy the link of your document from the browser address bar and paste it into the field below. You can change it later.","",
+"5. **Send me the link.** Open your document, copy the address from the browser address bar (it starts with `https://cad.onshape.com/documents/`), paste it into the field below and press **Save**. You can change it later.","",
 '<div class="cl-link" data-task="robot"></div>',"",
 '## Coordinates','','All parts are placed in one robot coordinate system: **X** forward, **Y** left, **Z** up, origin in the middle of the base plate on the floor. Base grid: holes Ø4, pitch 8, plates 3 thick.','',
 '## Subassemblies','','| # | Subassembly | Student | Parts |','|---|---|---|---|']
