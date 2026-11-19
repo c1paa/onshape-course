@@ -175,7 +175,7 @@ place('6.2',[],(TX,0,110))
 @part('6.3','Servo tower','6',dims=['Base 60 × 30 × 4, 4 holes Ø4 at x = −22, 26 and y = −10, 6','Two walls 6 × 20 × 84 under the servo tabs','M4 holes Ø3.3 in the wall tops, 48 apart'])
 def p73():
     m=pl(-30,30,-15,15,4).union(pl(-27,-21,-10,10,88)).union(pl(21,27,-10,10,88))
-    m=holes(m,[(x,y) for x in(-22,26) for y in(-10,6)],4,8)
+    m=holes(m,[(x,y) for x in(-14,18) for y in(-10,6)],4,8)
     return m.cut(W().pushPoints([(x,y) for x in(-24,24) for y in(-5,5)]).circle(1.65).extrude(10).translate((0,0,80)))
 place('6.3',[],(-62,-90,18))
 @part('6.4','Turret servo (standard servo)','6',1,SRV)

@@ -154,6 +154,9 @@ def drawing(code,out):
             for op in an:
                 if op[0]=='o' and op[1]==v:L+=[pj(v,q)+(0,) for q in op[2]]
             ordin(s,mn,mx,L)
+        else:
+            L=[pj(v,q)+(0,) for op in an if op[0]=='o' and op[1]==v for q in op[2]]
+            if L:ordin(s,mn,mx,L)
         for cen,Rr,r,ps in PT:
             x,y,_=max(ps,key=lambda c:c[0]+c[1]);d=round(2*r,2)
             s.callout(x,y,r,f'{len(ps)}× Ø{fmt(d)} on Ø{fmt(2*Rr)}',45,box)
