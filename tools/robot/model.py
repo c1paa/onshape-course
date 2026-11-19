@@ -26,9 +26,9 @@ def motor():
 def servo():
     m=pl(-20,20,-10,10,36.5).union(pl(-27,27,-10,10,2.5).translate((0,0,26.5)))
     m=holes(m,[(x,y) for x in(-24,24) for y in(-5,5)],4.2)
-    return m.union(cz(6,36.5,38,x=10)).union(cz(2.9,38,42,x=10))
+    return m.union(cz(6,36.5,38.5,x=10)).union(cz(2.9,38.5,42.5,x=10))
 MOT=['Body Ø36 × 60, front face at z = 0','Boss Ø12 × 2','Shaft Ø6 × 20 with a 0.5 flat (D-shaft)','4 holes Ø2.5 (M3) on Ø24, at 45°','Connector block 10 × 6 × 10 at the back']
-SRV=['Body 40 × 20 × 36.5','Tabs 54 × 20 × 2.5 at height 26.5, 4 holes Ø4.2 on 48 × 10','Output shaft 10 from the body center: collar Ø12 × 1.5, spline Ø5.8 × 4']
+SRV=['Body 40 × 20 × 36.5','Tabs 54 × 20 × 2.5 at height 26.5, 4 holes Ø4.2 on 48 × 10','Output shaft 10 from the body center: collar Ø12 × 2, spline Ø5.8 × 4 (shaft top 42.5)']
 # ---------- 1 chassis ----------
 @part('1.1','Base plate','1',dims=['288 × 288 × 3, corners R8','Holes Ø4 on the 8 mm grid: x, y = −140 … 140 (36 × 36), centered'])
 def p11():return holes(pl(-144,144,-144,144,3).edges('|Z').fillet(4),grid(-140,140,-140,140),4)
@@ -172,7 +172,7 @@ P['6.1']['place']=[([],(x,y,18)) for x,y in POST]
 @part('6.2','Lower bearing ring','6',dims=['Ring Ø156 / Ø96, 4 thick','4 holes Ø4.2 at the post positions: (±48, ±52) from the center'])
 def p72():return holes(ring(48,78,0,4),[(x-TX,y) for x,y in POST],4.2)
 place('6.2',[],(TX,0,110))
-@part('6.3','Servo tower','6',dims=['Base 60 × 30 × 4, 4 holes Ø4 at x = −22, 26 and y = −10, 6','Two walls 6 × 20 × 84 under the servo tabs','M4 holes Ø3.3 in the wall tops, 48 apart'])
+@part('6.3','Servo tower','6',dims=['Base 60 × 30 × 4, 4 holes Ø4 at x = −14, 18 and y = −10, 6','Two walls 6 × 20 × 88 (84 above the base) under the servo tabs, 42 between them','M4 holes Ø3.3 in the wall tops, 48 apart'])
 def p73():
     m=pl(-30,30,-15,15,4).union(pl(-27,-21,-10,10,88)).union(pl(21,27,-10,10,88))
     m=holes(m,[(x,y) for x in(-14,18) for y in(-10,6)],4,8)
