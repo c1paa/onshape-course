@@ -128,6 +128,7 @@ def tz(x):
     from scipy.interpolate import PchipInterpolator as PI
     xs=[p[0] for p in TRK][::-1];zs=[p[1] for p in TRK][::-1];return float(PI(xs,zs)(x))
 SX=(-42,-66)
+LB={-42:28,-66:38}
 def lz(xs):return round(min(tz(xs+d) for d in(-4.5,-3,-1.5))-3,1)
 def tsp(dz=0):
     return [(x,z+dz) for x,z in TRK]
@@ -135,11 +136,12 @@ def tsp(dz=0):
 def p51():
     a=tsp();b=tsp(-3)[::-1]
     m=W('XZ').moveTo(*a[0]).spline(a[1:],includeCurrent=True).lineTo(*b[0]).spline(b[1:],includeCurrent=True).close().extrude(41,both=True)
+    c=tsp(-3);bl=W('XZ').moveTo(*c[0]).spline(c[1:],includeCurrent=True).lineTo(c[-1][0],-50).lineTo(c[0][0],-50).close().extrude(41,both=True)
     for xs in SX:
-        u=lz(xs)
+        u=LB[xs]
         for sg in(-1,1):
-            m=m.union(pl(xs-4.5,xs-1.5,min(sg*14,sg*26),max(sg*14,sg*26),11.5).translate((0,0,u-10)))
-            m=m.cut(W('YZ').center(sg*20,u-5).circle(1.65).extrude(10).translate((xs-6,0,0)))
+            m=m.union(pl(xs-4.5,xs-1.5,min(sg*14,sg*26),max(sg*14,sg*26),40).translate((0,0,u)).intersect(bl))
+            m=m.cut(W('YZ').center(sg*20,u+5).circle(1.65).extrude(10).translate((xs-6,0,0)))
     return m
 place('5.1',[],(0,0,0))
 @part('5.2','Track wall','5',2,['Follows the floor curve, 25 high above the floor top','3 thick, inner face at y = ±38'])
@@ -152,9 +154,9 @@ def p53():return pl(-90,-87,-38,38,38)
 place('5.3',[],(0,0,70))
 def sup(h,xs):
     m=pl(-1.5,1.5,-30,30,h).union(pl(-1.5,10.5,-30,30,3))
-    m=m.cut(W('YZ').pushPoints([(-20,lz(xs)-5-18),(20,lz(xs)-5-18)]).circle(1.65).extrude(10).translate((-5,0,0)))
+    m=m.cut(W('YZ').pushPoints([(-20,LB[xs]+5-18),(20,LB[xs]+5-18)]).circle(1.65).extrude(10).translate((-5,0,0)))
     return holes(m,[(6,-20),(6,20)],4,8)
-def sh(x):return round(min(tz(x+d) for d in(-1.5,0,1.5))-3-18-0.3,1)
+def sh(x):return math.floor((min(tz(x+d) for d in(-1.5,0,1.5))-3-18-0.4)*2)/2
 @part('5.4','Track support, low','5')
 def p54():return sup(sh(-42),-42)
 place('5.4',[],(-42,0,18))
