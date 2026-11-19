@@ -1,7 +1,29 @@
 import sys,os,math,html;sys.path.insert(0,'.');sys.path.insert(0,'..')
 from model import *
 from draw import S
-from dwg import D,pj
+from dwg import D,pj,frame
+from OCP.BRepAdaptor import BRepAdaptor_Surface as BA
+def hdepth(sol,v,x,y,r):
+    X,Y=frame(v);dv=np.cross(X,Y);c0=x*X+y*Y;R=[]
+    for f in sol.Faces():
+        if f.geomType()!='CYLINDER':continue
+        cy=BA(f.wrapped).Cylinder()
+        if abs(cy.Radius()-r)>0.02:continue
+        a=np.array(cy.Axis().Direction().Coord());p=np.array(cy.Axis().Location().Coord())
+        if abs(abs(a@dv)-1)>1e-4:continue
+        q=p-c0;q=q-dv*(q@dv)
+        if np.linalg.norm(q)>0.05:continue
+        ts=[np.array(e.positionAt(u).toTuple())@dv for e in f.Edges() for u in(0,0.5,1)]
+        R.append([min(ts),max(ts)])
+    if not R:return None
+    R.sort(key=lambda z:-z[1]);t0,t1=R[0]
+    for a0,a1 in R[1:]:
+        if a1>=t0-0.01:t0=min(t0,a0)
+    ins=lambda t,o=np.zeros(3):sol.isInside(cq.Vector(*(c0+dv*t+o)),0.01)
+    rd=X*(r+0.3);tm=(t0+t1)/2
+    if ins(tm) or not ins(tm,rd):return None
+    if ins(t0-0.3):return round(t1-t0,2)
+    return None
 from ann import AN
 import numpy as np
 from OCP.HLRBRep import HLRBRep_Algo,HLRBRep_HLRToShape
@@ -157,17 +179,20 @@ def drawing(code,out):
         else:
             L=[pj(v,q)+(0,) for op in an if op[0]=='o' and op[1]==v for q in op[2]]
             if L:ordin(s,mn,mx,L)
+        sol=sh.val() if hasattr(sh,'val') else sh
+        dp=lambda c:hdepth(sol,v,c[0],c[1],c[2])
+        dt=lambda z:f', {fmt(z)} deep' if z else ''
         for cen,Rr,r,ps in PT:
             x,y,_=max(ps,key=lambda c:c[0]+c[1]);d=round(2*r,2)
-            s.callout(x,y,r,f'{len(ps)}× Ø{fmt(d)} on Ø{fmt(2*Rr)}',45,box)
+            s.callout(x,y,r,f'{len(ps)}× Ø{fmt(d)} on Ø{fmt(2*Rr)}'+dt(dp(ps[0])),45,box)
         grp={}
         for x,y,r in cir:
             if (x,y,r) in used:continue
-            grp.setdefault(round(2*r,2),[]).append((x,y,r))
-        for d,cs in sorted(grp.items(),key=lambda a:-a[0]):
-            if d in done or d*k<4:continue
-            done.add(d);x,y,r=max(cs,key=lambda c:(c[0]+c[1]));n=len(cs)
-            s.callout(x,y,r,(f'{n}× ' if n>1 else '')+'Ø'+fmt(d),45,box)
+            grp.setdefault((round(2*r,2),dp((x,y,r))),[]).append((x,y,r))
+        for (d,z),cs in sorted(grp.items(),key=lambda a:-a[0][0]):
+            if (d,z) in done or d*k<4:continue
+            done.add((d,z));x,y,r=max(cs,key=lambda c:(c[0]+c[1]));n=len(cs)
+            s.callout(x,y,r,(f'{n}× ' if n>1 else '')+'Ø'+fmt(d)+dt(z),45,box)
         ag={}
         for x,y,r,mxp,myp in arcs:
             if r*k<2.5 or any(abs(r-c[2])<0.01 and abs(x-c[0])<0.05 and abs(y-c[1])<0.05 for c in cir):continue
