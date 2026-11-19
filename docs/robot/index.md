@@ -11,7 +11,7 @@ Every student builds one subassembly of about 5 parts. Together they make a smal
 
 ## How to work in Onshape
 
-1. **Each of you makes your own Onshape document** for your subassembly. Name it `Surname_teamtask_Subassembly`, for example `Ivanov_teamtask_Intake`.
+1. **Each of you makes your own Onshape document** for your subassembly. Name it `Name_SimpleRobot_Subassembly`, for example `Vlad_SimpleRobot_Intake`.
 2. **Every part gets its own Part Studio.** Click **+** at the bottom left → **Create Part Studio**. Rename the tab with the part number and name, for example `4.3 Intake roller`.
 
     ![Create Part Studio](../img/robot/howto-part-studio.png){width=45%}
